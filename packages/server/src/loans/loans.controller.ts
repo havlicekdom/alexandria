@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
-
+@ApiTags('loans')
+@ApiBearerAuth()
 @Controller('loans')
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}

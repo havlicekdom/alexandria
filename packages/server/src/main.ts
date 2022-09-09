@@ -19,9 +19,10 @@ async function bootstrap() {
   app.useGlobalInterceptors(new DelayInterceptor());
 
   const config = new DocumentBuilder()
-    .setTitle('Personal finance')
-    .setDescription('API for personal finance app')
+    .setTitle('Library app')
+    .setDescription('API for library dashboard app')
     .setVersion('0.1')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
