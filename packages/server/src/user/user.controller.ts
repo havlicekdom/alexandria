@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { ApiBody } from '@nestjs/swagger';
 import { Public } from 'src/auth/decorators/metadata/public.decorator';
-
 import {
   CreateUserDto,
   UpdateUserDto,
