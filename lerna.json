@@ -1,0 +1,23 @@
+{
+  "command": {
+    "publish": {
+      "allowBranch": [
+        "master",
+        "develop"
+      ],
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "ignoreChanges": [
+        "*.spec.ts",
+        "*.spec.tsx",
+        "*.md"
+      ]
+    }
+  },
+  "useWorkspaces": true,
+  "npmClient": "yarn",
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.0.0"
+}

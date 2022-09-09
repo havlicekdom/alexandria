@@ -1,0 +1,66 @@
+import React, { useEffect } from 'react';
+import {
+  Routes,
+  Route,
+  useNavigate,
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { useAppDispatch } from 'store/hooks';
+import { getUserProfile } from 'store/user/userSlice';
+import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
+
+import {
+  Budget,
+  Login,
+  Overview,
+  Register,
+  Reports,
+  ResetPassword,
+  Scheduler,
+  Settings,
+} from './pages';
+
+import * as S from './App.styled';
+import ProtectedRoute from './shell/ProtectedRoute';
+import Spinner from './shell/Spinner';
+import Snackbar from './common/Snackbar';
+
+function App() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const isLoading = useSelector(selectIsLoading);
+  const message = useSelector(selectMessage);
+
+  useEffect(() => {
+    dispatch(getUserProfile())
+      .then(() => {
+        navigate('/', { replace: true });
+      });
+  }, []);
+
+  return (
+    <S.App>
+      {isLoading && <Spinner />}
+      {message && (
+        <Snackbar variant={message.type}>
+          { message.text }
+        </Snackbar>
+      )}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Overview />} />
+          <Route path="/budget" element={<Budget />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/scheduler" element={<Scheduler />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
+      </Routes>
+    </S.App>
+  );
+}
+
+export default App;

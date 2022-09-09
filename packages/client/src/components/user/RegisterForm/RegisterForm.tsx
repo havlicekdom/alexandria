@@ -1,0 +1,64 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import yup from 'utils/formValidation';
+
+import Icon from 'components/common/Icon';
+import FormInput from 'components/common/FormInput';
+import { useAppDispatch } from 'store/hooks';
+import { registerUser } from 'store/user/userSlice';
+import { formValidation as translations } from 'translations';
+
+import * as S from './RegisterForm.styled';
+
+type FormInputs = {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
+const validationSchema = yup.object({
+  username: yup.string().required().max(255),
+  email: yup.string().email().required().max(255),
+  password: yup.string().required().max(255),
+  confirmPassword: yup.string().required().oneOf([yup.ref('password'), null], translations.passwordsDontMatch).max(255),
+}).required();
+
+function RegisterForm() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const {
+    register, handleSubmit, formState: { errors },
+  } = useForm<FormInputs>({
+    resolver: yupResolver(validationSchema),
+  });
+
+  const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
+    await dispatch(registerUser(formData));
+    navigate('/login', { replace: true });
+  };
+
+  return (
+    <S.RegisterForm onSubmit={handleSubmit(onSubmit)}>
+      <S.RegisterHeader>
+        <Icon icon={faUserPlus} />
+        Create your account
+      </S.RegisterHeader>
+      <FormInput label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
+      <FormInput label="Email" fieldName="email" register={register} error={errors?.email} type="email" />
+      <FormInput label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
+      <FormInput label="Confirm password" fieldName="confirmPassword" register={register} error={errors?.confirmPassword} type="password" />
+      <S.RegisterFormButton type="submit" variant="primary" full>
+        <Icon icon={faUserPlus} />
+        Create account
+      </S.RegisterFormButton>
+    </S.RegisterForm>
+  );
+}
+
+export default RegisterForm;
