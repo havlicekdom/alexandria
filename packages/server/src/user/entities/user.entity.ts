@@ -20,7 +20,7 @@ export class User {
   salt: string;
 
   @OneToMany(() => Loan, (loan) => loan.user)
-  loans: Loan;
+  loans: Loan[];
 
   @Column({
     type: 'enum',

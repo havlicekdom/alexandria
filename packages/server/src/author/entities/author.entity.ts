@@ -17,7 +17,7 @@ export class Author {
   @Column()
   name: string;
 
-  @Column()
+  @Column('date')
   dateOfBirth: Date;
 
   @Column()
