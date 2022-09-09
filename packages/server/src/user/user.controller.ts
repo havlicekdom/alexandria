@@ -3,11 +3,11 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
   Request,
 } from '@nestjs/common';
-import { ApiBody } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/auth/decorators/metadata/public.decorator';
 import {
   CreateUserDto,
@@ -16,23 +16,26 @@ import {
   ChangeUserPasswordDto,
 } from './dto';
 import { UserService } from './user.service';
-
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @ApiBearerAuth()
   @Get('/profile')
   async getCurrentUser(@Request() req) {
     return req.user;
   }
 
+  @ApiBearerAuth()
   @Get('/:id')
   async getUser(@Param('id') id: string) {
     return await this.userService.findOne(id);
   }
 
+  @ApiBearerAuth()
   @ApiBody({ type: ChangeUserPasswordDto })
-  @Put('/change-password')
+  @Patch('/change-password')
   async changePassword(@Request() req, @Body() dto: ChangeUserPasswordDto) {
     const { oldPassword, newPassword } = dto;
 
@@ -43,8 +46,9 @@ export class UserController {
     );
   }
 
+  @ApiBearerAuth()
   @ApiBody({ type: UpdateUserDto })
-  @Put('/:id')
+  @Patch('/:id')
   async updateUser(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return await this.userService.update(id, dto);
   }
@@ -58,7 +62,7 @@ export class UserController {
 
   @Public()
   @ApiBody({ type: ResetUserPasswordDto })
-  @Put('/')
+  @Patch('/')
   async resetPassword(@Body() dto: ResetUserPasswordDto) {
     const { email } = dto;
 

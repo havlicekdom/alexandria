@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
+import { Genre } from 'src/genre/entities/genre.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class GenreService {
-  create(createGenreDto: CreateGenreDto) {
-    return 'This action adds a new genre';
+  constructor(
+    @InjectRepository(Genre)
+    private genreRepository: Repository<Genre>,
+  ) {}
+
+  async create(createGenreDto: CreateGenreDto) {
+    return await this.genreRepository.save(createGenreDto);
   }
 
-  findAll() {
-    return `This action returns all genre`;
+  async findAll() {
+    return await this.genreRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+  async findOne(id: string) {
+    return await this.genreRepository.findOneBy({ id });
   }
 
-  update(id: number, updateGenreDto: UpdateGenreDto) {
-    return `This action updates a #${id} genre`;
+  async update(id: string, updateGenreDto: UpdateGenreDto) {
+    const toUpdate = await this.findOne(id);
+    const updated = Object.assign(toUpdate, updateGenreDto);
+
+    return await this.genreRepository.save(updated);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  async remove(id: string) {
+    await this.genreRepository.delete({ id });
   }
 }

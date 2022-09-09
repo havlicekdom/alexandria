@@ -7,10 +7,12 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
-
+@ApiTags('author')
+@ApiBearerAuth()
 @Controller('author')
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
