@@ -10,9 +10,9 @@ import { Author } from 'src/author/entities/author.entity';
 import { Genre } from 'src/genre/entities/genre.entity';
 
 export enum BookFormat {
-  HARDCOVER = 'hardcover',
-  PAPERBACK = 'paperback',
-  DIGITAL = 'digital',
+  Hardcover = 'hardcover',
+  Paperback = 'paperback',
+  Digital = 'digital',
 }
 
 @Entity()
@@ -26,7 +26,7 @@ export class Book {
   @Column({
     type: 'enum',
     enum: BookFormat,
-    default: BookFormat.DIGITAL,
+    default: BookFormat.Digital,
   })
   format: BookFormat;
 
