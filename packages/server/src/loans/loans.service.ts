@@ -1,26 +1,66 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Book } from 'src/book/entities/book.entity';
+import { User } from 'src/user/entities/user.entity';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
+import { Loan } from './entities/loan.entity';
+import { createLoanEndDate } from 'src/loans/utils/loans';
 
 @Injectable()
 export class LoansService {
-  create(createLoanDto: CreateLoanDto) {
-    return 'This action adds a new loan';
+  constructor(
+    @InjectRepository(Loan)
+    private loanRepository: Repository<Loan>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+    @InjectRepository(Book)
+    private bookRepository: Repository<Book>,
+  ) {}
+
+  private async getUserById(id: string) {
+    return await this.userRepository.findOneBy({ id });
   }
 
-  findAll() {
-    return `This action returns all loans`;
+  private async getBookById(id: string) {
+    return await this.bookRepository.findOneBy({ id });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} loan`;
+  async create(createLoanDto: CreateLoanDto) {
+    const user = await this.getUserById(createLoanDto.userId);
+    const book = await this.getBookById(createLoanDto.bookId);
+    const dateEnd = createLoanEndDate();
+    const toSave = Object.assign(createLoanDto, {
+      user,
+      book,
+      dateEnd,
+    });
+
+    return await this.loanRepository.save(toSave);
   }
 
-  update(id: number, updateLoanDto: UpdateLoanDto) {
-    return `This action updates a #${id} loan`;
+  async findAll() {
+    return await this.loanRepository.find();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} loan`;
+  async findOne(id: string) {
+    return await this.loanRepository.findOneBy({ id });
+  }
+
+  async update(id: string, updateLoanDto: UpdateLoanDto) {
+    const user = await this.getUserById(updateLoanDto.userId);
+    const book = await this.getBookById(updateLoanDto.bookId);
+    const toUpdate = await this.findOne(id);
+    const toSave = Object.assign(toUpdate, updateLoanDto, {
+      user,
+      book,
+    });
+
+    return await this.loanRepository.save(toSave);
+  }
+
+  async remove(id: string) {
+    return await this.loanRepository.delete({ id });
   }
 }

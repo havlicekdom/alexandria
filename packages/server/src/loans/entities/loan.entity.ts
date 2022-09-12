@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -18,6 +19,7 @@ export class Loan {
   user: User;
 
   @OneToOne(() => Book)
+  @JoinColumn()
   book: Book;
 
   @CreateDateColumn()

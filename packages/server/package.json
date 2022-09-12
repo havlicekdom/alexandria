@@ -33,6 +33,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "helmet": "^6.0.0",
+    "moment-mini": "^2.29.4",
     "mysql2": "^2.3.3",
     "notarealdb": "^0.2.2",
     "passport": "^0.6.0",
