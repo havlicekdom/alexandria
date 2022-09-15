@@ -52,7 +52,7 @@ export class BookService {
   }
 
   async update(id: string, updateBookDto: UpdateBookDto) {
-    const toUpdate = this.findOne(id);
+    const toUpdate = await this.findOne(id);
     const author = await this.getAuthorById(updateBookDto.authorId);
     const genres = await this.getGenresByIdList(updateBookDto.genreIds);
     const toSave = Object.assign(toUpdate, updateBookDto, {
