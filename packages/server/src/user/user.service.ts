@@ -51,20 +51,20 @@ export class UserService {
     return user;
   }
 
-  async validatePassword(user: User, password: string): Promise<boolean> {
-    return await compareSync(password, user.password);
+  validatePassword(user: User, password: string): boolean {
+    return compareSync(password, user.password);
   }
 
-  findOne(id: string): Promise<User> {
-    return this.usersRepository.findOneBy({ id });
+  async findOne(id: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ id });
   }
 
-  findOneByUsername(username: string): Promise<User> {
-    return this.usersRepository.findOneBy({ username });
+  async findOneByUsername(username: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ username });
   }
 
-  findOneByEmail(email: string): Promise<User> {
-    return this.usersRepository.findOneBy({ email });
+  async findOneByEmail(email: string): Promise<User> {
+    return await this.usersRepository.findOneBy({ email });
   }
 
   async create(userDto: CreateUserDto): Promise<void> {
@@ -105,10 +105,7 @@ export class UserService {
     newPassword: string,
   ): Promise<void> {
     const toUpdate = await this.findOne(id);
-    const isOldPasswordValid = await this.validatePassword(
-      toUpdate,
-      oldPassword,
-    );
+    const isOldPasswordValid = this.validatePassword(toUpdate, oldPassword);
 
     if (!isOldPasswordValid) {
       const errors = { oldPassword: 'Your old password is wrong.' };
@@ -131,7 +128,6 @@ export class UserService {
   async resetPassword(email: string): Promise<void> {
     const toUpdate = await this.findOneByEmail(email);
     const newPassword = uuid().substring(0, 8);
-    console.log('New password for user: ', newPassword);
     const { salt, hashedPassword } = await this.hashPassword(newPassword);
     const updated = Object.assign(toUpdate, {
       salt,
