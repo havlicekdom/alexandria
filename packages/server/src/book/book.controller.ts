@@ -8,11 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/metadata/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 @ApiTags('book')
 @ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -23,11 +26,13 @@ export class BookController {
   }
 
   @Get()
+  @Roles(Role.User)
   findAll() {
     return this.bookService.findAll();
   }
 
   @Get(':id')
+  @Roles(Role.User)
   findOne(@Param('id') id: string) {
     return this.bookService.findOne(id);
   }
