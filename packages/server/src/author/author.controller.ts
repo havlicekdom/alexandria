@@ -8,11 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/metadata/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 import { AuthorService } from './author.service';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 @ApiTags('author')
 @ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('author')
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
@@ -23,11 +26,13 @@ export class AuthorController {
   }
 
   @Get()
+  @Roles(Role.User)
   findAll() {
     return this.authorService.findAll();
   }
 
   @Get(':id')
+  @Roles(Role.User)
   findOne(@Param('id') id: string) {
     return this.authorService.findOne(id);
   }

@@ -11,8 +11,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { GenreService } from './genre.service';
 import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
+import { Roles } from 'src/auth/decorators/metadata/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
 @ApiTags('genre')
 @ApiBearerAuth()
+@Roles(Role.Admin)
 @Controller('genre')
 export class GenreController {
   constructor(private readonly genreService: GenreService) {}
@@ -23,11 +26,13 @@ export class GenreController {
   }
 
   @Get()
+  @Roles(Role.User)
   findAll() {
     return this.genreService.findAll();
   }
 
   @Get(':id')
+  @Roles(Role.User)
   findOne(@Param('id') id: string) {
     return this.genreService.findOne(id);
   }
