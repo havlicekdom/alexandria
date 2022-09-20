@@ -1,6 +1,6 @@
-# Library App
+# Alexandria
 
-Library App is a simple dashboard for borrowing books from a library and administration of the loans and the books.
+Alexandria is a dashboard for borrowing books from a library and administration of the loans and the books.
 
 ## Installation
 
