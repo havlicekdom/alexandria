@@ -5,6 +5,7 @@ import {
   faBook,
   faRectangleList,
   faReceipt,
+  faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Icon from 'components/common/Icon';
@@ -15,6 +16,10 @@ import * as S from './Navigation.styled';
 function Navigation() {
   return (
     <S.NavigationWrapper>
+      <S.Logo>
+        <Icon icon={faBookOpen} />
+        Alexandria
+      </S.Logo>
       <S.Navigation>
         <S.NavigationItem>
           <S.NavigationLink to="/">

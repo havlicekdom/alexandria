@@ -9,8 +9,7 @@ import {
 
 export const NavigationWrapper = styled.nav`
   width: 25%;
-  max-width: 260px;
-  padding-top: ${spacing.large};
+  max-width: 275px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid ${secondaryBackgroundColor};
@@ -36,4 +35,10 @@ export const NavigationLink = styled(NavLink)`
   &:hover, &.active {
     background-color: ${primaryColor};
   }
+`;
+
+export const Logo = styled.h1`
+  padding: 0 ${spacing.medium};
+  margin: ${spacing.large} 0;
+  text-align: center;
 `;

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { lighten } from 'polished';
 
 import {
-  errorColor, fontSize, spacing, textColor,
+  errorColor, fontSize, secondaryBackgroundColor, spacing, textColor,
 } from 'constants/styles';
 
 type FormElementProps = {
@@ -37,6 +37,15 @@ export const FormInput = styled.input<FormElementProps>`
   &:focus {
     border-bottom-color: ${textColor};
     outline: none;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    border-bottom: 1px solid ${lighten(0.2, textColor)};
+    -webkit-text-fill-color: ${textColor};
+    -webkit-box-shadow: 0 0 0px 1000px ${secondaryBackgroundColor} inset;
+    transition: background-color 5000s ease-in-out 0s;
   }
 
   ${({ hasError }) => hasError && css`

@@ -17,10 +17,10 @@ function UserMenu() {
     <S.UserMenuWrapper>
       <S.UserMenu>
         <S.UserMenuItem>
-          <Link to="/settings">
+          <S.UserMenuLink to="/settings">
             <Icon icon={faCog} />
             Settings
-          </Link>
+          </S.UserMenuLink>
         </S.UserMenuItem>
         <S.UserMenuItem>
           <Button
