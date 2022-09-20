@@ -1,13 +1,14 @@
 import React from 'react';
 import {
   faClipboardList,
-  faSackDollar,
-  faCalendar,
-  faChartSimple,
+  faUserPen,
+  faBook,
+  faRectangleList,
+  faReceipt,
 } from '@fortawesome/free-solid-svg-icons';
 
 import Icon from 'components/common/Icon';
-import UserDetails from '../UserDetails';
+import UserMenu from '../UserMenu';
 
 import * as S from './Navigation.styled';
 
@@ -22,25 +23,31 @@ function Navigation() {
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/budget">
-            <Icon icon={faSackDollar} />
-            Budget
+          <S.NavigationLink to="/authors">
+            <Icon icon={faUserPen} />
+            Authors
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/scheduler">
-            <Icon icon={faCalendar} />
-            Scheduler
+          <S.NavigationLink to="/books">
+            <Icon icon={faBook} />
+            Books
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/reports">
-            <Icon icon={faChartSimple} />
-            Reports
+          <S.NavigationLink to="/genres">
+            <Icon icon={faRectangleList} />
+            Genres
+          </S.NavigationLink>
+        </S.NavigationItem>
+        <S.NavigationItem>
+          <S.NavigationLink to="/loans">
+            <Icon icon={faReceipt} />
+            Your loans
           </S.NavigationLink>
         </S.NavigationItem>
       </S.Navigation>
-      <UserDetails />
+      <UserMenu />
     </S.NavigationWrapper>
   );
 }
