@@ -11,13 +11,14 @@ import { getUserProfile } from 'store/user/userSlice';
 import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
 import {
-  Budget,
+  Authors,
+  Books,
+  Genres,
+  Loans,
   Login,
   Overview,
   Register,
-  Reports,
   ResetPassword,
-  Scheduler,
   Settings,
 } from './pages';
 
@@ -53,9 +54,10 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Overview />} />
-          <Route path="/budget" element={<Budget />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/scheduler" element={<Scheduler />} />
+          <Route path="/authors" element={<Authors />} />
+          <Route path="/books" element={<Books />} />
+          <Route path="/genres" element={<Genres />} />
+          <Route path="/loans" element={<Loans />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
