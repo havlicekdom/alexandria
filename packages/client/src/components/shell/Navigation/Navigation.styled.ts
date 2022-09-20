@@ -10,11 +10,10 @@ import {
 export const NavigationWrapper = styled.nav`
   width: 25%;
   max-width: 260px;
-  background-color: ${secondaryBackgroundColor};
   padding-top: ${spacing.large};
   display: flex;
   flex-direction: column;
-  box-shadow: 5px 0px 30px 5px rgba(20, 20, 20, 0.4);
+  border-right: 1px solid ${secondaryBackgroundColor};
 `;
 
 export const Navigation = styled.ul`
