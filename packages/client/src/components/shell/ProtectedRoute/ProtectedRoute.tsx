@@ -9,6 +9,9 @@ import { useAppSelector } from 'store/hooks';
 import { selectIsLoggedIn } from 'store/auth/authSlice';
 import Navigation from '../Navigation';
 
+import * as S from './ProtectedRoute.styled';
+import TopBar from '../TopBar';
+
 function ProtectedRoute() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const location = useLocation();
@@ -20,7 +23,10 @@ function ProtectedRoute() {
   return (
     <>
       <Navigation />
-      <Outlet />
+      <S.ContentWrapper>
+        <TopBar />
+        <Outlet />
+      </S.ContentWrapper>
     </>
   );
 }

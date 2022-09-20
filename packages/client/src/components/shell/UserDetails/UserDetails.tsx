@@ -1,26 +1,28 @@
 import React from 'react';
+import Jdenticon from 'react-jdenticon';
 
 import { useAppSelector } from 'store/hooks';
-import { selectIsLoggedIn } from 'store/auth/authSlice';
 import { selectUser } from 'store/user/userSlice';
 
 import * as S from './UserDetails.styled';
 
 function UserDetails() {
   const user = useAppSelector(selectUser);
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const iconSize = '25';
 
   return (
     <S.UserDetailsWrapper>
-      {isLoggedIn
-        ? (
-          <S.UserDetailsButton
-            variant="link"
-            onClick={() => null}
-          >
-            { user.username }
-          </S.UserDetailsButton>
-        ) : ''}
+      <S.UserDetailsAvatar iconSize={iconSize}>
+        <Jdenticon size={iconSize} value={user.username} />
+      </S.UserDetailsAvatar>
+      <S.UserDetailsText>
+        <S.UserDetailsUsername>
+          { user.username }
+        </S.UserDetailsUsername>
+        <S.UserDetailsEmail>
+          { user.email }
+        </S.UserDetailsEmail>
+      </S.UserDetailsText>
     </S.UserDetailsWrapper>
   );
 }
