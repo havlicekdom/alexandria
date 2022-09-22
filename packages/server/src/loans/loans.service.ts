@@ -44,6 +44,22 @@ export class LoansService {
     return await this.loanRepository.find();
   }
 
+  async findAllByUserId(id: string) {
+    return await this.loanRepository.find({
+      where: {
+        user: {
+          id,
+        },
+      },
+      relations: {
+        book: {
+          author: true,
+          genres: true,
+        },
+      },
+    });
+  }
+
   async findOne(id: string) {
     return await this.loanRepository.findOneBy({ id });
   }

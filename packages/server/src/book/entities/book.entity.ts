@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -10,15 +11,18 @@ import { Author } from 'src/author/entities/author.entity';
 import { Genre } from 'src/genre/entities/genre.entity';
 
 export enum BookFormat {
-  Hardcover = 'hardcover',
-  Paperback = 'paperback',
-  Digital = 'digital',
+  Hardcover = 'Hardcover',
+  Paperback = 'Paperback',
+  Digital = 'Digital',
 }
 
 @Entity()
 export class Book {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @CreateDateColumn()
+  created: string;
 
   @Column()
   name: string;

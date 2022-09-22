@@ -58,6 +58,18 @@ describe('LoansController', () => {
     });
   });
 
+  describe('findAll', () => {
+    it('should return list of all loans for current user', async () => {
+      const mockRequest = {
+        user: mockUser,
+      };
+
+      await expect(
+        controller.findAllForCurrentUser(mockRequest),
+      ).resolves.toEqual([mockLoan]);
+    });
+  });
+
   describe('findOne', () => {
     it('should return one loan', async () => {
       await expect(controller.findOne(mockLoan.id)).resolves.toEqual(mockLoan);

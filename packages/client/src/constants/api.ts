@@ -1,6 +1,12 @@
 export default {
   login: '/auth/login',
   logout: '/auth/logout',
-  register: '/user',
-  userProfile: '/user/profile',
+  books: {
+    latest: '/book/latest',
+  },
+  user: {
+    register: '/user',
+    profile: '/user/profile',
+    loans: '/loans/forCurrentUser',
+  },
 };

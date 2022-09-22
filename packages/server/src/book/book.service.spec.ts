@@ -71,6 +71,15 @@ describe('BookService', () => {
     });
   });
 
+  describe('findLatest', () => {
+    it('should return 5 latest books', async () => {
+      const books = await service.findLatest();
+
+      expect(bookRepo.find).toHaveBeenCalled();
+      expect(books).toEqual([mockBook]);
+    });
+  });
+
   describe('findOne', () => {
     it('should return book with provided ID', async () => {
       const book = await service.findOne(mockBook.id);

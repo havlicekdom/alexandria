@@ -47,6 +47,19 @@ export class BookService {
     return await this.bookRepository.find();
   }
 
+  async findLatest() {
+    return await this.bookRepository.find({
+      relations: {
+        author: true,
+        genres: true,
+      },
+      order: {
+        created: 'DESC',
+      },
+      take: 5,
+    });
+  }
+
   async findOne(id: string) {
     return await this.bookRepository.findOneBy({ id });
   }

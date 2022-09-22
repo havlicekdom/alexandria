@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
+import booksReducer from './books/booksSlice';
 import sharedReducer from './shared/sharedSlice';
 import userReducer from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
+    books: booksReducer,
     shared: sharedReducer,
     user: userReducer,
   },
