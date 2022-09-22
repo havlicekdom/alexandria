@@ -42,7 +42,7 @@ describe('BookController', () => {
   });
 
   describe('create', () => {
-    it('should create and return new author', async () => {
+    it('should create and return new book', async () => {
       const createBookDto: CreateBookDto = {
         name: mockBook.name,
         format: mockBook.format,
@@ -57,19 +57,25 @@ describe('BookController', () => {
   });
 
   describe('findAll', () => {
-    it('should return list of all authors', async () => {
+    it('should return list of all books', async () => {
       await expect(controller.findAll()).resolves.toEqual([mockBook]);
     });
   });
 
+  describe('findLatest', () => {
+    it('should return list of 5 latest books', async () => {
+      await expect(controller.findLatest()).resolves.toEqual([mockBook]);
+    });
+  });
+
   describe('findOne', () => {
-    it('should return one author', async () => {
+    it('should return one book', async () => {
       await expect(controller.findOne(mockBook.id)).resolves.toEqual(mockBook);
     });
   });
 
   describe('update', () => {
-    it('should update and return updated author', async () => {
+    it('should update and return updated book', async () => {
       const updateBookDto: UpdateBookDto = {
         name: 'Test updated name',
       };
@@ -84,7 +90,7 @@ describe('BookController', () => {
   });
 
   describe('remove', () => {
-    it('should remove one author', async () => {
+    it('should remove one book', async () => {
       await expect(controller.remove(mockBook.id)).resolves.toBeTruthy();
     });
   });

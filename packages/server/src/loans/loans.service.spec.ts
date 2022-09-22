@@ -67,6 +67,15 @@ describe('LoansService', () => {
     });
   });
 
+  describe('findAllByUserId', () => {
+    it('should return all loans for user with specified ID', async () => {
+      const loans = await service.findAllByUserId(mockUser.id);
+
+      expect(loanRepo.find).toHaveBeenCalled();
+      expect(loans).toEqual([mockLoan]);
+    });
+  });
+
   describe('findOne', () => {
     it('should return loan with provided ID', async () => {
       const loan = await service.findOne(mockLoan.id);

@@ -5,6 +5,7 @@ import {
   Body,
   Patch,
   Param,
+  Request,
   Delete,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -30,6 +31,12 @@ export class LoansController {
   @Roles(Role.User)
   findAll() {
     return this.loansService.findAll();
+  }
+
+  @Get('/forCurrentUser')
+  @Roles(Role.User)
+  findAllForCurrentUser(@Request() req) {
+    return this.loansService.findAllByUserId(req.user.id);
   }
 
   @Get(':id')

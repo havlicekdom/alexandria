@@ -4,3 +4,8 @@ export const fontSize = {
   default: '16px',
   large: '24px',
 };
+
+export const fontWeight = {
+  regular: 400,
+  bold: 700,
+};

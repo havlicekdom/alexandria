@@ -31,6 +31,12 @@ export class BookController {
     return this.bookService.findAll();
   }
 
+  @Get('/latest')
+  @Roles(Role.User)
+  findLatest() {
+    return this.bookService.findLatest();
+  }
+
   @Get(':id')
   @Roles(Role.User)
   findOne(@Param('id') id: string) {

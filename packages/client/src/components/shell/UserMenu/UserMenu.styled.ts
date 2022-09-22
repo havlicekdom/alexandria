@@ -10,7 +10,6 @@ export const UserMenuWrapper = styled.div`
 
 export const UserMenu = styled.ul`
   padding: 0;
-  padding-left: ${spacing.small};
   margin: 0;
   list-style: none;
 `;

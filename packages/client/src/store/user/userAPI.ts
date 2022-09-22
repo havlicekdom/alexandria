@@ -7,5 +7,6 @@ export type RegisterUserData = {
   password: string;
 }
 
-export const fetchUserProfileRequest = () => axios.get(API.userProfile);
-export const registerUserRequest = (data: RegisterUserData) => axios.post(API.register, data);
+export const fetchUserProfileRequest = () => axios.get(API.user.profile);
+export const fetchUserLoansRequest = () => axios.get(API.user.loans);
+export const registerUserRequest = (data: RegisterUserData) => axios.post(API.user.register, data);

@@ -12,7 +12,7 @@ export const NavigationWrapper = styled.nav`
   max-width: 275px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid ${secondaryBackgroundColor};
+  border-right: 2px solid ${secondaryBackgroundColor};
 `;
 
 export const Navigation = styled.ul`
@@ -22,7 +22,7 @@ export const Navigation = styled.ul`
 `;
 
 export const NavigationItem = styled.li`
-  padding: 0 ${spacing.medium} ${spacing.small};
+  padding: 0 ${spacing.medium} ${spacing.small} 0;
 `;
 
 export const NavigationLink = styled(NavLink)`
@@ -30,7 +30,10 @@ export const NavigationLink = styled(NavLink)`
   color: ${textColor};
   text-decoration: none;
   padding: ${spacing.small};
-  border-radius: 10px;
+  padding-left: ${spacing.medium};
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transition: background-color 0.1s ease-in-out;
 
   &:hover, &.active {
     background-color: ${primaryColor};
@@ -40,5 +43,4 @@ export const NavigationLink = styled(NavLink)`
 export const Logo = styled.h1`
   padding: 0 ${spacing.medium};
   margin: ${spacing.large} 0;
-  text-align: center;
 `;
