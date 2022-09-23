@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { faCog, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 import { useAppDispatch } from 'store/hooks';

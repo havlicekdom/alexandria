@@ -9,11 +9,12 @@ import * as S from './UserDetails.styled';
 function UserDetails() {
   const user = useAppSelector(selectUser);
   const iconSize = '25';
+  const env = process.env.NODE_ENV;
 
   return (
     <S.UserDetailsWrapper>
       <S.UserDetailsAvatar iconSize={iconSize}>
-        <Jdenticon size={iconSize} value={user.username} />
+        {env !== 'test' && <Jdenticon size={iconSize} value={user.username} />}
       </S.UserDetailsAvatar>
       <S.UserDetailsText>
         <S.UserDetailsUsername>
