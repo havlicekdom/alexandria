@@ -18,7 +18,7 @@ function Loan({ loan }: Props) {
   const isOverdue = endsIn.asDays() < 0;
 
   return (
-    <ListItem>
+    <ListItem data-testid="loan">
       <S.LoanIcon>
         <Icon icon={faReceipt} />
       </S.LoanIcon>

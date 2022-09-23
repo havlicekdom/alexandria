@@ -13,7 +13,9 @@ function LatestBooks() {
     dispatch(getLatestBooks());
   }, []);
 
-  const renderLatestBooks = () => latestBooks.map((book) => (<LatestBook book={book} />));
+  const renderLatestBooks = () => (
+    latestBooks.map((book) => (<LatestBook book={book} key={book.id} />))
+  );
 
   return (
     <Panel header="Recently added books" portion={2}>

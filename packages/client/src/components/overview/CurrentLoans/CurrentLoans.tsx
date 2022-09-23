@@ -13,7 +13,7 @@ function CurrentLoans() {
     dispatch(getUserLoans());
   }, []);
 
-  const renderLoans = () => loans.map((loan) => (<Loan loan={loan} />));
+  const renderLoans = () => loans.map((loan) => (<Loan loan={loan} key={loan.id} />));
 
   return (
     <Panel header="Your loans" portion={2}>

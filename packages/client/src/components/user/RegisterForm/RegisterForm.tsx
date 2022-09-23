@@ -49,11 +49,11 @@ function RegisterForm() {
         <Icon icon={faUserPlus} />
         Create your account
       </S.RegisterHeader>
-      <FormInput label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
-      <FormInput label="Email" fieldName="email" register={register} error={errors?.email} type="email" />
-      <FormInput label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
-      <FormInput label="Confirm password" fieldName="confirmPassword" register={register} error={errors?.confirmPassword} type="password" />
-      <S.RegisterFormButton type="submit" variant="primary" full>
+      <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
+      <FormInput data-testid="email" label="Email" fieldName="email" register={register} error={errors?.email} type="email" />
+      <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
+      <FormInput data-testid="confirm-password" label="Confirm password" fieldName="confirmPassword" register={register} error={errors?.confirmPassword} type="password" />
+      <S.RegisterFormButton data-testid="submit" type="submit" variant="primary" full>
         <Icon icon={faUserPlus} />
         Create account
       </S.RegisterFormButton>

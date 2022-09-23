@@ -14,10 +14,10 @@ type Props = {
 }
 
 function LatestBook({ book }: Props) {
-  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary">{ genre.name }</Pill>));
+  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}>{ genre.name }</Pill>));
 
   return (
-    <ListItem>
+    <ListItem data-testid="book">
       <S.LatestBookIcon>
         <Icon icon={faBook} />
       </S.LatestBookIcon>

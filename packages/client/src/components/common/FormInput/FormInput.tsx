@@ -14,7 +14,7 @@ type FormInputProps = {
 };
 
 function FormInput({
-  label, fieldName, error, register, type,
+  label, fieldName, error, register, type, ...rest
 }: FormInputProps) {
   return (
     <S.FormLabel hasError={!!error}>
@@ -23,6 +23,7 @@ function FormInput({
         {...register(fieldName)}
         hasError={!!error}
         type={type}
+        {...rest}
       />
       {error && (
         <S.FormError>

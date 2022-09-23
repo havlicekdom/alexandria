@@ -51,16 +51,16 @@ function LoginForm() {
         <Icon icon={faUser} />
         Log in
       </S.LoginHeader>
-      <FormInput label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
-      <FormInput label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
-      <S.LoginFormResetPasswordLink to="/reset-password">
+      <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
+      <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
+      <S.LoginFormResetPasswordLink data-testid="reset-password" to="/reset-password">
         Forgot your password?
       </S.LoginFormResetPasswordLink>
-      <S.LoginFormButton type="submit" variant="primary" full>
+      <S.LoginFormButton data-testid="submit" name="submit" type="submit" variant="primary" full>
         <Icon icon={faArrowRightToBracket} />
         Log in
       </S.LoginFormButton>
-      <S.LoginFormRegisterLink to="/register">
+      <S.LoginFormRegisterLink data-testid="register" to="/register">
         New to the app? Create your account here.
       </S.LoginFormRegisterLink>
     </S.LoginForm>
