@@ -11,7 +11,6 @@ import { GenreModule } from './genre/genre.module';
 import { LoansModule } from './loans/loans.module';
 
 const ENV = process.env.NODE_ENV;
-
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -23,7 +22,7 @@ const ENV = process.env.NODE_ENV;
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '127.0.0.1',
+      host: process.env.DB_HOST ?? '127.0.0.1',
       port: 3306,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,

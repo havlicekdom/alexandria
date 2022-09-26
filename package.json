@@ -18,12 +18,13 @@
   "scripts": {
     "start": "lerna run start --parallel",
     "build": "lerna run build --parallel",
-    "lint": "lerna run lint --parallel"
+    "lint": "lerna run lint --parallel",
+    "test": "lerna run test --parallel"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn test"
     }
   },
   "workspaces": [

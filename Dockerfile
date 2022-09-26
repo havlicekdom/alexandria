@@ -3,14 +3,14 @@ WORKDIR /app
 COPY packages/client/package.json /app
 RUN yarn --pure-lockfile
 COPY packages/client /app
-CMD [ "yarn", "build" ]
+RUN yarn build
 
 FROM node:18-alpine as buildServer
 WORKDIR /app
 COPY packages/server/package.json /app
 RUN yarn --pure-lockfile
 COPY packages/server /app
-CMD [ "yarn", "build" ]
+RUN yarn build
 
 FROM node:18-alpine
 WORKDIR /app

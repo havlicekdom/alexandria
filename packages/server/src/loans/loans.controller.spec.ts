@@ -21,6 +21,7 @@ describe('LoansController', () => {
           useValue: {
             create: jest.fn().mockResolvedValue(mockLoan),
             findAll: jest.fn().mockResolvedValue([mockLoan]),
+            findAllByUserId: jest.fn().mockResolvedValue([mockLoan]),
             findOne: jest.fn().mockResolvedValue(mockLoan),
             update: jest.fn((id, updateLoanDto) =>
               Promise.resolve({
