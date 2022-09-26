@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import moment from 'moment-mini';
+import * as moment from 'moment-mini';
 import { Book, BookFormat } from './entities/book.entity';
 
 export const createMockBook = (mockAuthor, mockGenre): Book => ({

@@ -21,6 +21,7 @@ describe('BookController', () => {
           useValue: {
             create: jest.fn().mockResolvedValue(mockBook),
             findAll: jest.fn().mockResolvedValue([mockBook]),
+            findLatest: jest.fn().mockResolvedValue([mockBook]),
             findOne: jest.fn().mockResolvedValue(mockBook),
             update: jest.fn((id, updateBookDto) =>
               Promise.resolve({

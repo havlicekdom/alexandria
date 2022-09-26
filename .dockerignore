@@ -1,6 +1,6 @@
 Dockerfile
 .dockerignore
-node_modules
+**/node_modules
 yarn-debug.log
-dist
-build
+**/dist
+**/build

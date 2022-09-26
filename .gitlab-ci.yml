@@ -1,0 +1,19 @@
+default:
+  image: node:18-alpine
+
+stages:
+  - test
+
+run frontend unit tests:
+  stage: test
+  script:
+    - cd packages/client
+    - yarn --pure-lockfile
+    - yarn test -- --ci
+
+run backend unit tests:
+  stage: test
+  script:
+    - cd packages/server
+    - yarn --pure-lockfile
+    - yarn test -- --ci
