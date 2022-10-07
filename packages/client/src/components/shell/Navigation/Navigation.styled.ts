@@ -43,4 +43,5 @@ export const NavigationLink = styled(NavLink)`
 export const Logo = styled.h1`
   padding: 0 ${spacing.medium};
   margin: ${spacing.large} 0;
+  white-space: nowrap;
 `;

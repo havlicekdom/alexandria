@@ -6,10 +6,13 @@ import { Genre } from 'types/genre';
 import { Author } from 'types/author';
 import { render } from '@testing-library/react';
 import { User } from 'types/user';
+import { Role } from 'types/role';
 
 export const mockUser: User = {
+  id: 'dummy-id',
   username: 'test user',
   email: 'test@test.com',
+  role: Role.Admin,
 };
 
 export const mockGenre: Genre = {

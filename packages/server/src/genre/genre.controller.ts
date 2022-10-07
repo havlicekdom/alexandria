@@ -15,7 +15,7 @@ import { Roles } from 'src/auth/decorators/metadata/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 @ApiTags('genre')
 @ApiBearerAuth()
-@Roles(Role.Admin)
+@Roles([Role.Admin])
 @Controller('genre')
 export class GenreController {
   constructor(private readonly genreService: GenreService) {}
@@ -26,13 +26,13 @@ export class GenreController {
   }
 
   @Get()
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findAll() {
     return this.genreService.findAll();
   }
 
   @Get(':id')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findOne(@Param('id') id: string) {
     return this.genreService.findOne(id);
   }

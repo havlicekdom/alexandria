@@ -21,6 +21,7 @@ describe('BookController', () => {
           useValue: {
             create: jest.fn().mockResolvedValue(mockBook),
             findAll: jest.fn().mockResolvedValue([mockBook]),
+            findLoanable: jest.fn().mockResolvedValue([mockBook]),
             findLatest: jest.fn().mockResolvedValue([mockBook]),
             findOne: jest.fn().mockResolvedValue(mockBook),
             update: jest.fn((id, updateBookDto) =>
@@ -60,6 +61,12 @@ describe('BookController', () => {
   describe('findAll', () => {
     it('should return list of all books', async () => {
       await expect(controller.findAll()).resolves.toEqual([mockBook]);
+    });
+  });
+
+  describe('findLoanable', () => {
+    it('should return list of all loanable books', async () => {
+      await expect(controller.findLoanable()).resolves.toEqual([mockBook]);
     });
   });
 

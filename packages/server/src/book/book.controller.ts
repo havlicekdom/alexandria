@@ -15,7 +15,7 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 @ApiTags('book')
 @ApiBearerAuth()
-@Roles(Role.Admin)
+@Roles([Role.Admin])
 @Controller('book')
 export class BookController {
   constructor(private readonly bookService: BookService) {}
@@ -26,19 +26,25 @@ export class BookController {
   }
 
   @Get()
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findAll() {
     return this.bookService.findAll();
   }
 
+  @Get('/loanable')
+  @Roles([Role.Admin, Role.User])
+  findLoanable() {
+    return this.bookService.findLoanable();
+  }
+
   @Get('/latest')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findLatest() {
     return this.bookService.findLatest();
   }
 
   @Get(':id')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findOne(@Param('id') id: string) {
     return this.bookService.findOne(id);
   }

@@ -15,7 +15,7 @@ import { CreateAuthorDto } from './dto/create-author.dto';
 import { UpdateAuthorDto } from './dto/update-author.dto';
 @ApiTags('author')
 @ApiBearerAuth()
-@Roles(Role.Admin)
+@Roles([Role.Admin])
 @Controller('author')
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
@@ -26,13 +26,13 @@ export class AuthorController {
   }
 
   @Get()
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findAll() {
     return this.authorService.findAll();
   }
 
   @Get(':id')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findOne(@Param('id') id: string) {
     return this.authorService.findOne(id);
   }
