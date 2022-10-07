@@ -37,7 +37,9 @@ export class Book {
   @Column()
   releaseYear: number;
 
-  @Column()
+  @Column({
+    length: 1000,
+  })
   description: string;
 
   @ManyToOne(() => Author, (author) => author.books)

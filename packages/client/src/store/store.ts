@@ -3,6 +3,7 @@ import authReducer from './auth/authSlice';
 import booksReducer from './books/booksSlice';
 import sharedReducer from './shared/sharedSlice';
 import userReducer from './user/userSlice';
+import loansReducer from './loans/loansSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     books: booksReducer,
     shared: sharedReducer,
     user: userReducer,
+    loans: loansReducer,
   },
 });
 

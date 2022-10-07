@@ -71,6 +71,15 @@ describe('BookService', () => {
     });
   });
 
+  describe('findLoanble', () => {
+    it('should return loanble books', async () => {
+      const books = await service.findLoanable();
+
+      expect(bookRepo.createQueryBuilder).toHaveBeenCalled();
+      expect(books).toEqual([mockBook]);
+    });
+  });
+
   describe('findLatest', () => {
     it('should return 5 latest books', async () => {
       const books = await service.findLatest();

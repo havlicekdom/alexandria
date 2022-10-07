@@ -5,7 +5,7 @@ import React from 'react';
 import * as S from './Button.styled';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: 'link' | 'primary';
+  variant: 'link' | 'primary' | 'close';
   full?: boolean;
 }
 
@@ -25,6 +25,13 @@ function Button(props: ButtonProps) {
         <S.ButtonPrimary {...props}>
           { children }
         </S.ButtonPrimary>
+      );
+
+    case 'close':
+      return (
+        <S.ButtonClose {...props}>
+          { children }
+        </S.ButtonClose>
       );
 
     default:

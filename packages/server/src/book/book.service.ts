@@ -47,6 +47,14 @@ export class BookService {
     return await this.bookRepository.find();
   }
 
+  async findLoanable() {
+    return await this.bookRepository
+      .createQueryBuilder('book')
+      .leftJoin('loan', 'loan', 'loan.bookId = book.id')
+      .where('loan.bookId IS NULL')
+      .getMany();
+  }
+
   async findLatest() {
     return await this.bookRepository.find({
       relations: {

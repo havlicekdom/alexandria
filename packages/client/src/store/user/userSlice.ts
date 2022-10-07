@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { messages } from 'translations';
 import { Loan } from 'types/loan';
+import { Role } from 'types/role';
 import { User } from 'types/user';
 import { RootState } from '../store';
 import {
@@ -15,8 +16,10 @@ export interface UserState {
 
 const initialState: UserState = {
   user: {
+    id: '',
     username: '',
     email: '',
+    role: Role.User,
   },
   loans: [],
 };

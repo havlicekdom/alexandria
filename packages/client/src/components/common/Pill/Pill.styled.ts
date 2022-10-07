@@ -1,8 +1,15 @@
 import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
 import {
   borderRadius,
-  errorColor, fontSize, fontWeight, infoColor, primaryColor, spacing, successColor, textColor,
+  errorColor,
+  fontSize,
+  fontWeight,
+  infoColor,
+  primaryColor,
+  spacing,
+  successColor,
+  textColor,
+  textColorInverse,
 } from 'constants/styles';
 import { PillVariant } from './Pill';
 
@@ -36,9 +43,10 @@ export const Pill = styled.div<PillProps>`
   border-radius: ${borderRadius.tiny};
   padding: ${spacing.tiny};
   background-color: ${({ variant }) => decidePillColor(variant)};
+  color: ${textColor};
 
   ${({ variant }) => variant === 'default' ? css`
-    color: ${lighten(0.1, '#000')};
+    color: ${textColorInverse};
   ` : ''}
 
   & + & {

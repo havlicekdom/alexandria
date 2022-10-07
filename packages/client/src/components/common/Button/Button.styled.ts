@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
-import { darken } from 'polished';
+import { darken, lighten } from 'polished';
 import {
   primaryColor,
   textColor,
+  textColorInverse,
   spacing,
   borderRadius,
 } from 'constants/styles';
@@ -36,7 +37,14 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 export const ButtonPrimary = styled(Button)`
+  transition: all 0.1s ease-in-out;
   background-color: ${primaryColor};
+  color: ${textColor};
+
+  &:hover, &:active {
+    background-color: ${lighten(0.02, primaryColor)};
+    color: ${darken(0.1, textColor)};
+  }
 `;
 
 export const ButtonLink = styled(Button)`
@@ -45,5 +53,14 @@ export const ButtonLink = styled(Button)`
 
   &:hover, &:active {
     color: ${darken(0.1, textColor)};
+  }
+`;
+
+export const ButtonClose = styled(Button)`
+  color: ${textColorInverse};
+  padding: 0;
+
+  &:hover, &:active {
+    color: ${darken(0.1, textColorInverse)};
   }
 `;

@@ -29,4 +29,10 @@ export const LatestBookAuthor = styled(LatestBookLine)``;
 
 export const LatestBookPills = styled(LatestBookLine)``;
 
-export const LatestBookDescription = styled(LatestBookLine)``;
+export const LatestBookDescription = styled(LatestBookLine)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;

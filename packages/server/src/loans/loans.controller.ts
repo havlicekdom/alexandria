@@ -16,31 +16,31 @@ import { Roles } from 'src/auth/decorators/metadata/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 @ApiTags('loans')
 @ApiBearerAuth()
-@Roles(Role.Admin)
+@Roles([Role.Admin])
 @Controller('loans')
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}
 
   @Post()
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   create(@Body() createLoanDto: CreateLoanDto) {
     return this.loansService.create(createLoanDto);
   }
 
   @Get()
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findAll() {
     return this.loansService.findAll();
   }
 
   @Get('/forCurrentUser')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findAllForCurrentUser(@Request() req) {
     return this.loansService.findAllByUserId(req.user.id);
   }
 
   @Get(':id')
-  @Roles(Role.User)
+  @Roles([Role.Admin, Role.User])
   findOne(@Param('id') id: string) {
     return this.loansService.findOne(id);
   }
