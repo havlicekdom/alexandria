@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import List from 'components/common/List';
-import Panel from 'components/common/Panel/Panel';
+import Panel from 'components/common/Panel';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { getLatestBooks, selectLatestBooks } from 'store/books/booksSlice';
 import LatestBook from './LatestBook';
