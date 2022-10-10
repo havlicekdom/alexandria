@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import useDocumentTitle from 'hooks/useDocumentTitle';
-import CurrentLoans from 'components/overview/CurrentLoans';
 import Container from 'components/common/Container';
-import LatestBooks from 'components/overview/LatestBooks';
 import FloatingButton from 'components/common/FloatingButton';
 import Icon from 'components/common/Icon';
-import LoanModal from 'components/overview/LoanModal';
+import CurrentLoans from './CurrentLoans';
+import LatestBooks from './LatestBooks';
+import LoanModal from './LoanModal';
 
 function Overview() {
   useDocumentTitle('Overview');

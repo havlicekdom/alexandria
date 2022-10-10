@@ -24,7 +24,7 @@ export const LoanBookName = styled.div`
 `;
 
 export const LoanBookDescription = styled.div`
-  color: ${darken(0.15, textColor)}
+  color: ${darken(0.15, textColor)};
 `;
 
 export const LoanBookDescriptionItem = styled.div`
