@@ -12,6 +12,7 @@ import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
 import {
   Authors,
+  AuthorsDetailPage,
   Books,
   Genres,
   Loans,
@@ -54,7 +55,10 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Overview />} />
-          <Route path="/authors" element={<Authors />} />
+          <Route path="/authors">
+            <Route index element={<Authors />} />
+            <Route path=":authorId" element={<AuthorsDetailPage />} />
+          </Route>
           <Route path="/books" element={<Books />} />
           <Route path="/genres" element={<Genres />} />
           <Route path="/loans" element={<Loans />} />

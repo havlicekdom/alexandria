@@ -3,7 +3,7 @@ import {
   waitFor, render, screen, waitForElementToBeRemoved,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { mockBook, mockUser } from 'utils/tests';
+import { createMockAxiosResponse, mockBook, mockUser } from 'utils/tests';
 import { fetchLoanableBooks } from 'store/books/booksAPI';
 import { createNewLoan } from 'store/loans/loansSlice';
 import { selectUser } from 'store/user/userSlice';
@@ -35,13 +35,7 @@ describe('LoanModal', () => {
     (createNewLoan as jest.MockedFunction<typeof createNewLoan>).mockImplementation();
     (selectUser as jest.MockedFunction<typeof selectUser>).mockReturnValue(mockUser);
     (fetchLoanableBooks as jest.MockedFunction<typeof fetchLoanableBooks>)
-      .mockResolvedValue({
-        status: 200,
-        statusText: 'OK',
-        data: [mockBook],
-        headers: {},
-        config: {},
-      });
+      .mockResolvedValue(createMockAxiosResponse([mockBook]));
 
     const close = jest.fn();
     const { container } = render(<LoanModal close={close} />);

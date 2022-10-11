@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 import { fontWeight, spacing, textColor } from 'constants/styles';
 
-export const LatestBookImage = styled.div`
+export const AuthorBookImage = styled.div`
   margin-right: ${spacing.small};
 
   img {
@@ -11,9 +11,9 @@ export const LatestBookImage = styled.div`
   }
 `;
 
-export const LatestBookContent = styled.div``;
+export const AuthorBookContent = styled.div``;
 
-const LatestBookLine = styled.div`
+const AuthorBookLine = styled.div`
   color: ${darken(0.15, textColor)};
   margin-bottom: ${spacing.tiny};
 
@@ -22,15 +22,13 @@ const LatestBookLine = styled.div`
   }
 `;
 
-export const LatestBookName = styled(LatestBookLine)`
+export const AuthorBookName = styled(AuthorBookLine)`
   font-weight: ${fontWeight.bold};
 `;
 
-export const LatestBookAuthor = styled(LatestBookLine)``;
+export const AuthorBookPills = styled(AuthorBookLine)``;
 
-export const LatestBookPills = styled(LatestBookLine)``;
-
-export const LatestBookDescription = styled(LatestBookLine)`
+export const AuthorBookDescription = styled(AuthorBookLine)`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

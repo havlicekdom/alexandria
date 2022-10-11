@@ -26,6 +26,8 @@ export const mockAuthor: Author = {
   name: 'dummy-author-name',
   bio: 'dummy-author-bio',
   dateOfBirth: '2022-06-09',
+  books: [],
+  genres: [],
 };
 
 export const mockBook: Book = {
@@ -45,6 +47,14 @@ export const mockLoan: Loan = {
   dateEnd: '2022-06-09',
   book: mockBook,
 };
+
+export const createMockAxiosResponse = (data: any) => ({
+  data,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+});
 
 export const renderWithRouter = (children: any) => ({
   ...render((

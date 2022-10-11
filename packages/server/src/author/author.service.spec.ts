@@ -74,7 +74,7 @@ describe('AuthorService', () => {
     it('should return author with provided ID', async () => {
       const author = await service.findOne(mockAuthor.id);
 
-      expect(authorRepo.findOneBy).toHaveBeenCalled();
+      expect(authorRepo.findOne).toHaveBeenCalled();
       expect(author).toEqual(mockAuthor);
     });
   });
