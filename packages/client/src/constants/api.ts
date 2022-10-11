@@ -16,5 +16,6 @@ export default {
   },
   authors: {
     list: '/author',
+    detail: (authorId: string) => `/author/${authorId}`,
   },
 };

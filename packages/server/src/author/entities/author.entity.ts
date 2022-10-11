@@ -20,7 +20,9 @@ export class Author {
   @Column('date')
   dateOfBirth: Date;
 
-  @Column()
+  @Column({
+    length: 1000,
+  })
   bio: string;
 
   @ManyToMany(() => Genre)

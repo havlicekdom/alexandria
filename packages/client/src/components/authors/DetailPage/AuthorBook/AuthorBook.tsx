@@ -7,42 +7,37 @@ import { Genre } from 'types/genre';
 
 import missingBookImage from 'assets/images/missing-book-image.jpeg';
 
-import * as S from './LatestBook.styled';
+import * as S from './AuthorBook.styled';
 
 type Props = {
   book: Book;
-}
+};
 
-function LatestBook({ book }: Props) {
+function AuthorBook({ book }: Props) {
   const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}>{ genre.name }</Pill>));
 
   return (
     <ListItem data-testid="book">
-      <S.LatestBookImage>
+      <S.AuthorBookImage>
         <img src={missingBookImage} alt="" />
-      </S.LatestBookImage>
-      <S.LatestBookContent>
-        <S.LatestBookName>
+      </S.AuthorBookImage>
+      <S.AuthorBookContent>
+        <S.AuthorBookName>
           <Link to={`/books/${book.id}`}>
             { book.name }
           </Link>
-        </S.LatestBookName>
-        <S.LatestBookAuthor>
-          <Link to={`/authors/${book.author.id}`}>
-            { book.author.name }
-          </Link>
-        </S.LatestBookAuthor>
-        <S.LatestBookPills>
+        </S.AuthorBookName>
+        <S.AuthorBookPills>
           <Pill>{ book.releaseYear }</Pill>
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
-        </S.LatestBookPills>
-        <S.LatestBookDescription>
+        </S.AuthorBookPills>
+        <S.AuthorBookDescription>
           { book.description }
-        </S.LatestBookDescription>
-      </S.LatestBookContent>
+        </S.AuthorBookDescription>
+      </S.AuthorBookContent>
     </ListItem>
   );
 }
 
-export default LatestBook;
+export default AuthorBook;

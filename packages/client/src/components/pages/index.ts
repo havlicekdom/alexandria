@@ -4,6 +4,7 @@ export { default as Loans } from './Loans';
 export { default as Overview } from '../overview';
 export { default as Register } from './Register';
 export { default as Authors } from '../authors';
+export { default as AuthorsDetailPage } from '../authors/DetailPage';
 export { default as ResetPassword } from './ResetPassword';
 export { default as Genres } from './Genres';
 export { default as Settings } from './Settings';

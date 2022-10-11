@@ -3,12 +3,13 @@ import {
   fontWeight, spacing, textColor,
 } from 'constants/styles';
 import { darken } from 'polished';
-import { Icon } from 'components/common/Icon/Icon.styled';
 
-export const AuthorIcon = styled.div`
-  ${Icon} {
-    font-size: 44px;
-    margin-right: ${spacing.small};
+export const AuthorImage = styled.div`
+  margin-right: ${spacing.small};
+
+  img {
+    width: 60px;
+    height: auto;
   }
 `;
 
@@ -21,6 +22,11 @@ export const AuthorName = styled.div`
 
 export const AuthorBio = styled.div`
   color: ${darken(0.15, textColor)};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 export const AuthorBioItem = styled.div`

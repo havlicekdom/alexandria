@@ -56,7 +56,17 @@ export class AuthorService {
   }
 
   async findOne(id: string) {
-    return await this.authorRepository.findOneBy({ id });
+    return await this.authorRepository.findOne({
+      relations: {
+        books: {
+          genres: true,
+        },
+        genres: true,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   async update(id: string, updateAuthorDto: UpdateAuthorDto) {

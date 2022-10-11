@@ -14,7 +14,7 @@ function Overview() {
 
   return (
     <Container>
-      <CurrentLoans />
+      <CurrentLoans openLoanModal={() => setLoanModalOpen(true)} />
       <LatestBooks />
       <FloatingButton onClick={() => setLoanModalOpen(!loanModalOpen)} large>
         <Icon icon={faPlusCircle} />
