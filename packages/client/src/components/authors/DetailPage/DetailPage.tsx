@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment-mini';
 import Container from 'components/common/Container';
 import List from 'components/common/List';
 import Panel from 'components/common/Panel';
 import Pill from 'components/common/Pill';
-import { fetchAuthorsDetail } from 'store/authors/authorsAPI';
-import { Author } from 'types/author';
+import { useAppSelector, useAppDispatch } from 'store/hooks';
+import { getAuthorsDetail, selectAuthorsDetail } from 'store/authors/authorsSlice';
 import missingAuthorImage from 'assets/images/missing-author-image.jpeg';
 import AuthorBook from './AuthorBook';
 
@@ -14,17 +14,13 @@ import * as S from './DetailPage.styled';
 
 function DetailPage() {
   const { authorId } = useParams();
-  const [authorData, setAuthorData] = useState<Author | null>(null);
+  const dispatch = useAppDispatch();
+  const authorData = useAppSelector(selectAuthorsDetail);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!authorId) return;
+    if (!authorId) return;
 
-      const response = await fetchAuthorsDetail(authorId);
-      setAuthorData(response.data);
-    };
-
-    fetchData();
+    dispatch(getAuthorsDetail(authorId));
   }, []);
 
   const renderBooks = () => (
