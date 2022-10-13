@@ -5,6 +5,7 @@ export default {
     all: '/book',
     loanable: '/book/loanable',
     latest: '/book/latest',
+    detail: (bookId: string) => `/book/${bookId}`,
   },
   user: {
     register: '/user',

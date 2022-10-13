@@ -93,7 +93,7 @@ describe('BookService', () => {
     it('should return book with provided ID', async () => {
       const book = await service.findOne(mockBook.id);
 
-      expect(bookRepo.findOneBy).toHaveBeenCalled();
+      expect(bookRepo.findOne).toHaveBeenCalled();
       expect(book).toEqual(mockBook);
     });
   });
