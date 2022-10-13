@@ -14,6 +14,7 @@ import {
   Authors,
   AuthorsDetailPage,
   Books,
+  BooksDetailPage,
   Genres,
   Loans,
   Login,
@@ -59,7 +60,10 @@ function App() {
             <Route index element={<Authors />} />
             <Route path=":authorId" element={<AuthorsDetailPage />} />
           </Route>
-          <Route path="/books" element={<Books />} />
+          <Route path="/books">
+            <Route index element={<Books />} />
+            <Route path=":bookId" element={<BooksDetailPage />} />
+          </Route>
           <Route path="/genres" element={<Genres />} />
           <Route path="/loans" element={<Loans />} />
           <Route path="/settings" element={<Settings />} />

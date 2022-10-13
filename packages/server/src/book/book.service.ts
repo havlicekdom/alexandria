@@ -44,7 +44,12 @@ export class BookService {
   }
 
   async findAll() {
-    return await this.bookRepository.find();
+    return await this.bookRepository.find({
+      relations: {
+        author: true,
+        genres: true,
+      },
+    });
   }
 
   async findLoanable() {
@@ -69,7 +74,15 @@ export class BookService {
   }
 
   async findOne(id: string) {
-    return await this.bookRepository.findOneBy({ id });
+    return await this.bookRepository.findOne({
+      relations: {
+        author: true,
+        genres: true,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   async update(id: string, updateBookDto: UpdateBookDto) {

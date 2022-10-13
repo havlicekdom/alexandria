@@ -1,4 +1,5 @@
-export { default as Books } from './Books';
+export { default as Books } from '../books';
+export { default as BooksDetailPage } from '../books/DetailPage';
 export { default as Login } from './Login';
 export { default as Loans } from './Loans';
 export { default as Overview } from '../overview';
