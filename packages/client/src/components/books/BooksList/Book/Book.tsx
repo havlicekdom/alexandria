@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from 'components/common/List/ListItem';
+import {
+  ListItemContent, ListItemContentWrapper, ListItemImage,
+} from 'components/common/List/ListItem/ListItem.styled';
 import Pill from 'components/common/Pill';
 import { Book as BookType, BookFormat } from 'types/book';
 import { Genre } from 'types/genre';
@@ -18,10 +21,10 @@ function Book({ book }: Props) {
 
   return (
     <ListItem data-testid="book">
-      <S.BookImage>
+      <ListItemImage>
         <img src={missingBookImage} alt="" />
-      </S.BookImage>
-      <S.BookContent>
+      </ListItemImage>
+      <ListItemContentWrapper>
         <Link to={`/books/${book.id}`}>
           <S.BookName>
             { book.name }
@@ -37,10 +40,10 @@ function Book({ book }: Props) {
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
         </S.BookPills>
-        <S.BookDescription>
+        <ListItemContent>
           { book.description }
-        </S.BookDescription>
-      </S.BookContent>
+        </ListItemContent>
+      </ListItemContentWrapper>
     </ListItem>
   );
 }

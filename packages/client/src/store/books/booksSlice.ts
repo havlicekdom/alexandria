@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { Book } from 'types/book';
+import { createCustomAsyncThunk } from 'utils/thunks';
 import { RootState } from '../store';
 import { fetchAllBooks, fetchBooksDetail, fetchLatestBooks } from './booksAPI';
 
@@ -16,69 +16,39 @@ const initialState: BooksState = {
   detail: null,
 };
 
-export const getLatestBooks = createAsyncThunk(
+export const getLatestBooks = createCustomAsyncThunk(
   'books/getLatest',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchLatestBooks();
+  async () => {
+    const response = await fetchLatestBooks();
 
-      return {
-        latestBooks: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      latestBooks: response.data,
+      message: null,
+    };
   },
 );
 
-export const getBooksList = createAsyncThunk(
+export const getBooksList = createCustomAsyncThunk(
   'books/getList',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchAllBooks();
+  async () => {
+    const response = await fetchAllBooks();
 
-      return {
-        list: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      list: response.data,
+      message: null,
+    };
   },
 );
 
-export const getBooksDetail = createAsyncThunk(
+export const getBooksDetail = createCustomAsyncThunk(
   'books/getDetail',
-  async (id: string, { rejectWithValue }) => {
-    try {
-      const response = await fetchBooksDetail(id);
+  async (id: string) => {
+    const response = await fetchBooksDetail(id);
 
-      return {
-        detail: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      detail: response.data,
+      message: null,
+    };
   },
 );
 

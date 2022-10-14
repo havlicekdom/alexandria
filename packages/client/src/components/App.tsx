@@ -36,7 +36,7 @@ function App() {
   const message = useSelector(selectMessage);
 
   useEffect(() => {
-    dispatch(getUserProfile())
+    dispatch(getUserProfile(null))
       .then(() => {
         navigate('/', { replace: true });
       });

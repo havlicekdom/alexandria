@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Pill from 'components/common/Pill';
+import {
+  HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
+} from 'components/common/DetailPage/DetailPage.styled';
 import { getBooksDetail, selectBooksDetail } from 'store/books/booksSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
@@ -23,14 +26,14 @@ function DetailPage() {
 
   return (
     book && (
-      <S.BookWrapper>
-        <S.BookImage>
+      <HeadingWrapper>
+        <HeadingImage>
           <img src={missingBookImage} alt={book.name} />
-        </S.BookImage>
-        <S.BookInfo>
-          <S.BookName>
+        </HeadingImage>
+        <HeadingInfo>
+          <HeadingName>
             { book.name }
-          </S.BookName>
+          </HeadingName>
           <S.BookAuthor>
             <Link to={`/authors/${book.author.id}`}>
               { book.author.name }
@@ -40,11 +43,11 @@ function DetailPage() {
             <Pill>{ book.releaseYear }</Pill>
             { renderGenres() }
           </S.BookGenres>
-          <S.BookDescription>
+          <HeadingText>
             { book.description }
-          </S.BookDescription>
-        </S.BookInfo>
-      </S.BookWrapper>
+          </HeadingText>
+        </HeadingInfo>
+      </HeadingWrapper>
     )
   );
 }

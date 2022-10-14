@@ -19,7 +19,7 @@ function CurrentLoans({ openLoanModal }: Props) {
   const loans = useAppSelector(selectUserLoans);
 
   useEffect(() => {
-    dispatch(getUserLoans());
+    dispatch(getUserLoans(null));
   }, []);
 
   const renderLoans = () => loans.map((loan) => (<Loan loan={loan} key={loan.id} />));

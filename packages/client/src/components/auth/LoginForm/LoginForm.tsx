@@ -41,7 +41,7 @@ function LoginForm() {
 
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     await dispatch(login(formData));
-    await dispatch(getUserProfile());
+    await dispatch(getUserProfile(null));
     navigate(from, { replace: true });
   };
 

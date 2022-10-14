@@ -10,7 +10,7 @@ function BooksList() {
   const books = useAppSelector(selectBooksList);
 
   useEffect(() => {
-    dispatch(getBooksList());
+    dispatch(getBooksList(null));
   }, []);
 
   const renderBooks = () => books.map((book) => (<Book book={book} key={book.id} />));

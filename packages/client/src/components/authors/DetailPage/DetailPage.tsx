@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment-mini';
+import {
+  HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
+} from 'components/common/DetailPage/DetailPage.styled';
 import Container from 'components/common/Container';
 import List from 'components/common/List';
 import Panel from 'components/common/Panel';
@@ -34,25 +37,25 @@ function DetailPage() {
   return (
     authorData && (
       <>
-        <S.AuthorWrapper>
-          <S.AuthorImage>
+        <HeadingWrapper>
+          <HeadingImage>
             <img src={missingAuthorImage} alt={authorData.name} />
-          </S.AuthorImage>
-          <S.AuthorInfo>
-            <S.AuthorName>
+          </HeadingImage>
+          <HeadingInfo>
+            <HeadingName>
               { authorData.name }
-            </S.AuthorName>
+            </HeadingName>
             <S.AuthorGenres>
               { renderGenres() }
             </S.AuthorGenres>
-            <S.AuthorBirthDate>
+            <HeadingText>
               { `Born ${moment(authorData.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
-            </S.AuthorBirthDate>
-            <S.AuthorBio>
+            </HeadingText>
+            <HeadingText>
               { authorData.bio }
-            </S.AuthorBio>
-          </S.AuthorInfo>
-        </S.AuthorWrapper>
+            </HeadingText>
+          </HeadingInfo>
+        </HeadingWrapper>
         <Container>
           <Panel portion={1} header="Books">
             <List>

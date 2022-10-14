@@ -24,7 +24,7 @@ function UserMenu() {
         <S.UserMenuItem>
           <Button
             variant="link"
-            onClick={() => dispatch(logout())}
+            onClick={() => dispatch(logout(null))}
           >
             <Icon icon={faArrowRightFromBracket} />
             Log out

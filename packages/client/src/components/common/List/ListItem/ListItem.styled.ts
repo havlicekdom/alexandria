@@ -1,5 +1,8 @@
 import styled from 'styled-components';
-import { spacing, secondaryBackgroundColor } from 'constants/styles';
+import { darken } from 'polished';
+import {
+  fontWeight, spacing, textColor, secondaryBackgroundColor,
+} from 'constants/styles';
 
 export const ListItem = styled.div`
   display: flex;
@@ -11,5 +14,38 @@ export const ListItem = styled.div`
     border-bottom: none;
     margin-bottom: 0;
     padding-bottom: 0;
+  }
+`;
+
+export const ListItemImage = styled.div`
+  margin-right: ${spacing.small};
+
+  img {
+    width: 60px;
+    height: auto;
+  }
+`;
+
+export const ListItemContentWrapper = styled.div``;
+
+export const ListItemName = styled.div`
+  font-weight: ${fontWeight.bold};
+  margin-bottom: ${spacing.tiny};
+`;
+
+export const ListItemContent = styled.div`
+  color: ${darken(0.15, textColor)};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+`;
+
+export const ListItemContentItem = styled.div`
+  margin-bottom: ${spacing.tiny};
+
+  &:last-child {
+    margin-bottom: 0;
   }
 `;
