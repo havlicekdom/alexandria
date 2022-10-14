@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { messages } from 'translations';
 import { Loan } from 'types/loan';
 import { Role } from 'types/role';
 import { User } from 'types/user';
+import { createCustomAsyncThunk } from 'utils/thunks';
 import { RootState } from '../store';
 import {
   fetchUserProfileRequest, fetchUserLoansRequest, RegisterUserData, registerUserRequest,
@@ -24,68 +24,38 @@ const initialState: UserState = {
   loans: [],
 };
 
-export const getUserProfile = createAsyncThunk(
+export const getUserProfile = createCustomAsyncThunk(
   'user/getProfile',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchUserProfileRequest();
+  async () => {
+    const response = await fetchUserProfileRequest();
 
-      return {
-        user: response.data,
-        message: messages.signInSuccess,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      user: response.data,
+      message: messages.signInSuccess,
+    };
   },
 );
 
-export const getUserLoans = createAsyncThunk(
+export const getUserLoans = createCustomAsyncThunk(
   'user/getLoans',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchUserLoansRequest();
+  async () => {
+    const response = await fetchUserLoansRequest();
 
-      return {
-        loans: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      loans: response.data,
+      message: null,
+    };
   },
 );
 
-export const registerUser = createAsyncThunk(
+export const registerUser = createCustomAsyncThunk(
   'user/register',
-  async (userData: RegisterUserData, { rejectWithValue }) => {
-    try {
-      await registerUserRequest(userData);
+  async (userData: RegisterUserData) => {
+    await registerUserRequest(userData);
 
-      return {
-        message: messages.registerSuccess,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      message: messages.registerSuccess,
+    };
   },
 );
 

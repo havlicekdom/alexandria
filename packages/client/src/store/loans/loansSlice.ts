@@ -1,30 +1,20 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { messages } from 'translations';
+import { createCustomAsyncThunk } from 'utils/thunks';
 import { CreateNewLoanData, postNewLoan } from './loansAPI';
 
 export type LoansState = Record<string, never>;
 
 const initialState: LoansState = {};
 
-export const createNewLoan = createAsyncThunk(
+export const createNewLoan = createCustomAsyncThunk(
   'loans/create',
-  async (formData: CreateNewLoanData, { rejectWithValue }) => {
-    try {
-      await postNewLoan(formData);
+  async (formData: CreateNewLoanData) => {
+    await postNewLoan(formData);
 
-      return {
-        message: messages.createLoanSuccess,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      message: messages.createLoanSuccess,
+    };
   },
 );
 

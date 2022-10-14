@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { messages } from 'translations';
+import { createCustomAsyncThunk } from 'utils/thunks';
 import { RootState } from '../store';
 import {
   loginUserRequest,
@@ -17,47 +17,27 @@ const initialState: AuthState = {
   token: '',
 };
 
-export const login = createAsyncThunk(
+export const login = createCustomAsyncThunk(
   'auth/login',
-  async ({ username, password }: { username: string, password: string }, { rejectWithValue }) => {
-    try {
-      const response = await loginUserRequest(username, password);
+  async ({ username, password }: { username: string, password: string }) => {
+    const response = await loginUserRequest(username, password);
 
-      return {
-        token: response.data.access_token,
-        message: messages.signInSuccess,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      token: response.data.access_token,
+      message: messages.signInSuccess,
+    };
   },
 );
 
-export const logout = createAsyncThunk(
+export const logout = createCustomAsyncThunk(
   'auth/logout',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await logoutUserRequest();
+  async () => {
+    const response = await logoutUserRequest();
 
-      return {
-        data: response.data,
-        message: messages.signOutSuccess,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      data: response.data,
+      message: messages.signOutSuccess,
+    };
   },
 );
 

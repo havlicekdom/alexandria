@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
 import ListItem from 'components/common/List/ListItem';
+import {
+  ListItemContent, ListItemContentItem, ListItemContentWrapper, ListItemImage,
+} from 'components/common/List/ListItem/ListItem.styled';
 import { Author as AuthorType } from 'types/author';
 
 import missingAuthorImage from 'assets/images/missing-author-image.jpeg';
@@ -15,24 +18,24 @@ type Props = {
 function Author({ author }: Props) {
   return (
     <ListItem data-testid="author">
-      <S.AuthorImage>
+      <ListItemImage>
         <img src={missingAuthorImage} alt="" />
-      </S.AuthorImage>
-      <S.AuthorContent>
+      </ListItemImage>
+      <ListItemContentWrapper>
         <Link to={`/authors/${author.id}`}>
           <S.AuthorName>
             { author.name }
           </S.AuthorName>
         </Link>
-        <S.AuthorBio>
-          <S.AuthorBioItem>
+        <ListItemContent>
+          <ListItemContentItem>
             { `Born ${moment(author.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
-          </S.AuthorBioItem>
-          <S.AuthorBioItem>
+          </ListItemContentItem>
+          <ListItemContentItem>
             { author.bio }
-          </S.AuthorBioItem>
-        </S.AuthorBio>
-      </S.AuthorContent>
+          </ListItemContentItem>
+        </ListItemContent>
+      </ListItemContentWrapper>
     </ListItem>
   );
 }

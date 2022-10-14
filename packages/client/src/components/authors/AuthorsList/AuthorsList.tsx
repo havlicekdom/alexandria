@@ -10,7 +10,7 @@ function AuthorsList() {
   const authors = useAppSelector(selectAuthorsList);
 
   useEffect(() => {
-    dispatch(getAuthorsList());
+    dispatch(getAuthorsList(null));
   }, []);
 
   const renderAuthors = () => authors.map((author) => (<Author author={author} key={author.id} />));

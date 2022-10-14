@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from 'store/store';
 import { Author } from 'types/author';
+import { createCustomAsyncThunk } from 'utils/thunks';
 import { fetchAuthorsDetail, fetchAuthorsList } from './authorsAPI';
 
 export interface AuthorsState {
@@ -14,47 +14,27 @@ const initialState: AuthorsState = {
   detail: null,
 };
 
-export const getAuthorsList = createAsyncThunk(
+export const getAuthorsList = createCustomAsyncThunk(
   'authors/getList',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await fetchAuthorsList();
+  async () => {
+    const response = await fetchAuthorsList();
 
-      return {
-        authors: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      authors: response.data,
+      message: null,
+    };
   },
 );
 
-export const getAuthorsDetail = createAsyncThunk(
+export const getAuthorsDetail = createCustomAsyncThunk(
   'authors/getDetail',
-  async (id: string, { rejectWithValue }) => {
-    try {
-      const response = await fetchAuthorsDetail(id);
+  async (id: string) => {
+    const response = await fetchAuthorsDetail(id);
 
-      return {
-        detail: response.data,
-        message: null,
-      };
-    } catch (error) {
-      const { response } = error as AxiosError;
-
-      if (!response) {
-        throw error;
-      }
-
-      return rejectWithValue(response.data);
-    }
+    return {
+      detail: response.data,
+      message: null,
+    };
   },
 );
 

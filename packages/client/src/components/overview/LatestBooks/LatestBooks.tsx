@@ -10,7 +10,7 @@ function LatestBooks() {
   const latestBooks = useAppSelector(selectLatestBooks);
 
   useEffect(() => {
-    dispatch(getLatestBooks());
+    dispatch(getLatestBooks(null));
   }, []);
 
   const renderLatestBooks = () => (

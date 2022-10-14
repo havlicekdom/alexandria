@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import ListItem from 'components/common/List/ListItem';
+import { ListItemContent, ListItemContentWrapper, ListItemImage } from 'components/common/List/ListItem/ListItem.styled';
 import Pill from 'components/common/Pill';
 import { Book, BookFormat } from 'types/book';
 import { Genre } from 'types/genre';
@@ -18,10 +19,10 @@ function AuthorBook({ book }: Props) {
 
   return (
     <ListItem data-testid="book">
-      <S.AuthorBookImage>
+      <ListItemImage>
         <img src={missingBookImage} alt="" />
-      </S.AuthorBookImage>
-      <S.AuthorBookContent>
+      </ListItemImage>
+      <ListItemContentWrapper>
         <S.AuthorBookName>
           <Link to={`/books/${book.id}`}>
             { book.name }
@@ -32,10 +33,10 @@ function AuthorBook({ book }: Props) {
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
         </S.AuthorBookPills>
-        <S.AuthorBookDescription>
+        <ListItemContent>
           { book.description }
-        </S.AuthorBookDescription>
-      </S.AuthorBookContent>
+        </ListItemContent>
+      </ListItemContentWrapper>
     </ListItem>
   );
 }
