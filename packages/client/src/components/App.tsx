@@ -16,6 +16,7 @@ import {
   Books,
   BooksDetailPage,
   Genres,
+  GenresDetailPage,
   Loans,
   Login,
   Overview,
@@ -64,7 +65,10 @@ function App() {
             <Route index element={<Books />} />
             <Route path=":bookId" element={<BooksDetailPage />} />
           </Route>
-          <Route path="/genres" element={<Genres />} />
+          <Route path="/genres">
+            <Route index element={<Genres />} />
+            <Route path=":genreId" element={<GenresDetailPage />} />
+          </Route>
           <Route path="/loans" element={<Loans />} />
           <Route path="/settings" element={<Settings />} />
         </Route>

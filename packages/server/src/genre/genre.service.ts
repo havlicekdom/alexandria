@@ -21,7 +21,15 @@ export class GenreService {
   }
 
   async findOne(id: string) {
-    return await this.genreRepository.findOneBy({ id });
+    return await this.genreRepository.findOne({
+      relations: {
+        books: true,
+        authors: true,
+      },
+      where: {
+        id,
+      },
+    });
   }
 
   async update(id: string, updateGenreDto: UpdateGenreDto) {
