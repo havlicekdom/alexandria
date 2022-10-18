@@ -19,6 +19,8 @@ export const mockGenre: Genre = {
   id: 'dummy-genre-id',
   name: 'dummy-genre-name',
   bio: 'dummy-genre-bio',
+  books: [],
+  authors: [],
 };
 
 export const mockAuthor: Author = {

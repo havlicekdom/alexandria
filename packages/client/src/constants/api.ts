@@ -19,4 +19,8 @@ export default {
     list: '/author',
     detail: (authorId: string) => `/author/${authorId}`,
   },
+  genres: {
+    list: '/genre',
+    detail: (genreId: string) => `/genre/${genreId}`,
+  },
 };

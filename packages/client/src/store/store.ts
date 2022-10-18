@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authReducer from './auth/authSlice';
 import authorsReducer from './authors/authorsSlice';
 import booksReducer from './books/booksSlice';
+import genresReducer from './genres/genresSlice';
 import sharedReducer from './shared/sharedSlice';
 import userReducer from './user/userSlice';
 import loansReducer from './loans/loansSlice';
@@ -11,6 +12,7 @@ export const store = configureStore({
     auth: authReducer,
     authors: authorsReducer,
     books: booksReducer,
+    genres: genresReducer,
     shared: sharedReducer,
     user: userReducer,
     loans: loansReducer,

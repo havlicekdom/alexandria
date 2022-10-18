@@ -7,5 +7,6 @@ export { default as Register } from './Register';
 export { default as Authors } from '../authors';
 export { default as AuthorsDetailPage } from '../authors/DetailPage';
 export { default as ResetPassword } from './ResetPassword';
-export { default as Genres } from './Genres';
+export { default as Genres } from '../genres';
+export { default as GenresDetailPage } from '../genres/DetailPage';
 export { default as Settings } from './Settings';

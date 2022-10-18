@@ -71,7 +71,7 @@ describe('GenreService', () => {
     it('should return genre with provided ID', async () => {
       const genre = await service.findOne(mockGenre.id);
 
-      expect(genreRepo.findOneBy).toHaveBeenCalled();
+      expect(genreRepo.findOne).toHaveBeenCalled();
       expect(genre).toEqual(mockGenre);
     });
   });
