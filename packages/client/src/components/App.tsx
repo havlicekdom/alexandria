@@ -17,7 +17,6 @@ import {
   BooksDetailPage,
   Genres,
   GenresDetailPage,
-  Loans,
   Login,
   Overview,
   Register,
@@ -69,7 +68,6 @@ function App() {
             <Route index element={<Genres />} />
             <Route path=":genreId" element={<GenresDetailPage />} />
           </Route>
-          <Route path="/loans" element={<Loans />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
