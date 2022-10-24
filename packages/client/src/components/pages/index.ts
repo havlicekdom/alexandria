@@ -1,6 +1,7 @@
 export { default as Books } from '../books';
 export { default as BooksDetailPage } from '../books/DetailPage';
 export { default as Login } from './Login';
+export { default as NotFound } from '../not-found';
 export { default as Overview } from '../overview';
 export { default as Register } from './Register';
 export { default as Authors } from '../authors';

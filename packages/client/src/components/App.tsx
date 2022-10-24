@@ -18,6 +18,7 @@ import {
   Genres,
   GenresDetailPage,
   Login,
+  NotFound,
   Overview,
   Register,
   ResetPassword,
@@ -70,6 +71,7 @@ function App() {
           </Route>
           <Route path="/settings" element={<Settings />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </S.App>
   );
