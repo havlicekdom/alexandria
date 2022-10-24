@@ -6,7 +6,12 @@ import { User } from 'types/user';
 import { createCustomAsyncThunk } from 'utils/thunks';
 import { RootState } from '../store';
 import {
-  fetchUserProfileRequest, fetchUserLoansRequest, RegisterUserData, registerUserRequest,
+  fetchUserProfileRequest,
+  fetchUserLoansRequest,
+  RegisterOrUpdateUserData,
+  registerUserRequest,
+  updateUserRequest,
+  resetPasswordRequest,
 } from './userAPI';
 
 export interface UserState {
@@ -50,11 +55,39 @@ export const getUserLoans = createCustomAsyncThunk(
 
 export const registerUser = createCustomAsyncThunk(
   'user/register',
-  async (userData: RegisterUserData) => {
+  async (userData: RegisterOrUpdateUserData) => {
     await registerUserRequest(userData);
 
     return {
       message: messages.registerSuccess,
+    };
+  },
+);
+
+export const updateUser = createCustomAsyncThunk(
+  'user/update',
+  async ({
+    userId,
+    userData,
+  }: {
+    userId: string,
+    userData: RegisterOrUpdateUserData,
+  }) => {
+    await updateUserRequest(userId, userData);
+
+    return {
+      message: messages.updateSuccess,
+    };
+  },
+);
+
+export const resetPassword = createCustomAsyncThunk(
+  'user/resetPassword',
+  async (userData: { email: string }) => {
+    await resetPasswordRequest(userData);
+
+    return {
+      message: messages.resetPasswordSuccess,
     };
   },
 );

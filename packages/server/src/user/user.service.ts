@@ -127,6 +127,9 @@ export class UserService {
 
   async resetPassword(email: string): Promise<void> {
     const toUpdate = await this.findOneByEmail(email);
+
+    if (!toUpdate) return;
+
     const newPassword = uuid().substring(0, 8);
     const { salt, hashedPassword } = await this.hashPassword(newPassword);
     const updated = Object.assign(toUpdate, {

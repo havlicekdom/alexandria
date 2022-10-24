@@ -4,7 +4,6 @@ import {
   faUserPen,
   faBook,
   faRectangleList,
-  faReceipt,
   faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -43,12 +42,6 @@ function Navigation() {
           <S.NavigationLink to="/genres">
             <Icon icon={faRectangleList} />
             Genres
-          </S.NavigationLink>
-        </S.NavigationItem>
-        <S.NavigationItem>
-          <S.NavigationLink to="/loans">
-            <Icon icon={faReceipt} />
-            Your loans
           </S.NavigationLink>
         </S.NavigationItem>
       </S.Navigation>

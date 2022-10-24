@@ -11,6 +11,7 @@ type FormInputProps = {
   error: FieldError | undefined;
   register: UseFormRegister<any>;
   type: 'text' | 'password' | 'email' | 'number';
+  value?: string;
 };
 
 function FormInput({
@@ -33,5 +34,9 @@ function FormInput({
     </S.FormLabel>
   );
 }
+
+FormInput.defaultProps = {
+  value: undefined,
+};
 
 export default FormInput;

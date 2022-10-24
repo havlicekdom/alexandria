@@ -1,12 +1,11 @@
 export { default as Books } from '../books';
 export { default as BooksDetailPage } from '../books/DetailPage';
 export { default as Login } from './Login';
-export { default as Loans } from './Loans';
 export { default as Overview } from '../overview';
 export { default as Register } from './Register';
 export { default as Authors } from '../authors';
 export { default as AuthorsDetailPage } from '../authors/DetailPage';
-export { default as ResetPassword } from './ResetPassword';
+export { default as ResetPassword } from '../reset-password';
 export { default as Genres } from '../genres';
 export { default as GenresDetailPage } from '../genres/DetailPage';
-export { default as Settings } from './Settings';
+export { default as Settings } from '../settings';
