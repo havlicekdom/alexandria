@@ -10,25 +10,24 @@ import { useAppDispatch } from 'store/hooks';
 import { getUserProfile } from 'store/user/userSlice';
 import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
-import {
-  Authors,
-  AuthorsDetailPage,
-  Books,
-  BooksDetailPage,
-  Genres,
-  GenresDetailPage,
-  Login,
-  NotFound,
-  Overview,
-  Register,
-  ResetPassword,
-  Settings,
-} from './pages';
-
-import * as S from './App.styled';
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
 import Snackbar from './common/Snackbar';
+
+import Login from './login';
+import Register from './register';
+import ResetPassword from './reset-password';
+import Overview from './overview';
+import Authors from './authors';
+import AuthorsDetailPage from './authors/DetailPage';
+import Books from './books';
+import BooksDetailPage from './books/DetailPage';
+import Genres from './genres';
+import GenresDetailPage from './genres/DetailPage';
+import Settings from './settings';
+import NotFound from './not-found';
+
+import * as S from './App.styled';
 
 function App() {
   const dispatch = useAppDispatch();

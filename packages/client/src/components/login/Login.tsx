@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LoginForm from 'components/auth/LoginForm';
 import useDocumentTitle from 'hooks/useDocumentTitle';
+import LoginForm from './LoginForm';
 
 import * as S from './Login.styled';
 

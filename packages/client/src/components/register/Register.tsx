@@ -1,7 +1,7 @@
 import React from 'react';
 import useDocumentTitle from 'hooks/useDocumentTitle';
 
-import RegisterForm from 'components/user/RegisterForm';
+import RegisterForm from './RegisterForm';
 
 import * as S from './Register.styled';
 
