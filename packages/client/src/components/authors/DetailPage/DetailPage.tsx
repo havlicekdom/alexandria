@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import moment from 'moment-mini';
+import routes from 'constants/routes';
 import {
   HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
 } from 'components/common/DetailPage/DetailPage.styled';
@@ -31,7 +32,7 @@ function DetailPage() {
   );
 
   const renderGenres = () => (
-    authorData?.genres?.map((genre) => (<Pill key={genre.id} variant="primary">{ genre.name }</Pill>))
+    authorData?.genres?.map((genre) => (<Pill key={genre.id} variant="primary"><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>))
   );
 
   return (

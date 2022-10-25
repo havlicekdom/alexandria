@@ -23,7 +23,7 @@ function DetailPage() {
     dispatch(getBooksDetail(bookId));
   }, []);
 
-  const renderGenres = () => book?.genres.map((genre) => (<Pill variant="primary" key={genre.id}>{genre.name}</Pill>));
+  const renderGenres = () => book?.genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
     book && (
