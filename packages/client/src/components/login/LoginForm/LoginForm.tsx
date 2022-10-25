@@ -10,6 +10,11 @@ import { login } from 'store/auth/authSlice';
 import { getUserProfile } from 'store/user/userSlice';
 import Icon from 'components/common/Icon';
 import FormInput from 'components/common/FormInput';
+import {
+  Form as FormStyled,
+  FormHeader as FormHeaderStyled,
+  FormButton as FormButtonStyled,
+} from 'components/common/FormPage/FormPage.styled';
 
 import * as S from './LoginForm.styled';
 
@@ -46,24 +51,24 @@ function LoginForm() {
   };
 
   return (
-    <S.LoginForm onSubmit={handleSubmit(onSubmit)}>
-      <S.LoginHeader>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
+      <FormHeaderStyled>
         <Icon icon={faUser} />
         Log in
-      </S.LoginHeader>
+      </FormHeaderStyled>
       <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
       <S.LoginFormResetPasswordLink data-testid="reset-password" to="/reset-password">
         Forgot your password?
       </S.LoginFormResetPasswordLink>
-      <S.LoginFormButton data-testid="submit" name="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
         <Icon icon={faArrowRightToBracket} />
         Log in
-      </S.LoginFormButton>
+      </FormButtonStyled>
       <S.LoginFormRegisterLink data-testid="register" to="/register">
         New to the app? Create your account here.
       </S.LoginFormRegisterLink>
-    </S.LoginForm>
+    </FormStyled>
   );
 }
 

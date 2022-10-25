@@ -4,11 +4,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Icon from 'components/common/Icon';
 import FormInput from 'components/common/FormInput';
+import {
+  Form as FormStyled,
+  FormHeader as FormHeaderStyled,
+  FormButton as FormButtonStyled,
+} from 'components/common/FormPage/FormPage.styled';
 import { useAppDispatch } from 'store/hooks';
 import { resetPassword } from 'store/user/userSlice';
 import yup from 'utils/formValidation';
-
-import * as S from './ResetPasswordForm.styled';
 
 type FormInputs = {
   email: string;
@@ -29,16 +32,16 @@ function ResetPasswordForm() {
   };
 
   return (
-    <S.ResetPasswordForm onSubmit={handleSubmit(onSubmit)}>
-      <S.ResetPasswordHeader>
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
+      <FormHeaderStyled>
         <Icon icon={faKey} />
         Forgotten password?
-      </S.ResetPasswordHeader>
+      </FormHeaderStyled>
       <FormInput data-testid="email" label="Your email" register={register} type="email" fieldName="email" error={errors.email} />
-      <S.ResetPasswordFormButton data-testid="submit" name="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
         Generate new password
-      </S.ResetPasswordFormButton>
-    </S.ResetPasswordForm>
+      </FormButtonStyled>
+    </FormStyled>
   );
 }
 
