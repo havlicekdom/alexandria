@@ -27,7 +27,7 @@ function Navigation() {
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/author">
+          <S.NavigationLink to="/authors">
             <Icon icon={faUserPen} />
             Authors
           </S.NavigationLink>

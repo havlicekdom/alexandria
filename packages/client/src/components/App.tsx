@@ -13,6 +13,7 @@ import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
 import Snackbar from './common/Snackbar';
+import FormPage from './common/FormPage';
 
 import Login from './login';
 import Register from './register';
@@ -51,9 +52,11 @@ function App() {
         </Snackbar>
       )}
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route element={<FormPage />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Overview />} />
           <Route path="/authors">

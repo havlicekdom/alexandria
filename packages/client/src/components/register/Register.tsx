@@ -3,15 +3,11 @@ import useDocumentTitle from 'hooks/useDocumentTitle';
 
 import RegisterForm from './RegisterForm';
 
-import * as S from './Register.styled';
-
 function Register() {
   useDocumentTitle('Register');
 
   return (
-    <S.RegisterWrapper>
-      <RegisterForm />
-    </S.RegisterWrapper>
+    <RegisterForm />
   );
 }
 
