@@ -10,6 +10,8 @@ import { useAppDispatch } from 'store/hooks';
 import { getUserProfile } from 'store/user/userSlice';
 import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
+import routes from 'constants/routes';
+
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
 import Snackbar from './common/Snackbar';
@@ -53,25 +55,25 @@ function App() {
       )}
       <Routes>
         <Route element={<FormPage />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path={routes.login} element={<Login />} />
+          <Route path={routes.register} element={<Register />} />
+          <Route path={routes.resetPassword} element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Overview />} />
-          <Route path="/authors">
+          <Route path={routes.overview} element={<Overview />} />
+          <Route path={routes.authors}>
             <Route index element={<Authors />} />
             <Route path=":authorId" element={<AuthorsDetailPage />} />
           </Route>
-          <Route path="/books">
+          <Route path={routes.books}>
             <Route index element={<Books />} />
             <Route path=":bookId" element={<BooksDetailPage />} />
           </Route>
-          <Route path="/genres">
+          <Route path={routes.genres}>
             <Route index element={<Genres />} />
             <Route path=":genreId" element={<GenresDetailPage />} />
           </Route>
-          <Route path="/settings" element={<Settings />} />
+          <Route path={routes.settings} element={<Settings />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

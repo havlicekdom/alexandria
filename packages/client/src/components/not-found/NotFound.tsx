@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import routes from 'constants/routes';
 import Icon from 'components/common/Icon';
 
 import * as S from './NotFound.styled';
@@ -9,7 +10,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   const onButtonClick = () => {
-    navigate('/');
+    navigate(routes.overview);
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import routes from 'constants/routes';
 import Pill from 'components/common/Pill';
 import {
   HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
@@ -35,7 +36,7 @@ function DetailPage() {
             { book.name }
           </HeadingName>
           <S.BookAuthor>
-            <Link to={`/authors/${book.author.id}`}>
+            <Link to={routes.authorsDetail(book.author.id)}>
               { book.author.name }
             </Link>
           </S.BookAuthor>
