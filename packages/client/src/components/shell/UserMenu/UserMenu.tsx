@@ -1,6 +1,7 @@
 import React from 'react';
 import { faCog, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
+import routes from 'constants/routes';
 import { useAppDispatch } from 'store/hooks';
 import { logout } from 'store/auth/authSlice';
 
@@ -16,7 +17,7 @@ function UserMenu() {
     <S.UserMenuWrapper>
       <S.UserMenu>
         <S.UserMenuItem>
-          <S.UserMenuLink to="/settings">
+          <S.UserMenuLink to={routes.settings}>
             <Icon icon={faCog} />
             Settings
           </S.UserMenuLink>

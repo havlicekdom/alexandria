@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import { ListItemContent, ListItemContentItem, ListItemContentWrapper } from 'components/common/List/ListItem/ListItem.styled';
 import { Genre as GenreType } from 'types/genre';
@@ -14,7 +15,7 @@ function Genre({ genre }: Props) {
   return (
     <ListItem data-testid="genre">
       <ListItemContentWrapper>
-        <Link to={`/genres/${genre.id}`}>
+        <Link to={routes.genresDetail(genre.id)}>
           <S.GenreName>
             { genre.name }
           </S.GenreName>

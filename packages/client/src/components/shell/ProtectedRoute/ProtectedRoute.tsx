@@ -5,6 +5,7 @@ import {
   Outlet,
 } from 'react-router-dom';
 
+import routes from 'constants/routes';
 import { useAppSelector } from 'store/hooks';
 import { selectIsLoggedIn } from 'store/auth/authSlice';
 import Navigation from '../Navigation';
@@ -17,7 +18,7 @@ function ProtectedRoute() {
   const location = useLocation();
 
   if (!isLoggedIn) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to={routes.login} state={{ from: location }} replace />;
   }
 
   return (

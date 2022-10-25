@@ -7,6 +7,7 @@ import {
   faBookOpen,
 } from '@fortawesome/free-solid-svg-icons';
 
+import routes from 'constants/routes';
 import Icon from 'components/common/Icon';
 import UserMenu from '../UserMenu';
 
@@ -21,25 +22,25 @@ function Navigation() {
       </S.Logo>
       <S.Navigation>
         <S.NavigationItem>
-          <S.NavigationLink to="/">
+          <S.NavigationLink to={routes.overview}>
             <Icon icon={faClipboardList} />
             Overview
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/authors">
+          <S.NavigationLink to={routes.authors}>
             <Icon icon={faUserPen} />
             Authors
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/books">
+          <S.NavigationLink to={routes.books}>
             <Icon icon={faBook} />
             Books
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to="/genres">
+          <S.NavigationLink to={routes.genres}>
             <Icon icon={faRectangleList} />
             Genres
           </S.NavigationLink>

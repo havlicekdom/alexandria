@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentWrapper, ListItemImage,
@@ -25,13 +26,13 @@ function Book({ book }: Props) {
         <img src={missingBookImage} alt="" />
       </ListItemImage>
       <ListItemContentWrapper>
-        <Link to={`/books/${book.id}`}>
+        <Link to={routes.booksDetail(book.id)}>
           <S.BookName>
             { book.name }
           </S.BookName>
         </Link>
         <S.BookAuthor>
-          <Link to={`/authors/${book.author.id}`}>
+          <Link to={routes.authorsDetail(book.author.id)}>
             { book.author.name }
           </Link>
         </S.BookAuthor>

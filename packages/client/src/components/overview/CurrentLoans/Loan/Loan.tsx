@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
+import routes from 'constants/routes';
 import Icon from 'components/common/Icon';
 import ListItem from 'components/common/List/ListItem';
 import { Loan as ILoan } from 'types/loan';
@@ -23,7 +24,7 @@ function Loan({ loan }: Props) {
         <Icon icon={faReceipt} />
       </S.LoanIcon>
       <S.LoanContent>
-        <Link to={`/books/${loan.book.id}`}>
+        <Link to={routes.booksDetail(loan.book.id)}>
           <S.LoanBookName>
             { loan.book.name }
           </S.LoanBookName>

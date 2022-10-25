@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import Pill from 'components/common/Pill';
 import { Book, BookFormat } from 'types/book';
@@ -23,12 +24,12 @@ function LatestBook({ book }: Props) {
       </S.LatestBookImage>
       <S.LatestBookContent>
         <S.LatestBookName>
-          <Link to={`/books/${book.id}`}>
+          <Link to={routes.booksDetail(book.id)}>
             { book.name }
           </Link>
         </S.LatestBookName>
         <S.LatestBookAuthor>
-          <Link to={`/authors/${book.author.id}`}>
+          <Link to={routes.authorsDetail(book.author.id)}>
             { book.author.name }
           </Link>
         </S.LatestBookAuthor>

@@ -1,4 +1,5 @@
 import React from 'react';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentWrapper, ListItemImage, ListItemName,
@@ -20,7 +21,7 @@ function GenreBook({ book }: Props) {
       </ListItemImage>
       <ListItemContentWrapper>
         <ListItemName>
-          <Link to={`/books/${book.id}`}>
+          <Link to={routes.booksDetail(book.id)}>
             { book.name }
           </Link>
         </ListItemName>

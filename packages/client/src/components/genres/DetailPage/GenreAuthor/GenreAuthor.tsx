@@ -1,4 +1,5 @@
 import React from 'react';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentWrapper, ListItemImage, ListItemName,
@@ -20,7 +21,7 @@ function GenreAuthor({ author }: Props) {
       </ListItemImage>
       <ListItemContentWrapper>
         <ListItemName>
-          <Link to={`/authors/${author.id}`}>
+          <Link to={routes.authorsDetail(author.id)}>
             { author.name }
           </Link>
         </ListItemName>

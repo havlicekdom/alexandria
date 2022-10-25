@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
+import routes from 'constants/routes';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentItem, ListItemContentWrapper, ListItemImage,
@@ -22,7 +23,7 @@ function Author({ author }: Props) {
         <img src={missingAuthorImage} alt="" />
       </ListItemImage>
       <ListItemContentWrapper>
-        <Link to={`/authors/${author.id}`}>
+        <Link to={routes.authorsDetail(author.id)}>
           <S.AuthorName>
             { author.name }
           </S.AuthorName>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import routes from 'constants/routes';
 import yup from 'utils/formValidation';
 import { useAppDispatch } from 'store/hooks';
 import { login } from 'store/auth/authSlice';
@@ -58,14 +59,14 @@ function LoginForm() {
       </FormHeaderStyled>
       <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
-      <S.LoginFormResetPasswordLink data-testid="reset-password" to="/reset-password">
+      <S.LoginFormResetPasswordLink data-testid="reset-password" to={routes.resetPassword}>
         Forgot your password?
       </S.LoginFormResetPasswordLink>
       <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
         <Icon icon={faArrowRightToBracket} />
         Log in
       </FormButtonStyled>
-      <S.LoginFormRegisterLink data-testid="register" to="/register">
+      <S.LoginFormRegisterLink data-testid="register" to={routes.register}>
         New to the app? Create your account here.
       </S.LoginFormRegisterLink>
     </FormStyled>
