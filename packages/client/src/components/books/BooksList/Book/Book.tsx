@@ -18,7 +18,7 @@ type Props = {
 }
 
 function Book({ book }: Props) {
-  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}>{ genre.name }</Pill>));
+  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
     <ListItem data-testid="book">
