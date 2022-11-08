@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { AnyAction, createSlice } from '@reduxjs/toolkit';
 import { messages } from 'translations';
 import { createCustomAsyncThunk } from 'utils/thunks';
 import { RootState } from '../store';
@@ -54,6 +54,12 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.token = initialState.token;
         state.isLoggedIn = false;
+      })
+      .addMatcher((action: AnyAction) => action.type.includes('/rejected'), (state, action) => {
+        if (action.payload.statusCode === 401) {
+          state.token = initialState.token;
+          state.isLoggedIn = false;
+        }
       });
   },
 });
