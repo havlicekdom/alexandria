@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from 'store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'store/store';
 import { injectStore } from 'utils/api';
 import './assets/styles/index.css';
 import 'normalize.css/normalize.css';
@@ -10,12 +11,16 @@ import App from './components/App';
 
 injectStore(store);
 
+const PGate = PersistGate as any;
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
+      <PGate loading={null} persistor={persistor}>
+        <Router>
+          <App />
+        </Router>
+      </PGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
