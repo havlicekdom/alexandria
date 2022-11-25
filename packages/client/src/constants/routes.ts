@@ -1,7 +1,8 @@
-export default {
+const routes = {
   login: '/login',
   register: '/register',
-  resetPassword: '/reset-password',
+  forgottenPassword: '/forgotten-password',
+  resetPassword: '/reset-password/:id',
   overview: '/',
   authors: '/authors',
   authorsDetail: (authorId: string) => `/authors/${authorId}`,
@@ -11,3 +12,12 @@ export default {
   genresDetail: (genreId: string) => `/genres/${genreId}`,
   settings: '/settings',
 };
+
+export const publicRoutes = [
+  routes.login,
+  routes.register,
+  routes.forgottenPassword,
+  '/reset-password', // used to check if the route is public, has to be without the parameter
+];
+
+export default routes;

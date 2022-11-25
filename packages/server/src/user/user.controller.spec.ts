@@ -5,6 +5,7 @@ import { mockLoan } from 'src/loans/mocks';
 import { UserService } from './user.service';
 import { ChangeUserPasswordDto } from './dto/change-user-password.dto';
 import { ResetUserPasswordDto } from './dto/reset-user-password.dto';
+import { ForgottenPasswordDto } from './dto/forgotten-password.dto';
 
 describe('UserController', () => {
   let controller: UserController;
@@ -34,6 +35,7 @@ describe('UserController', () => {
               Promise.resolve({ ...mockUser, password: newPassword }),
             ),
             resetPassword: jest.fn(),
+            forgottenPassword: jest.fn(),
             getPublicUser: jest.fn(),
           },
         },
@@ -108,16 +110,37 @@ describe('UserController', () => {
     });
   });
 
-  describe('resetPassword', () => {
-    it('should create new password for user', async () => {
-      const resetUserPasswordDto: ResetUserPasswordDto = {
+  describe('forgottenPassword', () => {
+    it('should send user email with instructions how to reset their password', async () => {
+      const forgottenPasswordDto: ForgottenPasswordDto = {
         email: mockUser.email,
+      };
+      const mockHeaders = {
+        origin: 'mock-origin',
+      };
+
+      await controller.forgottenPassword(forgottenPasswordDto, mockHeaders);
+
+      const spy = jest.spyOn(service, 'forgottenPassword');
+      expect(spy).toHaveBeenCalledWith(
+        forgottenPasswordDto.email,
+        mockHeaders.origin,
+      );
+    });
+  });
+
+  describe('resetPassword', () => {
+    it('should save new password for user', async () => {
+      const resetUserPasswordDto: ResetUserPasswordDto = {
+        id: 'mock-id',
+        password: mockUser.password,
+        confirmPassword: mockUser.password,
       };
       await controller.resetPassword(resetUserPasswordDto);
 
       const spy = jest.spyOn(service, 'resetPassword');
 
-      expect(spy).toHaveBeenCalledWith(mockUser.email);
+      expect(spy).toHaveBeenCalledWith(resetUserPasswordDto);
     });
   });
 });

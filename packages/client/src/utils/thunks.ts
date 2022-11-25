@@ -24,7 +24,10 @@ export const createCustomAsyncThunk = <Returned, ThunkArg = any>(
         throw err;
       }
 
-      return thunkAPI.rejectWithValue(response.data);
+      return thunkAPI.rejectWithValue({
+        statusCode: response.status,
+        ...response.data as object,
+      });
     }
   },
 );

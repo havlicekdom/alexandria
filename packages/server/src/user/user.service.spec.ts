@@ -1,16 +1,27 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Repository } from 'typeorm';
+import { MailerService } from '@nestjs-modules/mailer';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
-import { createMockUser } from './mocks';
+import { createMockUser, mockForgottenPassword } from './mocks';
 import { mockLoan } from 'src/loans/mocks';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import mockRepo from 'src/utils/mockRepo';
+import { ForgottenPassword } from './entities/forgottenPassword.entity';
+import { mailSubjects, mailTemplates, resetPasswordFePath } from './constants';
+
+jest.mock('jsonwebtoken', () => ({
+  sign: jest.fn().mockReturnValue('mock-token'),
+  verify: jest.fn().mockReturnValue({
+    userId: 'mock-user-id',
+  }),
+}));
 
 describe('UserService', () => {
   let service: UserService;
   let userRepo: Repository<User>;
 
+  const mockOrigin = 'mock-origin';
   const mockUser = createMockUser(mockLoan);
   const mockedUserRepository = Object.assign(
     {},
@@ -22,6 +33,13 @@ describe('UserService', () => {
       getOne: jest.fn().mockResolvedValue(null),
     },
   );
+  const mockedForgottenPasswordRepository = mockRepo(
+    [mockForgottenPassword],
+    mockForgottenPassword,
+  );
+  const mockedMailerService = {
+    sendMail: jest.fn().mockResolvedValue(true),
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -30,6 +48,14 @@ describe('UserService', () => {
         {
           provide: getRepositoryToken(User),
           useValue: mockedUserRepository,
+        },
+        {
+          provide: getRepositoryToken(ForgottenPassword),
+          useValue: mockedForgottenPasswordRepository,
+        },
+        {
+          provide: MailerService,
+          useValue: mockedMailerService,
         },
       ],
     }).compile();
@@ -107,10 +133,52 @@ describe('UserService', () => {
   //   });
   // });
 
+  describe('forgottenPassword', () => {
+    it('should send email with info, that a user is trying to reset password, but the email is not in our database', async () => {
+      mockedUserRepository.findOneBy.mockResolvedValueOnce(null);
+      await service.forgottenPassword(mockUser.email, mockOrigin);
+
+      expect(mockedMailerService.sendMail).toHaveBeenCalledWith({
+        to: mockUser.email,
+        subject: mailSubjects.forgottenPassword,
+        template: mailTemplates.forgottenPasswordEmailNotInDb,
+        context: {
+          email: mockUser.email,
+        },
+      });
+    });
+
+    it('should generate forgotten password token and save it to database', async () => {
+      await service.forgottenPassword(mockUser.email, mockOrigin);
+
+      expect(mockedForgottenPasswordRepository.save).toHaveBeenCalledWith({
+        token: mockForgottenPassword.token,
+      });
+    });
+
+    it('should send email with reset password token to user', async () => {
+      const mockLink = `${mockOrigin}/${resetPasswordFePath}/${mockForgottenPassword.id}`;
+      await service.forgottenPassword(mockUser.email, mockOrigin);
+
+      expect(mockedMailerService.sendMail).toHaveBeenCalledWith({
+        to: mockUser.email,
+        subject: mailSubjects.forgottenPassword,
+        template: mailTemplates.forgottenPassword,
+        context: {
+          email: mockUser.email,
+          link: mockLink,
+        },
+      });
+    });
+  });
+
   describe('resetPassword', () => {
     it('should reset user password', async () => {
       const spy = jest.spyOn(userRepo, 'save');
-      await service.resetPassword(mockUser.email);
+      await service.resetPassword({
+        id: 'mock-id',
+        password: 'mock-password',
+      });
 
       // TODO: Add bcrypt mocks and check for returned user object instead
       expect(spy).toHaveBeenCalled();

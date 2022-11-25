@@ -16,7 +16,7 @@ jest.mock('store/hooks', () => ({
 
 jest.mock('store/user/userSlice');
 
-describe('LoginForm', () => {
+describe('RegisterForm', () => {
   it('should render all the fields', () => {
     const { getByTestId } = renderWithRouter(<RegisterForm />);
 

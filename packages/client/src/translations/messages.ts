@@ -5,7 +5,8 @@ export default {
   signOutSuccess: createSuccessMessage('Log out successful, goodbye.'),
   registerSuccess: createSuccessMessage('Your registration has been successfully completed.'),
   updateSuccess: createSuccessMessage('Your settings have been saved.'),
-  resetPasswordSuccess: createSuccessMessage('Password reset successful. New password has been sent to your email.'),
+  forgottenPasswordSuccess: createSuccessMessage('Password reset successful. Instructions how to change it have been sent to your email.'),
+  resetPasswordSuccess: createSuccessMessage('Password change successful.'),
   createLoanSuccess: createSuccessMessage('Book loaned successfully.'),
   loginExpiredError: createErrorMessage('Your session has expired, please log in again.'),
 };

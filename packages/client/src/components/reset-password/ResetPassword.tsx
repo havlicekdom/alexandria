@@ -3,7 +3,7 @@ import useDocumentTitle from 'hooks/useDocumentTitle';
 import ResetPasswordForm from './ResetPasswordForm';
 
 function ResetPassword() {
-  useDocumentTitle('Reset password');
+  useDocumentTitle('Reset your password');
 
   return (
     <ResetPasswordForm />

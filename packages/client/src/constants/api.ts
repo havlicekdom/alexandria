@@ -9,7 +9,8 @@ export default {
   },
   user: {
     register: '/user',
-    resetPassword: '/user',
+    forgottenPassword: '/user/forgotten-password',
+    resetPassword: '/user/reset-password',
     profile: '/user/profile',
     loans: '/loans/forCurrentUser',
     update: (userId: string) => `/user/${userId}`,

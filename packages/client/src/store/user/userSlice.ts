@@ -11,6 +11,8 @@ import {
   RegisterOrUpdateUserData,
   registerUserRequest,
   updateUserRequest,
+  forgottenPasswordRequest,
+  ResetPasswordData,
   resetPasswordRequest,
 } from './userAPI';
 
@@ -81,9 +83,20 @@ export const updateUser = createCustomAsyncThunk(
   },
 );
 
+export const forgottenPassword = createCustomAsyncThunk(
+  'user/forgottenPassword',
+  async (userData: { email: string }) => {
+    await forgottenPasswordRequest(userData);
+
+    return {
+      message: messages.forgottenPasswordSuccess,
+    };
+  },
+);
+
 export const resetPassword = createCustomAsyncThunk(
   'user/resetPassword',
-  async (userData: { email: string }) => {
+  async (userData: ResetPasswordData) => {
     await resetPasswordRequest(userData);
 
     return {
