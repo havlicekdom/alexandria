@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
@@ -16,6 +18,30 @@ const ENV = process.env.NODE_ENV;
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: !ENV ? '.env' : `.env.${ENV}`,
+    }),
+    MailerModule.forRootAsync({
+      useFactory: () => ({
+        transport: `smtps://${process.env.SMTP_USER}@${process.env.SMTP_DOMAIN}:${process.env.SMTP_PASS}@${process.env.SMTP_URL}`,
+        defaults: {
+          from: '"Alexandria" <noreply@alexandria.com>',
+        },
+        preview: true,
+        template: {
+          dir: `${__dirname}/templates/mailing`,
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+        options: {
+          partials: {
+            dir: `${__dirname}/templates/mailing/partials`,
+            options: {
+              strict: true,
+            },
+          },
+        },
+      }),
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'client', 'build'),

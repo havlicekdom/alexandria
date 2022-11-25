@@ -4,21 +4,72 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
+import { MailerService } from '@nestjs-modules/mailer';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 import { genSalt, hash, compareSync } from 'bcrypt';
+import * as jwt from 'jsonwebtoken';
 
 import { User } from './entities/user.entity';
+import { ForgottenPassword } from './entities/forgottenPassword.entity';
 import { CreateUserDto, UpdateUserDto } from './dto';
-import { PublicUser } from './user.interface';
+import { ForgottenPasswordJwtToken, PublicUser } from './user.interface';
+import { mailSubjects, mailTemplates, resetPasswordFePath } from './constants';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    @InjectRepository(ForgottenPassword)
+    private forgottenPasswordRepository: Repository<ForgottenPassword>,
+    private mailerService: MailerService,
   ) {}
+
+  private async generateForgottenPasswordRecord(userId: string) {
+    const jwtToken = jwt.sign(
+      {
+        user: userId,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '5m',
+      },
+    );
+
+    const record = await this.forgottenPasswordRepository.save({
+      token: jwtToken,
+    });
+
+    return record.id;
+  }
+
+  private async validateForgottenPasswordToken(id: string) {
+    const record = await this.forgottenPasswordRepository.findOneBy({ id });
+
+    if (!record) {
+      throw new HttpException(
+        { message: 'Requested token not found.' },
+        HttpStatus.NOT_FOUND,
+      );
+    }
+
+    try {
+      const token = jwt.verify(
+        record.token,
+        process.env.JWT_SECRET,
+      ) as ForgottenPasswordJwtToken;
+
+      return token.userId;
+    } catch (error) {
+      this.forgottenPasswordRepository.delete({ id });
+
+      throw new HttpException(
+        { message: 'Your request has expired, please create new one.' },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
+  }
 
   private async hashPassword(
     password: string,
@@ -125,19 +176,55 @@ export class UserService {
     await this.usersRepository.save(updated);
   }
 
-  async resetPassword(email: string): Promise<void> {
+  async forgottenPassword(email: string, origin: string): Promise<void> {
     const toUpdate = await this.findOneByEmail(email);
+
+    if (!toUpdate) {
+      return await this.mailerService.sendMail({
+        to: email,
+        subject: mailSubjects.forgottenPassword,
+        template: mailTemplates.forgottenPasswordEmailNotInDb,
+        context: {
+          email,
+        },
+      });
+    }
+
+    const id = await this.generateForgottenPasswordRecord(toUpdate.id);
+    const link = `${origin}/${resetPasswordFePath}/${id}`;
+
+    await this.mailerService.sendMail({
+      to: email,
+      subject: mailSubjects.forgottenPassword,
+      template: mailTemplates.forgottenPassword,
+      context: {
+        email,
+        link,
+      },
+    });
+  }
+
+  async resetPassword({
+    id,
+    password,
+  }: {
+    id: string;
+    password: string;
+  }): Promise<void> {
+    const userId = await this.validateForgottenPasswordToken(id);
+
+    const toUpdate = await this.findOne(userId);
 
     if (!toUpdate) return;
 
-    const newPassword = uuid().substring(0, 8);
-    const { salt, hashedPassword } = await this.hashPassword(newPassword);
+    const { salt, hashedPassword } = await this.hashPassword(password);
     const updated = Object.assign(toUpdate, {
       salt,
       password: hashedPassword,
     });
 
     await this.usersRepository.save(updated);
+    await this.forgottenPasswordRepository.delete({ id });
   }
 
   async getPublicUser(id: string) {

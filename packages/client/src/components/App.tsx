@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   useNavigate,
+  useLocation,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +11,7 @@ import { useAppDispatch } from 'store/hooks';
 import { getUserProfile } from 'store/user/userSlice';
 import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
-import routes from 'constants/routes';
+import routes, { publicRoutes } from 'constants/routes';
 
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
@@ -19,6 +20,7 @@ import FormPage from './common/FormPage';
 
 import Login from './login';
 import Register from './register';
+import ForgottenPassword from './forgotten-password';
 import ResetPassword from './reset-password';
 import Overview from './overview';
 import Authors from './authors';
@@ -35,10 +37,13 @@ import * as S from './App.styled';
 function App() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const isLoading = useSelector(selectIsLoading);
   const message = useSelector(selectMessage);
 
   useEffect(() => {
+    if (publicRoutes.some((route) => pathname.includes(route))) return;
+
     dispatch(getUserProfile(null))
       .then(() => {
         navigate('/', { replace: true });
@@ -57,6 +62,7 @@ function App() {
         <Route element={<FormPage />}>
           <Route path={routes.login} element={<Login />} />
           <Route path={routes.register} element={<Register />} />
+          <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
           <Route path={routes.resetPassword} element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoute />}>

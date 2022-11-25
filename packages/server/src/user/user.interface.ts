@@ -3,3 +3,7 @@ export interface PublicUser {
   username: string;
   email: string;
 }
+
+export interface ForgottenPasswordJwtToken {
+  userId: string;
+}

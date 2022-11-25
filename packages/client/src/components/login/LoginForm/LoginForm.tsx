@@ -59,7 +59,7 @@ function LoginForm() {
       </FormHeaderStyled>
       <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
-      <S.LoginFormResetPasswordLink data-testid="reset-password" to={routes.resetPassword}>
+      <S.LoginFormResetPasswordLink data-testid="reset-password" to={routes.forgottenPassword}>
         Forgot your password?
       </S.LoginFormResetPasswordLink>
       <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>

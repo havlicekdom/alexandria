@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { User } from './entities/user.entity';
 import { Role } from 'src/auth/enums/role.enum';
+import { ForgottenPassword } from './entities/forgottenPassword.entity';
 
 export const createMockUser = (mockLoan, role: Role = Role.User): User => ({
   id: uuid(),
@@ -20,4 +21,9 @@ export const mockUser: User = {
   salt: 'testsalt',
   loans: [],
   role: Role.User,
+};
+
+export const mockForgottenPassword: ForgottenPassword = {
+  id: uuid(),
+  token: 'mock-token',
 };

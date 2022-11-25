@@ -1,10 +1,11 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { useParams } from 'react-router-dom';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { resetPassword } from 'store/user/userSlice';
-import { renderWithRouter } from 'utils/tests';
-
 import ResetPasswordForm from './ResetPasswordForm';
+
+jest.mock('react-router-dom');
 
 jest.mock('store/hooks', () => ({
   useAppDispatch: () => jest.fn(),
@@ -14,22 +15,28 @@ jest.mock('store/user/userSlice');
 
 describe('ResetPasswordForm', () => {
   it('should render all the fields', () => {
-    const { getByTestId } = renderWithRouter(<ResetPasswordForm />);
+    (useParams as jest.MockedFunction<typeof useParams>).mockReturnValue({ id: 'test-id' });
+    const { getByTestId } = render(<ResetPasswordForm />);
 
-    expect(getByTestId('email')).toBeInTheDocument();
+    expect(getByTestId('id')).toBeInTheDocument();
+    expect(getByTestId('password')).toBeInTheDocument();
+    expect(getByTestId('confirm-password')).toBeInTheDocument();
     expect(getByTestId('submit')).toBeInTheDocument();
   });
 
-  it('should dispatch action after filling email and clicking button', async () => {
+  it('should send correct input data', async () => {
     (resetPassword as jest.MockedFunction<typeof resetPassword>).mockImplementation();
-    renderWithRouter(<ResetPasswordForm />);
-    const email = 'test@test.com';
+    (useParams as jest.MockedFunction<typeof useParams>).mockReturnValue({ id: 'test-id' });
+    const { getByTestId } = render(<ResetPasswordForm />);
 
-    await userEvent.type(screen.getByTestId('email'), email);
-    await userEvent.click(screen.getByTestId('submit'));
+    await userEvent.type(getByTestId('password'), 'test');
+    await userEvent.type(getByTestId('confirm-password'), 'test');
+    await userEvent.click(getByTestId('submit'));
 
     await waitFor(() => expect(resetPassword).toHaveBeenCalledWith({
-      email,
+      id: 'test-id',
+      password: 'test',
+      confirmPassword: 'test',
     }));
   });
 });
