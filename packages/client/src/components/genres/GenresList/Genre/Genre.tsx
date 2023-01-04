@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
 import { ListItemContent, ListItemContentItem, ListItemContentWrapper } from 'components/common/List/ListItem/ListItem.styled';
 import { Genre as GenreType } from 'types/genre';
@@ -12,6 +13,8 @@ type Props = {
 };
 
 function Genre({ genre }: Props) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <ListItem data-testid="genre">
       <ListItemContentWrapper>
@@ -20,7 +23,7 @@ function Genre({ genre }: Props) {
             { genre.name }
           </S.GenreName>
         </Link>
-        <ListItemContent>
+        <ListItemContent currentTheme={theme}>
           <ListItemContentItem>
             { genre.bio }
           </ListItemContentItem>

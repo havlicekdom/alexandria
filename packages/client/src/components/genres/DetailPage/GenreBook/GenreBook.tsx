@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentWrapper, ListItemImage, ListItemName,
@@ -14,6 +15,8 @@ type Props = {
 };
 
 function GenreBook({ book }: Props) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <ListItem>
       <ListItemImage>
@@ -25,7 +28,7 @@ function GenreBook({ book }: Props) {
             { book.name }
           </Link>
         </ListItemName>
-        <ListItemContent>
+        <ListItemContent currentTheme={theme}>
           { book.description }
         </ListItemContent>
       </ListItemContentWrapper>

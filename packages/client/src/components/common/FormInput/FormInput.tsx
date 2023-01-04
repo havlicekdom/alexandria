@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
+import { ThemeContext } from 'context/ThemeContext';
 
 import * as S from './FormInput.styled';
 
@@ -17,6 +18,8 @@ type FormInputProps = {
 function FormInput({
   label, fieldName, error, register, type, ...rest
 }: FormInputProps) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <S.FormLabel hasError={!!error}>
       { label }
@@ -24,6 +27,7 @@ function FormInput({
         {...register(fieldName)}
         hasError={!!error}
         type={type}
+        currentTheme={theme}
         {...rest}
       />
       {error && (

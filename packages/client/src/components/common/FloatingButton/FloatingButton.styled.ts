@@ -10,6 +10,7 @@ export const FloatingButton = styled(Button)<FloatingButtonProps>`
   position: fixed;
   bottom: ${spacing.medium};
   right: ${spacing.medium};
+  z-index: 1;
 
   ${({ large }) => large && css`
     font-size: ${fontSize.large};

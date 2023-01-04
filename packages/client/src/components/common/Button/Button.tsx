@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from 'context/ThemeContext';
 
 import * as S from './Button.styled';
 
@@ -11,25 +12,26 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 function Button(props: ButtonProps) {
   const { children, variant } = props;
+  const { theme } = useContext(ThemeContext);
 
   switch (variant) {
     case 'link':
       return (
-        <S.ButtonLink {...props}>
+        <S.ButtonLink currentTheme={theme} {...props}>
           { children }
         </S.ButtonLink>
       );
 
     case 'primary':
       return (
-        <S.ButtonPrimary {...props}>
+        <S.ButtonPrimary currentTheme={theme} {...props}>
           { children }
         </S.ButtonPrimary>
       );
 
     case 'close':
       return (
-        <S.ButtonClose {...props}>
+        <S.ButtonClose currentTheme={theme} {...props}>
           { children }
         </S.ButtonClose>
       );

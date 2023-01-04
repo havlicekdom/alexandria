@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ThemeProvider } from 'context/ThemeContext';
 import { store, persistor } from 'store/store';
 import { injectStore } from 'utils/api';
-import './assets/styles/index.css';
 import 'normalize.css/normalize.css';
 import App from './components/App';
 
@@ -18,7 +18,9 @@ ReactDOM.render(
     <Provider store={store}>
       <PGate loading={null} persistor={persistor}>
         <Router>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </Router>
       </PGate>
     </Provider>

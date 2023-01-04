@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentItem, ListItemContentWrapper, ListItemImage,
@@ -17,6 +18,8 @@ type Props = {
 }
 
 function Author({ author }: Props) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <ListItem data-testid="author">
       <ListItemImage>
@@ -28,7 +31,7 @@ function Author({ author }: Props) {
             { author.name }
           </S.AuthorName>
         </Link>
-        <ListItemContent>
+        <ListItemContent currentTheme={theme}>
           <ListItemContentItem>
             { `Born ${moment(author.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
           </ListItemContentItem>

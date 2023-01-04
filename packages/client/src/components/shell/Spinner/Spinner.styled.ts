@@ -2,6 +2,7 @@ import styled, { keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { backgroundColor } from 'constants/styles';
+import { ComponentWithTheme } from 'types/styled';
 
 const rotatingAnimation = keyframes`
   0% {
@@ -12,14 +13,14 @@ const rotatingAnimation = keyframes`
   }
 `;
 
-export const SpinnerWrapper = styled.div`
+export const SpinnerWrapper = styled.div<ComponentWithTheme>`
   position: fixed;
   z-index: 999;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${backgroundColor};
+  background-color: ${({ currentTheme }) => backgroundColor(currentTheme)};
   display: flex;
   align-items: center;
   justify-content: center;

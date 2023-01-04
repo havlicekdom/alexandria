@@ -4,6 +4,7 @@ import {
 } from 'constants/styles';
 import { darken } from 'polished';
 import { Icon } from 'components/common/Icon/Icon.styled';
+import { ComponentWithTheme } from 'types/styled';
 
 type EndsInProps = {
   isOverdue: boolean;
@@ -23,8 +24,8 @@ export const LoanBookName = styled.div`
   margin-bottom: ${spacing.tiny};
 `;
 
-export const LoanBookDescription = styled.div`
-  color: ${darken(0.15, textColor)};
+export const LoanBookDescription = styled.div<ComponentWithTheme>`
+  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
 `;
 
 export const LoanBookDescriptionItem = styled.div`

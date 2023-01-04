@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -12,6 +12,7 @@ import { getUserProfile } from 'store/user/userSlice';
 import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
 
 import routes, { publicRoutes } from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
@@ -40,6 +41,7 @@ function App() {
   const { pathname } = useLocation();
   const isLoading = useSelector(selectIsLoading);
   const message = useSelector(selectMessage);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (publicRoutes.some((route) => pathname.includes(route))) return;
@@ -51,39 +53,42 @@ function App() {
   }, []);
 
   return (
-    <S.App>
-      {isLoading && <Spinner />}
-      {message && (
-        <Snackbar variant={message.type}>
-          { message.text }
-        </Snackbar>
-      )}
-      <Routes>
-        <Route element={<FormPage />}>
-          <Route path={routes.login} element={<Login />} />
-          <Route path={routes.register} element={<Register />} />
-          <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
-          <Route path={routes.resetPassword} element={<ResetPassword />} />
-        </Route>
-        <Route element={<ProtectedRoute />}>
-          <Route path={routes.overview} element={<Overview />} />
-          <Route path={routes.authors}>
-            <Route index element={<Authors />} />
-            <Route path=":authorId" element={<AuthorsDetailPage />} />
+    <>
+      <S.GlobalStyles currentTheme={theme} />
+      <S.App currentTheme={theme}>
+        {isLoading && <Spinner />}
+        {message && (
+          <Snackbar variant={message.type}>
+            { message.text }
+          </Snackbar>
+        )}
+        <Routes>
+          <Route element={<FormPage />}>
+            <Route path={routes.login} element={<Login />} />
+            <Route path={routes.register} element={<Register />} />
+            <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
+            <Route path={routes.resetPassword} element={<ResetPassword />} />
           </Route>
-          <Route path={routes.books}>
-            <Route index element={<Books />} />
-            <Route path=":bookId" element={<BooksDetailPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={routes.overview} element={<Overview />} />
+            <Route path={routes.authors}>
+              <Route index element={<Authors />} />
+              <Route path=":authorId" element={<AuthorsDetailPage />} />
+            </Route>
+            <Route path={routes.books}>
+              <Route index element={<Books />} />
+              <Route path=":bookId" element={<BooksDetailPage />} />
+            </Route>
+            <Route path={routes.genres}>
+              <Route index element={<Genres />} />
+              <Route path=":genreId" element={<GenresDetailPage />} />
+            </Route>
+            <Route path={routes.settings} element={<Settings />} />
           </Route>
-          <Route path={routes.genres}>
-            <Route index element={<Genres />} />
-            <Route path=":genreId" element={<GenresDetailPage />} />
-          </Route>
-          <Route path={routes.settings} element={<Settings />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </S.App>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </S.App>
+    </>
   );
 }
 

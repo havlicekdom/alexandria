@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import Icon from 'components/common/Icon';
 import ListItem from 'components/common/List/ListItem';
 import { Loan as ILoan } from 'types/loan';
@@ -17,6 +18,7 @@ function Loan({ loan }: Props) {
   const dateEndMoment = moment(loan.dateEnd);
   const endsIn = moment.duration(dateEndMoment.diff(moment()));
   const isOverdue = endsIn.asDays() < 0;
+  const { theme } = useContext(ThemeContext);
 
   return (
     <ListItem data-testid="loan">
@@ -29,7 +31,7 @@ function Loan({ loan }: Props) {
             { loan.book.name }
           </S.LoanBookName>
         </Link>
-        <S.LoanBookDescription>
+        <S.LoanBookDescription currentTheme={theme}>
           <S.LoanBookDescriptionItem>
             { loan.book.author.name }
           </S.LoanBookDescriptionItem>

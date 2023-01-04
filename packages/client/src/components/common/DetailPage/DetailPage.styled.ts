@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 import { spacing, textColor } from 'constants/styles';
+import { ComponentWithTheme } from 'types/styled';
 
 export const HeadingWrapper = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ export const HeadingName = styled.h1`
   margin-top: 0;
 `;
 
-export const HeadingText = styled.div`
-  color: ${darken(0.15, textColor)};
+export const HeadingText = styled.div<ComponentWithTheme>`
+  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
   margin-bottom: ${spacing.small};
 `;

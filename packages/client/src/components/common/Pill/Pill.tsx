@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from 'context/ThemeContext';
 
 import * as S from './Pill.styled';
 
@@ -10,8 +11,10 @@ type Props = {
 };
 
 function Pill({ children, variant }: Props) {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <S.Pill variant={variant}>
+    <S.Pill currentTheme={theme} variant={variant}>
       { children }
     </S.Pill>
   );

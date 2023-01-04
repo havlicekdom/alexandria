@@ -7,6 +7,7 @@ import { logout } from 'store/auth/authSlice';
 
 import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
+import ThemeSwitch from 'components/shell/ThemeSwitch';
 
 import * as S from './UserMenu.styled';
 
@@ -16,6 +17,9 @@ function UserMenu() {
   return (
     <S.UserMenuWrapper>
       <S.UserMenu>
+        <S.UserMenuItem>
+          <ThemeSwitch />
+        </S.UserMenuItem>
         <S.UserMenuItem>
           <S.UserMenuLink to={routes.settings}>
             <Icon icon={faCog} />
