@@ -57,5 +57,11 @@ module.exports = {
         'no-confusing-arrow': 'off',
       },
     },
+    {
+      files: '*.test.tsx',
+      rules: {
+        'react/jsx-no-constructed-context-values': 'off',
+      },
+    },
   ],
 };

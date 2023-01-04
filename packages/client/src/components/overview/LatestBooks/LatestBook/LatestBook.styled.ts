@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { fontWeight, spacing, textColor } from 'constants/styles';
+import {
+  fontWeight, spacing, textColor,
+} from 'constants/styles';
+import { ComponentWithTheme } from 'types/styled';
 
 export const LatestBookImage = styled.div`
   margin-right: ${spacing.small};
@@ -13,8 +16,8 @@ export const LatestBookImage = styled.div`
 
 export const LatestBookContent = styled.div``;
 
-const LatestBookLine = styled.div`
-  color: ${darken(0.15, textColor)};
+const LatestBookLine = styled.div<ComponentWithTheme>`
+  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
   margin-bottom: ${spacing.tiny};
 
   &:last-child {

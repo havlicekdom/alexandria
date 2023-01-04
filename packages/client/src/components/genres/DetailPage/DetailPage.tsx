@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ThemeContext } from 'context/ThemeContext';
 import {
   HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
 } from 'components/common/DetailPage/DetailPage.styled';
@@ -15,6 +16,7 @@ function DetailPage() {
   const { genreId } = useParams();
   const dispatch = useAppDispatch();
   const genre = useAppSelector(selectGenresDetail);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!genreId) return;
@@ -36,7 +38,7 @@ function DetailPage() {
             <HeadingName>
               { genre.name }
             </HeadingName>
-            <HeadingText>
+            <HeadingText currentTheme={theme}>
               { genre.bio }
             </HeadingText>
           </HeadingInfo>

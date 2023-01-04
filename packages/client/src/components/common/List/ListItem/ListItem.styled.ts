@@ -3,6 +3,7 @@ import { darken } from 'polished';
 import {
   fontWeight, spacing, textColor, secondaryBackgroundColor,
 } from 'constants/styles';
+import { ComponentWithTheme } from 'types/styled';
 
 export const ListItem = styled.div`
   display: flex;
@@ -33,8 +34,8 @@ export const ListItemName = styled.div`
   margin-bottom: ${spacing.tiny};
 `;
 
-export const ListItemContent = styled.div`
-  color: ${darken(0.15, textColor)};
+export const ListItemContent = styled.div<ComponentWithTheme>`
+  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 import {
+  backgroundColor,
   borderRadius,
   errorColor,
   fontSize,
@@ -10,14 +12,17 @@ import {
   successColor,
   textColor,
   textColorInverse,
+  ThemeVariants,
 } from 'constants/styles';
+import { isDarkTheme } from 'utils/styles';
 import { PillVariant } from './Pill';
 
 type PillProps = {
+  currentTheme: ThemeVariants;
   variant?: PillVariant;
 };
 
-const decidePillColor = (variant?: PillVariant) => {
+const decidePillColor = (currentTheme: ThemeVariants, variant?: PillVariant) => {
   switch (variant) {
     case 'primary':
       return primaryColor;
@@ -32,7 +37,7 @@ const decidePillColor = (variant?: PillVariant) => {
       return errorColor;
 
     default:
-      return textColor;
+      return textColor(currentTheme);
   }
 };
 
@@ -42,14 +47,24 @@ export const Pill = styled.div<PillProps>`
   font-weight: ${fontWeight.bold};
   border-radius: ${borderRadius.tiny};
   padding: ${spacing.tiny};
-  background-color: ${({ variant }) => decidePillColor(variant)};
-  color: ${textColor};
+  background-color: ${({ currentTheme, variant }) => decidePillColor(currentTheme, variant)};
+  color: ${({ currentTheme }) => isDarkTheme(currentTheme) ? textColor(currentTheme) : backgroundColor(currentTheme)};
 
-  ${({ variant }) => variant === 'default' ? css`
-    color: ${textColorInverse};
+  ${({ currentTheme, variant }) => variant === 'default' ? css`
+    color: ${textColorInverse(currentTheme)};
   ` : ''}
 
   & + & {
     margin-left: ${spacing.tiny};
+  }
+
+  a {
+    ${({ currentTheme }) => !isDarkTheme(currentTheme) ? css`
+      color: ${backgroundColor(currentTheme)};
+
+      &:hover {
+        color: ${darken(0.1, backgroundColor(currentTheme))};
+      }
+    ` : ''}
   }
 `;

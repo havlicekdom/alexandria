@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import {
-  spacing, textColor, textColorInverse, borderRadius,
+  spacing, textColor, backgroundColor, borderRadius, ThemeVariants,
 } from 'constants/styles';
 import Button from '../Button';
 import { Icon } from '../Icon/Icon.styled';
@@ -8,6 +8,7 @@ import { Icon } from '../Icon/Icon.styled';
 type ModalSize = 'default' | 'small';
 
 type ModalBodyProps = {
+  currentTheme: ThemeVariants;
   size?: ModalSize;
 };
 
@@ -57,8 +58,8 @@ export const ModalBackground = styled.div`
 
 export const ModalBody = styled.div<ModalBodyProps>`
   padding: ${spacing.medium};
-  background-color: ${textColor};
-  color: ${textColorInverse};
+  background-color: ${({ currentTheme }) => backgroundColor(currentTheme)};
+  color: ${({ currentTheme }) => textColor(currentTheme)};
   border-radius: ${borderRadius.small};
   position: relative;
 

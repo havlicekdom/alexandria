@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import moment from 'moment-mini';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import {
   HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
 } from 'components/common/DetailPage/DetailPage.styled';
@@ -20,6 +21,7 @@ function DetailPage() {
   const { authorId } = useParams();
   const dispatch = useAppDispatch();
   const authorData = useAppSelector(selectAuthorsDetail);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!authorId) return;
@@ -49,10 +51,10 @@ function DetailPage() {
             <S.AuthorGenres>
               { renderGenres() }
             </S.AuthorGenres>
-            <HeadingText>
+            <HeadingText currentTheme={theme}>
               { `Born ${moment(authorData.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
             </HeadingText>
-            <HeadingText>
+            <HeadingText currentTheme={theme}>
               { authorData.bio }
             </HeadingText>
           </HeadingInfo>

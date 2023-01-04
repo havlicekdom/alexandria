@@ -1,11 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import {
   textColor,
   primaryColor,
   spacing,
   secondaryBackgroundColor,
+  backgroundColor,
+  ThemeVariants,
 } from 'constants/styles';
+import { isDarkTheme } from 'utils/styles';
 
 export const NavigationWrapper = styled.nav`
   width: 25%;
@@ -25,9 +28,10 @@ export const NavigationItem = styled.li`
   padding: 0 ${spacing.medium} ${spacing.small} 0;
 `;
 
-export const NavigationLink = styled(NavLink)`
+// Using camel case for current theme prop caused a react error and this is a workaround
+export const NavigationLink = styled(NavLink)<{ currenttheme: ThemeVariants }>`
   display: block;
-  color: ${textColor};
+  color: ${({ currenttheme }) => textColor(currenttheme)};
   text-decoration: none;
   padding: ${spacing.small};
   padding-left: ${spacing.medium};
@@ -37,6 +41,10 @@ export const NavigationLink = styled(NavLink)`
 
   &:hover, &.active {
     background-color: ${primaryColor};
+
+    ${({ currenttheme }) => !isDarkTheme(currenttheme) ? css`
+      color: ${backgroundColor(currenttheme)};
+    ` : ''};
   }
 `;
 

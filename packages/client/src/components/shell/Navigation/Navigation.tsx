@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   faClipboardList,
   faUserPen,
@@ -8,12 +8,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import Icon from 'components/common/Icon';
 import UserMenu from '../UserMenu';
 
 import * as S from './Navigation.styled';
 
 function Navigation() {
+  const { theme } = useContext(ThemeContext);
+
+  // Using camel case for current theme prop caused a react error and this is a workaround
   return (
     <S.NavigationWrapper>
       <S.Logo>
@@ -22,25 +26,25 @@ function Navigation() {
       </S.Logo>
       <S.Navigation>
         <S.NavigationItem>
-          <S.NavigationLink to={routes.overview}>
+          <S.NavigationLink currenttheme={theme} to={routes.overview}>
             <Icon icon={faClipboardList} />
             Overview
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to={routes.authors}>
+          <S.NavigationLink currenttheme={theme} to={routes.authors}>
             <Icon icon={faUserPen} />
             Authors
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to={routes.books}>
+          <S.NavigationLink currenttheme={theme} to={routes.books}>
             <Icon icon={faBook} />
             Books
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink to={routes.genres}>
+          <S.NavigationLink currenttheme={theme} to={routes.genres}>
             <Icon icon={faRectangleList} />
             Genres
           </S.NavigationLink>

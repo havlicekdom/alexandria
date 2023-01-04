@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import Pill from 'components/common/Pill';
 import {
   HeadingImage, HeadingInfo, HeadingName, HeadingText, HeadingWrapper,
@@ -16,6 +17,7 @@ function DetailPage() {
   const { bookId } = useParams();
   const dispatch = useAppDispatch();
   const book = useAppSelector(selectBooksDetail);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!bookId) return;
@@ -44,7 +46,7 @@ function DetailPage() {
             <Pill>{ book.releaseYear }</Pill>
             { renderGenres() }
           </S.BookGenres>
-          <HeadingText>
+          <HeadingText currentTheme={theme}>
             { book.description }
           </HeadingText>
         </HeadingInfo>

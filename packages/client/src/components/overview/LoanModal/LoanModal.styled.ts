@@ -14,7 +14,7 @@ export const Legend = styled.legend`
 `;
 
 export const SubmitButton = styled(Button)`
-  margin-top: auto;
+  margin-top: auto !important;
 `;
 
 export const Error = styled.span`

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
+import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
 import {
   ListItemContent, ListItemContentWrapper, ListItemImage,
@@ -18,6 +19,7 @@ type Props = {
 }
 
 function Book({ book }: Props) {
+  const { theme } = useContext(ThemeContext);
   const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
@@ -27,21 +29,21 @@ function Book({ book }: Props) {
       </ListItemImage>
       <ListItemContentWrapper>
         <Link to={routes.booksDetail(book.id)}>
-          <S.BookName>
+          <S.BookName currentTheme={theme}>
             { book.name }
           </S.BookName>
         </Link>
-        <S.BookAuthor>
+        <S.BookAuthor currentTheme={theme}>
           <Link to={routes.authorsDetail(book.author.id)}>
             { book.author.name }
           </Link>
         </S.BookAuthor>
-        <S.BookPills>
+        <S.BookPills currentTheme={theme}>
           <Pill>{ book.releaseYear }</Pill>
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
         </S.BookPills>
-        <ListItemContent>
+        <ListItemContent currentTheme={theme}>
           { book.description }
         </ListItemContent>
       </ListItemContentWrapper>

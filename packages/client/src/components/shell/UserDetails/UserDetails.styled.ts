@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-import { fontSize, spacing, textColor } from 'constants/styles';
+import {
+  fontSize, spacing, textColor, ThemeVariants,
+} from 'constants/styles';
 
 type AvatarProps = {
   iconSize: string;
+  currentTheme: ThemeVariants;
 };
 
 export const UserDetailsWrapper = styled.div`
@@ -30,7 +33,7 @@ export const UserDetailsAvatar = styled.div<AvatarProps>`
   justify-content: center;
   border-radius: 50%;
   padding: 5px;
-  background-color: ${textColor};
+  background-color: ${({ currentTheme }) => textColor(currentTheme)};
 
   div {
     height: ${({ iconSize }) => `${iconSize}px`};
