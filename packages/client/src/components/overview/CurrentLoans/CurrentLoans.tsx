@@ -28,7 +28,7 @@ function CurrentLoans({ openLoanModal }: Props) {
     <>
       <S.NoLoansMessage>You currently have no loans.</S.NoLoansMessage>
 
-      <Button variant="primary" onClick={() => openLoanModal()} data-testid="loan-button">
+      <Button variant="primary" onClick={openLoanModal} data-testid="loan-button">
         <Icon icon={faPlusCircle} />
         Loan a book
       </Button>

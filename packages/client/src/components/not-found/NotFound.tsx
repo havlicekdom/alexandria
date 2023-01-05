@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import routes from 'constants/routes';
-import Icon from 'components/common/Icon';
 
 import * as S from './NotFound.styled';
 
@@ -15,7 +13,6 @@ function NotFound() {
 
   return (
     <S.NotFoundWrapper>
-      <Icon icon={faExclamationTriangle} />
       <S.NotFoundCode>
         404
       </S.NotFoundCode>
@@ -26,7 +23,7 @@ function NotFound() {
         It looks like the content you&apos;re looking for is somewhere else...
       </S.NotFoundContent>
       <S.NotFoundContent>
-        <S.NotFoundButton data-testid="home-button" variant="primary" onClick={() => onButtonClick()}>
+        <S.NotFoundButton data-testid="home-button" variant="primary" onClick={onButtonClick}>
           Take me home
         </S.NotFoundButton>
       </S.NotFoundContent>

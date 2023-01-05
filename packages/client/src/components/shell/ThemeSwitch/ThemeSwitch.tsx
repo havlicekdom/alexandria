@@ -19,7 +19,7 @@ function ThemeSwitch() {
   };
 
   return (
-    <Button variant="link" type="button" onClick={() => handleToggle()}>
+    <Button variant="link" type="button" onClick={handleToggle}>
       {
         isDarkTheme(theme)
           ? (
