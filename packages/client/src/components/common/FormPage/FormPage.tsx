@@ -1,12 +1,15 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { SubmitSuccessfulProvider } from 'context/SubmitSuccessfulContext';
 
 import * as S from './FormPage.styled';
 
 function FormPage() {
   return (
     <S.FormPageWrapper>
-      <Outlet />
+      <SubmitSuccessfulProvider>
+        <Outlet />
+      </SubmitSuccessfulProvider>
     </S.FormPageWrapper>
   );
 }

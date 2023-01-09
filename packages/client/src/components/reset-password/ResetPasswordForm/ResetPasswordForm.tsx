@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,6 +12,7 @@ import {
   FormHeader as FormHeaderStyled,
   FormButton as FormButtonStyled,
 } from 'components/common/FormPage/FormPage.styled';
+import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
 import { useAppDispatch } from 'store/hooks';
 import { resetPassword } from 'store/user/userSlice';
 import { formValidation as translations } from 'translations';
@@ -30,6 +31,7 @@ const validationSchema = yup.object({
 }).required();
 
 function ResetPasswordForm() {
+  const { setIsSuccessfullySubmitted } = useContext(SubmitSuccessfulContext);
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
@@ -38,6 +40,7 @@ function ResetPasswordForm() {
 
   const onSubmit: SubmitHandler<FormInputs> = (formData) => {
     dispatch(resetPassword(formData));
+    setIsSuccessfullySubmitted(true);
   };
 
   return (
