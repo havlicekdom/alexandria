@@ -1,8 +1,9 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
 import { forgottenPassword } from 'store/user/userSlice';
-import { renderWithRouter } from 'utils/tests';
+import { renderWithContext, renderWithRouter } from 'utils/tests';
 
 import ForgottenPasswordForm from './ForgottenPasswordForm';
 
@@ -20,9 +21,18 @@ describe('ForgottenPasswordForm', () => {
     expect(getByTestId('submit')).toBeInTheDocument();
   });
 
-  it('should dispatch action after filling email and clicking button', async () => {
+  it('should dispatch action and set context value after filling email and clicking button', async () => {
     (forgottenPassword as jest.MockedFunction<typeof forgottenPassword>).mockImplementation();
-    renderWithRouter(<ForgottenPasswordForm />);
+    const setIsSuccessfullySubmitted = jest.fn();
+    renderWithContext(
+      <ForgottenPasswordForm />,
+      {
+        isSuccessfullySubmitted: false,
+        setIsSuccessfullySubmitted,
+      },
+      SubmitSuccessfulContext,
+      renderWithRouter,
+    );
     const email = 'test@test.com';
 
     await userEvent.type(screen.getByTestId('email'), email);
@@ -31,5 +41,6 @@ describe('ForgottenPasswordForm', () => {
     await waitFor(() => expect(forgottenPassword).toHaveBeenCalledWith({
       email,
     }));
+    expect(setIsSuccessfullySubmitted).toHaveBeenCalledWith(true);
   });
 });

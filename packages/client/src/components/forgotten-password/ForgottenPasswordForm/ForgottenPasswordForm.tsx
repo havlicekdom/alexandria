@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -9,6 +9,7 @@ import {
   FormHeader as FormHeaderStyled,
   FormButton as FormButtonStyled,
 } from 'components/common/FormPage/FormPage.styled';
+import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
 import { useAppDispatch } from 'store/hooks';
 import { forgottenPassword } from 'store/user/userSlice';
 import yup from 'utils/formValidation';
@@ -22,6 +23,7 @@ const validationSchema = yup.object({
 }).required();
 
 function ForgottenPasswordForm() {
+  const { setIsSuccessfullySubmitted } = useContext(SubmitSuccessfulContext);
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
     resolver: yupResolver(validationSchema),
@@ -29,6 +31,7 @@ function ForgottenPasswordForm() {
 
   const onSubmit: SubmitHandler<FormInputs> = (formData) => {
     dispatch(forgottenPassword(formData));
+    setIsSuccessfullySubmitted(true);
   };
 
   return (

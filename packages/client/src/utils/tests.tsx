@@ -65,3 +65,16 @@ export const renderWithRouter = (children: any) => ({
     </BrowserRouter>
   )),
 });
+
+export const renderWithContext = (
+  children: any,
+  contextValues: any,
+  Context: React.Context<typeof contextValues>,
+  renderMethod: any = render,
+) => ({
+  ...renderMethod(
+    <Context.Provider value={contextValues}>
+      { children }
+    </Context.Provider>,
+  ),
+});

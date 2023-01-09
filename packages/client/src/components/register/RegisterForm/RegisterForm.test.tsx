@@ -1,7 +1,8 @@
 import React from 'react';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithRouter } from 'utils/tests';
+import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
+import { renderWithContext, renderWithRouter } from 'utils/tests';
 import { registerUser } from 'store/user/userSlice';
 import RegisterForm from './RegisterForm';
 
@@ -27,9 +28,18 @@ describe('RegisterForm', () => {
     expect(getByTestId('submit')).toBeInTheDocument();
   });
 
-  it('should send correct input data', async () => {
+  it('should send correct input data and update context value to show success message', async () => {
     (registerUser as jest.MockedFunction<typeof registerUser>).mockImplementation();
-    renderWithRouter(<RegisterForm />);
+    const setIsSuccessfullySubmitted = jest.fn();
+    renderWithContext(
+      <RegisterForm />,
+      {
+        isSuccessfullySubmitted: false,
+        setIsSuccessfullySubmitted,
+      },
+      SubmitSuccessfulContext,
+      renderWithRouter,
+    );
 
     await userEvent.type(screen.getByLabelText(/username/i), 'test');
     await userEvent.type(screen.getByLabelText(/email/i), 'test@test.com');
@@ -43,5 +53,6 @@ describe('RegisterForm', () => {
       password: 'test',
       confirmPassword: 'test',
     }));
+    expect(setIsSuccessfullySubmitted).toHaveBeenCalledWith(true);
   });
 });

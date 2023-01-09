@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -17,6 +16,7 @@ import {
 import { useAppDispatch } from 'store/hooks';
 import { registerUser } from 'store/user/userSlice';
 import { formValidation as translations } from 'translations';
+import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
 
 type FormInputs = {
   username: string;
@@ -33,8 +33,8 @@ const validationSchema = yup.object({
 }).required();
 
 function RegisterForm() {
+  const { setIsSuccessfullySubmitted } = useContext(SubmitSuccessfulContext);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const {
     register, handleSubmit, formState: { errors },
   } = useForm<FormInputs>({
@@ -43,7 +43,7 @@ function RegisterForm() {
 
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     await dispatch(registerUser(formData));
-    navigate('/login', { replace: true });
+    setIsSuccessfullySubmitted(true);
   };
 
   return (
