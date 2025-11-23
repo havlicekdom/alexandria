@@ -20,7 +20,7 @@ export const SpinnerWrapper = styled.div<ComponentWithTheme>`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: ${({ currentTheme }) => backgroundColor(currentTheme)};
+  background-color: ${({ $currentTheme }) => backgroundColor($currentTheme)};
   display: flex;
   align-items: center;
   justify-content: center;

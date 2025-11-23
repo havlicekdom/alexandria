@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import routes from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
@@ -20,7 +20,7 @@ function GenreAuthor({ author }: Props) {
   return (
     <ListItem>
       <ListItemImage>
-        <img src={missingAuthorImage} alt={author.name} />
+        <img src={missingAuthorImage.src} alt={author.name} />
       </ListItemImage>
       <ListItemContentWrapper>
         <ListItemName>
@@ -28,7 +28,7 @@ function GenreAuthor({ author }: Props) {
             { author.name }
           </Link>
         </ListItemName>
-        <ListItemContent currentTheme={theme}>
+        <ListItemContent $currentTheme={theme}>
           { author.bio }
         </ListItemContent>
       </ListItemContentWrapper>

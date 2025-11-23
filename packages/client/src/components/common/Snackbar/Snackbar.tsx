@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { CSSTransition } from 'react-transition-group';
+"use client";
+
+import { BaseHTMLAttributes, useEffect, useState } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -9,16 +10,16 @@ import { clearMessage } from 'store/shared/sharedSlice';
 
 import * as S from './Snackbar.styled';
 
-export interface SnackbarProps extends React.BaseHTMLAttributes<HTMLDivElement> {
-  variant: 'error' | 'success' | 'info' | 'default';
+export interface SnackbarProps extends BaseHTMLAttributes<HTMLDivElement> {
+  $variant: 'error' | 'success' | 'info' | 'default';
   autoHide?: number;
 }
 
-function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
+function Snackbar({ $variant, autoHide = 3000, children }: SnackbarProps) {
   const dispatch = useAppDispatch();
   const [show, setShow] = useState(true);
 
-  const animationLength = 200;
+  const $animationLength = 200;
 
   let hideTimer: NodeJS.Timeout;
   let animationTimer: NodeJS.Timeout;
@@ -30,7 +31,7 @@ function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
 
     hideTimer = setTimeout(() => {
       dispatch(clearMessage());
-    }, autoHide + (animationLength * 2));
+    }, autoHide + ($animationLength * 2));
     // the delay needs to be bigger than the length to prevent clipping
 
     return () => {
@@ -44,26 +45,19 @@ function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
 
     hideTimer = setTimeout(() => {
       dispatch(clearMessage());
-    }, animationLength);
+    }, $animationLength);
 
     clearTimeout(hideTimer);
   };
 
+  // TODO: Solve animations
   return (
-    <CSSTransition
-      classNames="snackbar"
-      in={show}
-      appear
-      enter={false}
-      timeout={animationLength}
-    >
-      <S.SnackbarWrapper variant={variant} animationLength={animationLength}>
-        { children }
-        <S.SnackbarClose variant="link" onClick={handleClose}>
-          <FontAwesomeIcon icon={faTimes} />
-        </S.SnackbarClose>
-      </S.SnackbarWrapper>
-    </CSSTransition>
+    <S.SnackbarWrapper $variant={$variant} $animationLength={$animationLength}>
+      { children }
+      <S.SnackbarClose variant="link" onClick={handleClose}>
+        <FontAwesomeIcon icon={faTimes} />
+      </S.SnackbarClose>
+    </S.SnackbarWrapper>
   );
 }
 

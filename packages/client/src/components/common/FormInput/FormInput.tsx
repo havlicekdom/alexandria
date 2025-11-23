@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useContext } from 'react';
+"use client";
+
+import { useContext } from 'react';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 import { ThemeContext } from 'context/ThemeContext';
 
@@ -21,13 +23,13 @@ function FormInput({
   const { theme } = useContext(ThemeContext);
 
   return (
-    <S.FormLabel hasError={!!error}>
+    <S.FormLabel $hasError={!!error}>
       { label }
       <S.FormInput
         {...register(fieldName)}
-        hasError={!!error}
+        $hasError={!!error}
         type={type}
-        currentTheme={theme}
+        $currentTheme={theme}
         {...rest}
       />
       {error && (

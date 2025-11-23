@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, waitFor } from '@testing-library/react';
 import { getBooksDetail, selectBooksDetail } from 'store/books/booksSlice';
 import { mockBook } from 'utils/tests';

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -9,14 +9,13 @@ import { useSelector } from 'react-redux';
 
 import { useAppDispatch } from 'store/hooks';
 import { getUserProfile } from 'store/user/userSlice';
-import { selectIsLoading, selectMessage } from 'store/shared/sharedSlice';
+import { selectIsLoading } from 'store/shared/sharedSlice';
 
 import routes, { publicRoutes } from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
 
 import ProtectedRoute from './shell/ProtectedRoute';
 import Spinner from './shell/Spinner';
-import Snackbar from './common/Snackbar';
 import FormPage from './common/FormPage';
 
 import Login from './login';
@@ -34,41 +33,28 @@ import Settings from './settings';
 import NotFound from './not-found';
 
 import * as S from './App.styled';
+import { usePathname, useRouter } from 'next/navigation';
 
 function App() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const isLoading = useSelector(selectIsLoading);
-  const message = useSelector(selectMessage);
+  const pathname = usePathname();
   const { theme } = useContext(ThemeContext);
+  const router = useRouter();
 
   useEffect(() => {
     if (publicRoutes.some((route) => pathname.includes(route))) return;
 
     dispatch(getUserProfile(null))
       .then(() => {
-        navigate('/', { replace: true });
+        router.replace('/')
       });
   }, []);
 
   return (
     <>
-      <S.GlobalStyles currentTheme={theme} />
-      <S.App currentTheme={theme}>
-        {isLoading && <Spinner />}
-        {message && (
-          <Snackbar variant={message.type}>
-            { message.text }
-          </Snackbar>
-        )}
+      <S.GlobalStyles $currentTheme={theme} />
+      <S.App $currentTheme={theme}>
         <Routes>
-          <Route element={<FormPage />}>
-            <Route path={routes.login} element={<Login />} />
-            <Route path={routes.register} element={<Register />} />
-            <Route path={routes.forgottenPassword} element={<ForgottenPassword />} />
-            <Route path={routes.resetPassword} element={<ResetPassword />} />
-          </Route>
           <Route element={<ProtectedRoute />}>
             <Route path={routes.overview} element={<Overview />} />
             <Route path={routes.authors}>

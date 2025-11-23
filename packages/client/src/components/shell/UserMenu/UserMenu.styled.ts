@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { primaryColor, spacing } from 'constants/styles';
-import { NavLink } from 'react-router-dom';
 import { lighten } from 'polished';
+import NavLink from 'components/shell/Navigation/NavLink';
 
 export const UserMenuWrapper = styled.div`
   margin: auto 0 ${spacing.large};

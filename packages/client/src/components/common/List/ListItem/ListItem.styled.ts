@@ -35,7 +35,7 @@ export const ListItemName = styled.div`
 `;
 
 export const ListItemContent = styled.div<ComponentWithTheme>`
-  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
+  color: ${({ $currentTheme }) => darken(0.15, textColor($currentTheme))};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

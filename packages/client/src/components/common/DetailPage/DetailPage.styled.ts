@@ -25,6 +25,6 @@ export const HeadingName = styled.h1`
 `;
 
 export const HeadingText = styled.div<ComponentWithTheme>`
-  color: ${({ currentTheme }) => darken(0.15, textColor(currentTheme))};
+  color: ${({ $currentTheme }) => darken(0.15, textColor($currentTheme))};
   margin-bottom: ${spacing.small};
 `;

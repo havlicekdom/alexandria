@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import Link from 'next';
 import moment from 'moment-mini';
 import { faReceipt } from '@fortawesome/free-solid-svg-icons';
 import routes from 'constants/routes';
@@ -26,12 +26,12 @@ function Loan({ loan }: Props) {
         <Icon icon={faReceipt} />
       </S.LoanIcon>
       <S.LoanContent>
-        <Link to={routes.booksDetail(loan.book.id)}>
+        <Link href={routes.booksDetail(loan.book.id)}>
           <S.LoanBookName>
             { loan.book.name }
           </S.LoanBookName>
         </Link>
-        <S.LoanBookDescription currentTheme={theme}>
+        <S.LoanBookDescription $currentTheme={theme}>
           <S.LoanBookDescriptionItem>
             { loan.book.author.name }
           </S.LoanBookDescriptionItem>

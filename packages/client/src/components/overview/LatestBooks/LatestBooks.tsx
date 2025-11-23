@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import List from 'components/common/List';
 import Panel from 'components/common/Panel';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -18,7 +18,7 @@ function LatestBooks() {
   );
 
   return (
-    <Panel header="Recently added books" portion={2}>
+    <Panel header="Recently added books" $portion={2}>
       <List>
         { renderLatestBooks() }
       </List>

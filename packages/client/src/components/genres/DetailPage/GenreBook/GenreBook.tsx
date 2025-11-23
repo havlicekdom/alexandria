@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import routes from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
@@ -20,7 +20,7 @@ function GenreBook({ book }: Props) {
   return (
     <ListItem>
       <ListItemImage>
-        <img src={missingBookImage} alt={book.name} />
+        <img src={missingBookImage.src} alt={book.name} />
       </ListItemImage>
       <ListItemContentWrapper>
         <ListItemName>
@@ -28,7 +28,7 @@ function GenreBook({ book }: Props) {
             { book.name }
           </Link>
         </ListItemName>
-        <ListItemContent currentTheme={theme}>
+        <ListItemContent $currentTheme={theme}>
           { book.description }
         </ListItemContent>
       </ListItemContentWrapper>

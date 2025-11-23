@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from 'context/ThemeContext';
 import routes from 'constants/routes';
@@ -18,25 +18,25 @@ type Props = {
 
 function AuthorBook({ book }: Props) {
   const { theme } = useContext(ThemeContext);
-  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
+  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill $variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
     <ListItem data-testid="book">
       <ListItemImage>
-        <img src={missingBookImage} alt="" />
+        <img src={missingBookImage.src} alt="" />
       </ListItemImage>
       <ListItemContentWrapper>
-        <S.AuthorBookName currentTheme={theme}>
+        <S.AuthorBookName $currentTheme={theme}>
           <Link to={routes.booksDetail(book.id)}>
             { book.name }
           </Link>
         </S.AuthorBookName>
-        <S.AuthorBookPills currentTheme={theme}>
+        <S.AuthorBookPills $currentTheme={theme}>
           <Pill>{ book.releaseYear }</Pill>
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
         </S.AuthorBookPills>
-        <ListItemContent currentTheme={theme}>
+        <ListItemContent $currentTheme={theme}>
           { book.description }
         </ListItemContent>
       </ListItemContentWrapper>

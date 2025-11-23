@@ -18,12 +18,12 @@ import { isDarkTheme } from 'utils/styles';
 import { PillVariant } from './Pill';
 
 type PillProps = {
-  currentTheme: ThemeVariants;
-  variant?: PillVariant;
+  $currentTheme: ThemeVariants;
+  $variant?: PillVariant;
 };
 
-const decidePillColor = (currentTheme: ThemeVariants, variant?: PillVariant) => {
-  switch (variant) {
+const decidePillColor = ($currentTheme: ThemeVariants, $variant?: PillVariant) => {
+  switch ($variant) {
     case 'primary':
       return primaryColor;
 
@@ -37,7 +37,7 @@ const decidePillColor = (currentTheme: ThemeVariants, variant?: PillVariant) => 
       return errorColor;
 
     default:
-      return textColor(currentTheme);
+      return textColor($currentTheme);
   }
 };
 
@@ -47,11 +47,11 @@ export const Pill = styled.div<PillProps>`
   font-weight: ${fontWeight.bold};
   border-radius: ${borderRadius.tiny};
   padding: ${spacing.tiny};
-  background-color: ${({ currentTheme, variant }) => decidePillColor(currentTheme, variant)};
-  color: ${({ currentTheme }) => isDarkTheme(currentTheme) ? textColor(currentTheme) : backgroundColor(currentTheme)};
+  background-color: ${({ $currentTheme, $variant }) => decidePillColor($currentTheme, $variant)};
+  color: ${({ $currentTheme }) => isDarkTheme($currentTheme) ? textColor($currentTheme) : backgroundColor($currentTheme)};
 
-  ${({ currentTheme, variant }) => variant === 'default' ? css`
-    color: ${textColorInverse(currentTheme)};
+  ${({ $currentTheme, $variant }) => $variant === 'default' ? css`
+    color: ${textColorInverse($currentTheme)};
   ` : ''}
 
   & + & {
@@ -59,11 +59,11 @@ export const Pill = styled.div<PillProps>`
   }
 
   a {
-    ${({ currentTheme }) => !isDarkTheme(currentTheme) ? css`
-      color: ${backgroundColor(currentTheme)};
+    ${({ $currentTheme }) => !isDarkTheme($currentTheme) ? css`
+      color: ${backgroundColor($currentTheme)};
 
       &:hover {
-        color: ${darken(0.1, backgroundColor(currentTheme))};
+        color: ${darken(0.1, backgroundColor($currentTheme))};
       }
     ` : ''}
   }

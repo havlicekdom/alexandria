@@ -15,4 +15,4 @@ export const createErrorMessage = (text: string): Message => ({
   text,
 });
 
-export const parseErrorToMessage = (error: ErrorResponse): Message => createErrorMessage(`${error.statusCode}: ${error.message}`);
+export const parseErrorToMessage = (error: ErrorResponse): Message => createErrorMessage(`${error?.statusCode ?? 500}: ${error?.message ?? 'Unknown error'}`);

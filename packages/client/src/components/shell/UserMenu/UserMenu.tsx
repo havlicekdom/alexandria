@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { faCog, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 import routes from 'constants/routes';

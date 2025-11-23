@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { screen, render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -10,13 +10,13 @@ jest.mock('store/hooks', () => ({
 
 describe('Snackbar', () => {
   it('should auto hide after 3000ms', async () => {
-    render(<Snackbar variant="success">Test message</Snackbar>);
+    render(<Snackbar $variant="success">Test message</Snackbar>);
 
     await waitFor(() => expect(screen.getByText('Test message')).not.toBeVisible(), { timeout: 3000 });
   });
 
   it('should hide after click on close', async () => {
-    render(<Snackbar variant="success">Test message</Snackbar>);
+    render(<Snackbar $variant="success">Test message</Snackbar>);
 
     await userEvent.click(screen.getByRole('button'));
     await waitFor(() => expect(screen.getByText('Test message')).not.toBeVisible());

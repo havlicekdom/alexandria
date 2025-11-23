@@ -1,6 +1,4 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { persistReducer, persistStore } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 import authReducer from './auth/authSlice';
 import authorsReducer from './authors/authorsSlice';
 import booksReducer from './books/booksSlice';
@@ -9,16 +7,9 @@ import sharedReducer from './shared/sharedSlice';
 import userReducer from './user/userSlice';
 import loansReducer from './loans/loansSlice';
 
-const persistConfig = {
-  key: 'user',
-  storage,
-};
-
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
-
 export const store = configureStore({
   reducer: {
-    auth: persistedAuthReducer,
+    auth: authReducer,
     authors: authorsReducer,
     books: booksReducer,
     genres: genresReducer,
@@ -27,8 +18,6 @@ export const store = configureStore({
     loans: loansReducer,
   },
 });
-
-export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;

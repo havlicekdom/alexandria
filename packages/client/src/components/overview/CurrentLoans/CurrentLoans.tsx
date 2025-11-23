@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
@@ -36,7 +36,7 @@ function CurrentLoans({ openLoanModal }: Props) {
   );
 
   return (
-    <Panel header="Your loans" portion={2}>
+    <Panel header="Your loans" $portion={2}>
       <List>
         { loans.length > 0 ? renderLoans() : renderNoLoanMessage() }
       </List>

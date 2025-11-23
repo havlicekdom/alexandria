@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { ThemeContext } from 'context/ThemeContext';
 
 import * as S from './Button.styled';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'link' | 'primary' | 'close';
-  full?: boolean;
+  $full?: boolean;
 }
 
 function Button(props: ButtonProps) {
@@ -17,21 +17,21 @@ function Button(props: ButtonProps) {
   switch (variant) {
     case 'link':
       return (
-        <S.ButtonLink currentTheme={theme} {...props}>
+        <S.ButtonLink $currentTheme={theme} {...props}>
           { children }
         </S.ButtonLink>
       );
 
     case 'primary':
       return (
-        <S.ButtonPrimary currentTheme={theme} {...props}>
+        <S.ButtonPrimary $currentTheme={theme} {...props}>
           { children }
         </S.ButtonPrimary>
       );
 
     case 'close':
       return (
-        <S.ButtonClose currentTheme={theme} {...props}>
+        <S.ButtonClose $currentTheme={theme} {...props}>
           { children }
         </S.ButtonClose>
       );
@@ -42,7 +42,7 @@ function Button(props: ButtonProps) {
 }
 
 Button.defaultProps = {
-  full: false,
+  $full: false,
 };
 
 export default Button;

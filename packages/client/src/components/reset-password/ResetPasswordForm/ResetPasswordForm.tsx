@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +16,7 @@ import { useAppDispatch } from 'store/hooks';
 import { resetPassword } from 'store/user/userSlice';
 import { formValidation as translations } from 'translations';
 import yup from 'utils/formValidation';
+import { useParams } from 'next/navigation';
 
 type FormInputs = {
   id: string;
@@ -52,7 +52,7 @@ function ResetPasswordForm() {
       <input data-testid="id" type="hidden" value={id} {...register('id')} />
       <FormInput data-testid="password" label="New password" register={register} type="password" fieldName="password" error={errors.password} />
       <FormInput data-testid="confirm-password" label="Confirm your new password" register={register} type="password" fieldName="confirmPassword" error={errors.confirmPassword} />
-      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" $full>
         Save password
       </FormButtonStyled>
     </FormStyled>

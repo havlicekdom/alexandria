@@ -8,7 +8,7 @@ import { Icon } from '../Icon/Icon.styled';
 type ModalSize = 'default' | 'small';
 
 type ModalBodyProps = {
-  currentTheme: ThemeVariants;
+  $currentTheme: ThemeVariants;
   size?: ModalSize;
 };
 
@@ -58,8 +58,8 @@ export const ModalBackground = styled.div`
 
 export const ModalBody = styled.div<ModalBodyProps>`
   padding: ${spacing.medium};
-  background-color: ${({ currentTheme }) => backgroundColor(currentTheme)};
-  color: ${({ currentTheme }) => textColor(currentTheme)};
+  background-color: ${({ $currentTheme }) => backgroundColor($currentTheme)};
+  color: ${({ $currentTheme }) => textColor($currentTheme)};
   border-radius: ${borderRadius.small};
   position: relative;
 

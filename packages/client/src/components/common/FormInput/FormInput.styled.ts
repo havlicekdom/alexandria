@@ -7,7 +7,7 @@ import {
 import { ComponentWithTheme } from 'types/styled';
 
 type FormElementProps = {
-  hasError: boolean;
+  $hasError: boolean;
 };
 
 export const FormLabel = styled.label<FormElementProps>`
@@ -19,7 +19,7 @@ export const FormLabel = styled.label<FormElementProps>`
     margin-bottom: 0;
   }
 
-  ${({ hasError }) => hasError && css`
+  ${({ $hasError }) => $hasError && css`
     color: ${errorColor};
   `}
 `;
@@ -28,28 +28,28 @@ export const FormInput = styled.input<FormElementProps & ComponentWithTheme>`
   display: block;
   width: 100%;
   background-color: transparent;
-  color: ${({ currentTheme }) => textColor(currentTheme)};
+  color: ${({ $currentTheme }) => textColor($currentTheme)};
   border: none;
-  border-bottom: 1px solid ${({ currentTheme }) => lighten(0.2, textColor(currentTheme))};
+  border-bottom: 1px solid ${({ $currentTheme }) => lighten(0.2, textColor($currentTheme))};
   padding: ${spacing.tiny};
   font-size: ${fontSize.default};
   margin-top: 5px;
 
   &:focus {
-    border-bottom-color: ${({ currentTheme }) => textColor(currentTheme)};
+    border-bottom-color: ${({ $currentTheme }) => textColor($currentTheme)};
     outline: none;
   }
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    border-bottom: 1px solid ${({ currentTheme }) => lighten(0.2, textColor(currentTheme))};
-    -webkit-text-fill-color: ${({ currentTheme }) => textColor(currentTheme)};
+    border-bottom: 1px solid ${({ $currentTheme }) => lighten(0.2, textColor($currentTheme))};
+    -webkit-text-fill-color: ${({ $currentTheme }) => textColor($currentTheme)};
     -webkit-box-shadow: 0 0 0px 1000px ${secondaryBackgroundColor} inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 
-  ${({ hasError }) => hasError && css`
+  ${({ $hasError }) => $hasError && css`
     border-bottom-color: ${errorColor};
     color: ${errorColor};
 

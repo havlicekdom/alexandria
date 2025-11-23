@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { getGenresList, selectGenresList } from 'store/genres/genresSlice';
 import { mockGenre, renderWithRouter } from 'utils/tests';
 import { Genre } from 'types/genre';

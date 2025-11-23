@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, waitFor } from '@testing-library/react';
 import { useParams } from 'react-router-dom';
 import { getAuthorsDetail, selectAuthorsDetail } from 'store/authors/authorsSlice';

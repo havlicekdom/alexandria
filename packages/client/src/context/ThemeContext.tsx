@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from 'react';
+'use client';
+
+import { createContext, Dispatch, ReactNode, SetStateAction, useMemo, useState } from 'react';
 import { ThemeVariants } from 'constants/styles/theme';
 
 type InitialState = {
   theme: ThemeVariants;
-  setTheme: React.Dispatch<React.SetStateAction<ThemeVariants>>;
+  setTheme: Dispatch<SetStateAction<ThemeVariants>>;
 };
 
 const initialState: InitialState = {
@@ -11,11 +13,11 @@ const initialState: InitialState = {
   setTheme: () => ({}),
 };
 
-const ThemeContext = React.createContext(initialState);
+const ThemeContext = createContext(initialState);
 
 ThemeContext.displayName = 'ThemeContext';
 
-function ThemeProvider({ children }: { children: React.ReactNode }) {
+function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState(ThemeVariants.Dark);
 
   const themeContextValues = useMemo(() => ({

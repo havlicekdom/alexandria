@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import List from 'components/common/List';
 import Panel from 'components/common/Panel';
 import { getBooksList, selectBooksList } from 'store/books/booksSlice';
@@ -16,7 +16,7 @@ function BooksList() {
   const renderBooks = () => books.map((book) => (<Book book={book} key={book.id} />));
 
   return (
-    <Panel portion={2}>
+    <Panel $portion={2}>
       <List>
         { renderBooks() }
       </List>

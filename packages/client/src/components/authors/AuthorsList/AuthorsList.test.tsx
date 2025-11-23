@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { getAuthorsList, selectAuthorsList } from 'store/authors/authorsSlice';
 import { mockAuthor, renderWithRouter } from 'utils/tests';
 import { Author } from 'types/author';

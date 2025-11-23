@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment-mini';
 import routes from 'constants/routes';
@@ -23,7 +23,7 @@ function Author({ author }: Props) {
   return (
     <ListItem data-testid="author">
       <ListItemImage>
-        <img src={missingAuthorImage} alt="" />
+        <img src={missingAuthorImage.src} alt="" />
       </ListItemImage>
       <ListItemContentWrapper>
         <Link to={routes.authorsDetail(author.id)}>
@@ -31,7 +31,7 @@ function Author({ author }: Props) {
             { author.name }
           </S.AuthorName>
         </Link>
-        <ListItemContent currentTheme={theme}>
+        <ListItemContent $currentTheme={theme}>
           <ListItemContentItem>
             { `Born ${moment(author.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
           </ListItemContentItem>

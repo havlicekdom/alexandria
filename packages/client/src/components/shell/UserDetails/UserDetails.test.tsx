@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { selectUser } from 'store/user/userSlice';
 import { mockUser, renderWithRouter } from 'utils/tests';
 import { User } from 'types/user';

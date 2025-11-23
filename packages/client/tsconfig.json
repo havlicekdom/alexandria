@@ -19,9 +19,21 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "src"
+    "src",
+    "next-env.d.ts",
+    "build/types/**/*.ts",
+    "build/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

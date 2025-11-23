@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import Link from 'next/link';
 import routes from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
 import ListItem from 'components/common/List/ListItem';
@@ -16,31 +16,31 @@ type Props = {
 }
 
 function LatestBook({ book }: Props) {
-  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
+  const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill $variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
   const { theme } = useContext(ThemeContext);
 
   return (
     <ListItem data-testid="book">
       <S.LatestBookImage>
-        <img src={missingBookImage} alt="" />
+        <img src={missingBookImage.src} alt="" />
       </S.LatestBookImage>
       <S.LatestBookContent>
-        <S.LatestBookName currentTheme={theme}>
-          <Link to={routes.booksDetail(book.id)}>
+        <S.LatestBookName $currentTheme={theme}>
+          <Link href={routes.booksDetail(book.id)}>
             { book.name }
           </Link>
         </S.LatestBookName>
-        <S.LatestBookAuthor currentTheme={theme}>
-          <Link to={routes.authorsDetail(book.author.id)}>
+        <S.LatestBookAuthor $currentTheme={theme}>
+          <Link href={routes.authorsDetail(book.author.id)}>
             { book.author.name }
           </Link>
         </S.LatestBookAuthor>
-        <S.LatestBookPills currentTheme={theme}>
+        <S.LatestBookPills $currentTheme={theme}>
           <Pill>{ book.releaseYear }</Pill>
           <Pill>{ BookFormat[book.format] }</Pill>
           { renderGenres(book.genres) }
         </S.LatestBookPills>
-        <S.LatestBookDescription currentTheme={theme}>
+        <S.LatestBookDescription $currentTheme={theme}>
           { book.description }
         </S.LatestBookDescription>
       </S.LatestBookContent>

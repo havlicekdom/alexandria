@@ -56,7 +56,7 @@ export const authSlice = createSlice({
         state.isLoggedIn = false;
       })
       .addMatcher((action: AnyAction) => action.type.includes('/rejected'), (state, action) => {
-        if (action.payload.statusCode === 401) {
+        if (action.payload?.statusCode === 401) {
           state.token = initialState.token;
           state.isLoggedIn = false;
         }

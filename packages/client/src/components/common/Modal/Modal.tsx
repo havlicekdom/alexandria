@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ThemeContext } from 'context/ThemeContext';
 import Icon from '../Icon';
@@ -16,7 +16,7 @@ function Modal({ children, close, size }: Props) {
 
   return (
     <S.ModalWrapper>
-      <S.ModalBody currentTheme={theme} size={size}>
+      <S.ModalBody $currentTheme={theme} size={size}>
         <S.ModalClose variant="close" onClick={() => close()} data-testid="modal-close">
           <Icon icon={faTimes} />
         </S.ModalClose>

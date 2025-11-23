@@ -1,6 +1,6 @@
-import React from 'react';
+"use client";
+
 import { faUser, faArrowRightToBracket } from '@fortawesome/free-solid-svg-icons';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -18,6 +18,7 @@ import {
 } from 'components/common/FormPage/FormPage.styled';
 
 import * as S from './LoginForm.styled';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface LocationState {
   from: {
@@ -36,19 +37,17 @@ const validationSchema = yup.object({
 }).required();
 
 function LoginForm() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const search = useSearchParams();
   const dispatch = useAppDispatch();
   const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>({
     resolver: yupResolver(validationSchema),
   });
-
-  const { from } = location.state as LocationState || { from: { pathname: '/' } };
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormInputs> = async (formData) => {
     await dispatch(login(formData));
     await dispatch(getUserProfile(null));
-    navigate(from, { replace: true });
+    router.replace(search.get('from') || '/');
   };
 
   return (
@@ -59,14 +58,14 @@ function LoginForm() {
       </FormHeaderStyled>
       <FormInput data-testid="username" label="Username" fieldName="username" register={register} error={errors?.username} type="text" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
-      <S.LoginFormResetPasswordLink data-testid="reset-password" to={routes.forgottenPassword}>
+      <S.LoginFormResetPasswordLink data-testid="reset-password" href={routes.forgottenPassword}>
         Forgot your password?
       </S.LoginFormResetPasswordLink>
-      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" $full>
         <Icon icon={faArrowRightToBracket} />
         Log in
       </FormButtonStyled>
-      <S.LoginFormRegisterLink data-testid="register" to={routes.register}>
+      <S.LoginFormRegisterLink data-testid="register" href={routes.register}>
         New to the app? Create your account here.
       </S.LoginFormRegisterLink>
     </FormStyled>

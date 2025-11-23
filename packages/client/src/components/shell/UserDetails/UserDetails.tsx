@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Jdenticon from 'react-jdenticon';
 
 import { ThemeContext } from 'context/ThemeContext';
@@ -9,14 +9,14 @@ import * as S from './UserDetails.styled';
 
 function UserDetails() {
   const user = useAppSelector(selectUser);
-  const iconSize = '25';
+  const $iconSize = '25';
   const env = process.env.NODE_ENV;
   const { theme } = useContext(ThemeContext);
 
   return (
     <S.UserDetailsWrapper>
-      <S.UserDetailsAvatar currentTheme={theme} iconSize={iconSize}>
-        {env !== 'test' && <Jdenticon size={iconSize} value={user.username} />}
+      <S.UserDetailsAvatar $currentTheme={theme} $iconSize={$iconSize}>
+        {env !== 'test' && <Jdenticon size={$iconSize} value={user.username} />}
       </S.UserDetailsAvatar>
       <S.UserDetailsText>
         <S.UserDetailsUsername>

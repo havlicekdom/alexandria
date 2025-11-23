@@ -10,8 +10,8 @@ import {
 import Button from '../Button';
 
 type SnackbarWrapperProps = {
-  variant: 'error' | 'success' | 'info' | 'default';
-  animationLength: number;
+  $variant: 'error' | 'success' | 'info' | 'default';
+  $animationLength: number;
 };
 
 const handleBackgroundColor = (color: string) => {
@@ -35,7 +35,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   right: ${spacing.medium};
   padding: ${spacing.small};
   padding-right: 75px;
-  background-color: ${({ variant }) => handleBackgroundColor(variant)};
+  background-color: ${({ $variant }) => handleBackgroundColor($variant)};
 
   &.snackbar-appear {
     opacity: 0;
@@ -44,7 +44,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   &.snackbar-appear-done {
     opacity: 1;
     right: ${spacing.medium};
-    transition: opacity ${({ animationLength }) => animationLength}ms, right ${({ animationLength }) => animationLength}ms;
+    transition: opacity ${({ $animationLength }) => $animationLength}ms, right ${({ $animationLength }) => $animationLength}ms;
   }
   &.snackbar-exit {
     opacity: 1;
@@ -53,7 +53,7 @@ export const SnackbarWrapper = styled.div<SnackbarWrapperProps>`
   &.snackbar-exit-done {
     opacity: 0;
     right: -100%;
-    transition: opacity ${({ animationLength }) => animationLength}ms, right ${({ animationLength }) => animationLength}ms;
+    transition: opacity ${({ $animationLength }) => $animationLength}ms, right ${({ $animationLength }) => $animationLength}ms;
   }
 `;
 

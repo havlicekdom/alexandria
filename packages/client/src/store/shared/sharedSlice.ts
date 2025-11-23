@@ -32,7 +32,7 @@ export const sharedSlice = createSlice({
         state.loading -= 1;
       })
       .addMatcher((action: AnyAction) => action.type.includes('/rejected'), (state, action) => {
-        if (action.payload.statusCode === 401) {
+        if (action.payload?.statusCode === 401) {
           state.message = translations.loginExpiredError;
         } else {
           state.message = parseErrorToMessage(action.payload);

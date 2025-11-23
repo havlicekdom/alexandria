@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import {
   faClipboardList,
   faUserPen,
@@ -26,25 +26,25 @@ function Navigation() {
       </S.Logo>
       <S.Navigation>
         <S.NavigationItem>
-          <S.NavigationLink currenttheme={theme} to={routes.overview}>
+          <S.NavigationLink $currentTheme={theme} to={routes.overview}>
             <Icon icon={faClipboardList} />
             Overview
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink currenttheme={theme} to={routes.authors}>
+          <S.NavigationLink $currentTheme={theme} to={routes.authors}>
             <Icon icon={faUserPen} />
             Authors
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink currenttheme={theme} to={routes.books}>
+          <S.NavigationLink $currentTheme={theme} to={routes.books}>
             <Icon icon={faBook} />
             Books
           </S.NavigationLink>
         </S.NavigationItem>
         <S.NavigationItem>
-          <S.NavigationLink currenttheme={theme} to={routes.genres}>
+          <S.NavigationLink $currentTheme={theme} to={routes.genres}>
             <Icon icon={faRectangleList} />
             Genres
           </S.NavigationLink>

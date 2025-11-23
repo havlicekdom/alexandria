@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import useDocumentTitle from 'hooks/useDocumentTitle';
 import Container from 'components/common/Container';

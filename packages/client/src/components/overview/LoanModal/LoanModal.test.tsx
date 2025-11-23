@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   waitFor, render, screen, waitForElementToBeRemoved,
 } from '@testing-library/react';

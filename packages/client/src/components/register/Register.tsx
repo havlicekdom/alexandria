@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import SuccessMessage from 'components/common/SuccessMessage';
 import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
 import useDocumentTitle from 'hooks/useDocumentTitle';

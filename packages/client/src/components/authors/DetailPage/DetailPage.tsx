@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import moment from 'moment-mini';
 import routes from 'constants/routes';
@@ -34,7 +34,7 @@ function DetailPage() {
   );
 
   const renderGenres = () => (
-    authorData?.genres?.map((genre) => (<Pill key={genre.id} variant="primary"><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>))
+    authorData?.genres?.map((genre) => (<Pill key={genre.id} $variant="primary"><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>))
   );
 
   return (
@@ -42,7 +42,7 @@ function DetailPage() {
       <>
         <HeadingWrapper>
           <HeadingImage>
-            <img src={missingAuthorImage} alt={authorData.name} />
+            <img src={missingAuthorImage.src} alt={authorData.name} />
           </HeadingImage>
           <HeadingInfo>
             <HeadingName>
@@ -51,16 +51,16 @@ function DetailPage() {
             <S.AuthorGenres>
               { renderGenres() }
             </S.AuthorGenres>
-            <HeadingText currentTheme={theme}>
+            <HeadingText $currentTheme={theme}>
               { `Born ${moment(authorData.dateOfBirth, 'YYYY-MM-DD').toDate().toLocaleDateString()}` }
             </HeadingText>
-            <HeadingText currentTheme={theme}>
+            <HeadingText $currentTheme={theme}>
               { authorData.bio }
             </HeadingText>
           </HeadingInfo>
         </HeadingWrapper>
         <Container>
-          <Panel portion={1} header="Books">
+          <Panel $portion={1} header="Books">
             <List>
               { renderBooks() }
             </List>

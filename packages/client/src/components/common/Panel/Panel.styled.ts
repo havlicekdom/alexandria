@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { secondaryBackgroundColor, borderRadius, spacing } from 'constants/styles';
 
 type PanelProps = {
-  portion: number;
+  $portion: number;
 }
 
 export const PanelWrapper = styled.div<PanelProps>`
   margin: 0 ${spacing.small};
-  width: ${({ portion }) => `${Math.floor(100 / portion)}%`};
+  width: ${({ $portion }) => `${Math.floor(100 / $portion)}%`};
 `;
 
 export const Panel = styled.div`

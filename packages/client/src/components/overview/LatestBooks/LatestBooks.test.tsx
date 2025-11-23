@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { getLatestBooks, selectLatestBooks } from 'store/books/booksSlice';
 import { mockBook, renderWithRouter } from 'utils/tests';
 import { Book } from 'types/book';

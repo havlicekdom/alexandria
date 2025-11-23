@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -56,7 +56,7 @@ function RegisterForm() {
       <FormInput data-testid="email" label="Email" fieldName="email" register={register} error={errors?.email} type="email" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
       <FormInput data-testid="confirm-password" label="Confirm password" fieldName="confirmPassword" register={register} error={errors?.confirmPassword} type="password" />
-      <FormButtonStyled data-testid="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" type="submit" variant="primary" $full>
         <Icon icon={faUserPlus} />
         Create account
       </FormButtonStyled>

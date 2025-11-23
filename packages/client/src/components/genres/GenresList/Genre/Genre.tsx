@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import routes from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
@@ -23,7 +23,7 @@ function Genre({ genre }: Props) {
             { genre.name }
           </S.GenreName>
         </Link>
-        <ListItemContent currentTheme={theme}>
+        <ListItemContent $currentTheme={theme}>
           <ListItemContentItem>
             { genre.bio }
           </ListItemContentItem>

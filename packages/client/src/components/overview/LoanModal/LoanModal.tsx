@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import AsyncSelect from 'react-select/async';
@@ -84,7 +84,7 @@ function LoanModal({ close }: Props) {
             You need to select a book first.
           </S.Error>
         )}
-        <S.SubmitButton data-testid="loan-modal-submit" variant="primary" type="submit" name="submit" full>
+        <S.SubmitButton data-testid="loan-modal-submit" variant="primary" type="submit" name="submit" $full>
           <Icon icon={faPlusCircle} />
           Loan
         </S.SubmitButton>

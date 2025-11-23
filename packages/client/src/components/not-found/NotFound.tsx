@@ -1,14 +1,16 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+
+"use client";
+
 import routes from 'constants/routes';
 
 import * as S from './NotFound.styled';
+import { useRouter } from 'next/navigation';
 
 function NotFound() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const onButtonClick = () => {
-    navigate(routes.overview);
+    router.replace(routes.overview);
   };
 
   return (

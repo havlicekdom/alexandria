@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
-import React from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { faCog, faSave } from '@fortawesome/free-solid-svg-icons';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -51,7 +51,7 @@ function SettingsForm() {
       <FormInput data-testid="email" label="Email" value={user.email} fieldName="email" register={register} error={errors?.email} type="email" />
       <FormInput data-testid="password" label="Password" fieldName="password" register={register} error={errors?.password} type="password" />
       <FormInput data-testid="confirm-password" label="Confirm password" fieldName="confirmPassword" register={register} error={errors?.confirmPassword} type="password" />
-      <S.SettingsFormButton data-testid="submit" type="submit" variant="primary" full>
+      <S.SettingsFormButton data-testid="submit" type="submit" variant="primary" $full>
         <Icon icon={faSave} />
         Save
       </S.SettingsFormButton>

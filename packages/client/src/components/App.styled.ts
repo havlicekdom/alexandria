@@ -11,9 +11,9 @@ export const App = styled.div<ComponentWithTheme>`
   flex-direction: row;
   min-height: 100vh;
 
-  ${({ currentTheme }) => css`
-    background-color: ${backgroundColor(currentTheme)};
-    color: ${textColor(currentTheme)};
+  ${({ $currentTheme }) => css`
+    background-color: ${backgroundColor($currentTheme)};
+    color: ${textColor($currentTheme)};
   `};
 `;
 
@@ -36,13 +36,13 @@ export const GlobalStyles = createGlobalStyle<ComponentWithTheme>`
     line-height: 1.33;
   }
 
-  ${({ currentTheme }) => css`
+  ${({ $currentTheme }) => css`
     a {
-      color: ${textColor(currentTheme)};
+      color: ${textColor($currentTheme)};
       text-decoration: none;
 
       &:hover {
-        color: ${isDarkTheme(currentTheme) ? darken(0.2, textColor(currentTheme)) : lighten(0.2, textColor(currentTheme))};
+        color: ${isDarkTheme($currentTheme) ? darken(0.2, textColor($currentTheme)) : lighten(0.2, textColor($currentTheme))};
       }
     }
   `}

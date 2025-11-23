@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ThemeContext } from 'context/ThemeContext';
 import {
@@ -38,18 +38,18 @@ function DetailPage() {
             <HeadingName>
               { genre.name }
             </HeadingName>
-            <HeadingText currentTheme={theme}>
+            <HeadingText $currentTheme={theme}>
               { genre.bio }
             </HeadingText>
           </HeadingInfo>
         </HeadingWrapper>
         <Container>
-          <Panel portion={2} header="Books">
+          <Panel $portion={2} header="Books">
             <List>
               { renderBooks() }
             </List>
           </Panel>
-          <Panel portion={2} header="Authors">
+          <Panel $portion={2} header="Authors">
             <List>
               { renderAuthors() }
             </List>

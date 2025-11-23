@@ -34,7 +34,7 @@ export const Button = styled.button<ButtonProps & ComponentWithTheme>`
     border: 0;
     padding: ${spacing.small};
   }
-  ${({ full }) => full && css`
+  ${({ $full }) => $full && css`
     width: 100%;
   `}
 `;
@@ -42,28 +42,28 @@ export const Button = styled.button<ButtonProps & ComponentWithTheme>`
 export const ButtonPrimary = styled(Button)`
   transition: all 0.1s ease-in-out;
   background-color: ${primaryColor};
-  color: ${({ currentTheme }) => isDarkTheme(currentTheme) ? textColor(currentTheme) : backgroundColor(currentTheme)};
+  color: ${({ $currentTheme }) => isDarkTheme($currentTheme) ? textColor($currentTheme) : backgroundColor($currentTheme)};
 
   &:hover, &:active {
     background-color: ${lighten(0.02, primaryColor)};
-    color: ${({ currentTheme }) => isDarkTheme(currentTheme) ? darken(0.1, textColor(currentTheme)) : backgroundColor(currentTheme)};
+    color: ${({ $currentTheme }) => isDarkTheme($currentTheme) ? darken(0.1, textColor($currentTheme)) : backgroundColor($currentTheme)};
   }
 `;
 
 export const ButtonLink = styled(Button)`
-  color: ${({ currentTheme }) => textColor(currentTheme)};
+  color: ${({ $currentTheme }) => textColor($currentTheme)};
   padding: 0;
 
   &:hover, &:active {
-    color: ${({ currentTheme }) => darken(0.1, textColor(currentTheme))};
+    color: ${({ $currentTheme }) => darken(0.1, textColor($currentTheme))};
   }
 `;
 
 export const ButtonClose = styled(Button)`
-  color: ${({ currentTheme }) => textColorInverse(currentTheme)};
+  color: ${({ $currentTheme }) => textColorInverse($currentTheme)};
   padding: 0;
 
   &:hover, &:active {
-    color: ${({ currentTheme }) => darken(0.1, textColorInverse(currentTheme))};
+    color: ${({ $currentTheme }) => darken(0.1, textColorInverse($currentTheme))};
   }
 `;

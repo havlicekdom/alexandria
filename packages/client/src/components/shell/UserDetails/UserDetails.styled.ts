@@ -4,8 +4,8 @@ import {
 } from 'constants/styles';
 
 type AvatarProps = {
-  iconSize: string;
-  currentTheme: ThemeVariants;
+  $iconSize: string;
+  $currentTheme: ThemeVariants;
 };
 
 export const UserDetailsWrapper = styled.div`
@@ -33,9 +33,9 @@ export const UserDetailsAvatar = styled.div<AvatarProps>`
   justify-content: center;
   border-radius: 50%;
   padding: 5px;
-  background-color: ${({ currentTheme }) => textColor(currentTheme)};
+  background-color: ${({ $currentTheme }) => textColor($currentTheme)};
 
   div {
-    height: ${({ iconSize }) => `${iconSize}px`};
+    height: ${({ $iconSize }) => `${$iconSize}px`};
   }
 `;

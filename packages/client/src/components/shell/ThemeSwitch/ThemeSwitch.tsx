@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
 import Button from 'components/common/Button';

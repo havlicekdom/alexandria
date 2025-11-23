@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import Panel from 'components/common/Panel';
 import { getAuthorsList, selectAuthorsList } from 'store/authors/authorsSlice';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -16,7 +16,7 @@ function AuthorsList() {
   const renderAuthors = () => authors.map((author) => (<Author author={author} key={author.id} />));
 
   return (
-    <Panel portion={2}>
+    <Panel $portion={2}>
       <List>
         { renderAuthors() }
       </List>

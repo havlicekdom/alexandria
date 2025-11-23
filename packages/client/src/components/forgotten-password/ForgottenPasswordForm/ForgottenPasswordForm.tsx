@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -41,7 +41,7 @@ function ForgottenPasswordForm() {
         Forgotten password?
       </FormHeaderStyled>
       <FormInput data-testid="email" label="Your email" register={register} type="email" fieldName="email" error={errors.email} />
-      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" full>
+      <FormButtonStyled data-testid="submit" name="submit" type="submit" variant="primary" $full>
         Generate new password
       </FormButtonStyled>
     </FormStyled>

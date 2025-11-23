@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 import { Icon } from '../Icon/Icon.styled';

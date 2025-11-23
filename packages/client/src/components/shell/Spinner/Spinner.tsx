@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import { ThemeContext } from 'context/ThemeContext';
@@ -9,7 +9,7 @@ function Spinner() {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <S.SpinnerWrapper currentTheme={theme}>
+    <S.SpinnerWrapper $currentTheme={theme}>
       <S.SpinnerIcon icon={faSpinner} />
     </S.SpinnerWrapper>
   );

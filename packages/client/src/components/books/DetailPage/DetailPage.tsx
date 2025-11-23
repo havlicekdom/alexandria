@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import routes from 'constants/routes';
 import { ThemeContext } from 'context/ThemeContext';
@@ -25,13 +25,13 @@ function DetailPage() {
     dispatch(getBooksDetail(bookId));
   }, []);
 
-  const renderGenres = () => book?.genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
+  const renderGenres = () => book?.genres.map((genre) => (<Pill $variant="primary" key={genre.id}><Link to={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
     book && (
       <HeadingWrapper>
         <HeadingImage>
-          <img src={missingBookImage} alt={book.name} />
+          <img src={missingBookImage.src} alt={book.name} />
         </HeadingImage>
         <HeadingInfo>
           <HeadingName>
@@ -46,7 +46,7 @@ function DetailPage() {
             <Pill>{ book.releaseYear }</Pill>
             { renderGenres() }
           </S.BookGenres>
-          <HeadingText currentTheme={theme}>
+          <HeadingText $currentTheme={theme}>
             { book.description }
           </HeadingText>
         </HeadingInfo>

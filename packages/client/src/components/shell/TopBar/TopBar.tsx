@@ -1,4 +1,4 @@
-import React from 'react';
+
 import UserDetails from '../UserDetails';
 
 import * as S from './TopBar.styled';

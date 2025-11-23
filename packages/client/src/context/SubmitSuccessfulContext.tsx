@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
+"use client";
+
+import { createContext, Dispatch, ReactNode, SetStateAction, useMemo, useState } from 'react';
 
 type InitialState = {
   isSuccessfullySubmitted: boolean;
-  setIsSuccessfullySubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSuccessfullySubmitted: Dispatch<SetStateAction<boolean>>;
 };
 
 const initialState: InitialState = {
@@ -10,11 +12,11 @@ const initialState: InitialState = {
   setIsSuccessfullySubmitted: () => ({}),
 };
 
-const SubmitSuccessfulContext = React.createContext(initialState);
+const SubmitSuccessfulContext = createContext(initialState);
 
 SubmitSuccessfulContext.displayName = 'SubmitSuccessfulContext';
 
-function SubmitSuccessfulProvider({ children }: { children: React.ReactNode }) {
+function SubmitSuccessfulProvider({ children }: { children: ReactNode }) {
   const [isSuccessfullySubmitted, setIsSuccessfullySubmitted] = useState(false);
 
   const submitSuccessfulContextValues = useMemo(() => ({

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import userEvent from '@testing-library/user-event';
 import { logout } from 'store/auth/authSlice';
 import { renderWithRouter } from 'utils/tests';
