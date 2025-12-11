@@ -1,12 +1,5 @@
-import "normalize.css/normalize.css";
-import { ThemeProvider } from "context/ThemeContext";
-import { store } from "store/store";
-import { injectStore } from "utils/api";
-import ReduxProvider from "store/ReduxProvider";
-import { Snackbars } from "components/common/Snackbars/Snackbars";
-import StyledComponentsRegistry from "lib/registry";
-import ClientLayout from "lib/client-layout";
-injectStore(store);
+import { Snackbars } from "components/common/Snackbars";
+import "./globals.css";
 
 export const metadata = {
   title: "Alexandria",
@@ -20,15 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ReduxProvider>
-          <Snackbars />
-          <StyledComponentsRegistry>
-            <ThemeProvider>
-              <ClientLayout>{children}</ClientLayout>
-            </ThemeProvider>
-          </StyledComponentsRegistry>
-        </ReduxProvider>
+      <body className="bg-">
+        <Snackbars />
+        <div className="flex flex-row min-h-screen">{children}</div>
       </body>
     </html>
   );

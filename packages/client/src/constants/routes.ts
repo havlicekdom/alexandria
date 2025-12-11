@@ -3,7 +3,7 @@ const routes = {
   register: '/register',
   forgottenPassword: '/forgotten-password',
   resetPassword: '/reset-password/:id',
-  overview: '/',
+  overview: '/overview',
   authors: '/authors',
   authorsDetail: (authorId: string) => `/authors/${authorId}`,
   books: '/books',
@@ -16,8 +16,10 @@ const routes = {
 export const publicRoutes = [
   routes.login,
   routes.register,
+  `${routes.register}/success`,
   routes.forgottenPassword,
-  '/reset-password', // used to check if the route is public, has to be without the parameter
+  `${routes.forgottenPassword}/success`,
+  'reset\-password\/?[a-zA-Z0-9\-]*',
 ];
 
 export default routes;

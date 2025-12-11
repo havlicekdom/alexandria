@@ -28,6 +28,7 @@
     ]
   },
   "include": [
+    "src/app",
     "src",
     "next-env.d.ts",
     "build/types/**/*.ts",

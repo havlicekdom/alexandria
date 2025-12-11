@@ -146,7 +146,14 @@ export class UserService {
     const updated = Object.assign(
       this.removeSensitiveDataFromUser(toUpdate),
       dto,
-    );
+    ) as User;
+
+    if (dto.password) {
+      const { salt, hashedPassword } = await this.hashPassword(dto.password);
+      updated.password = hashedPassword;
+      updated.salt = salt;
+    }
+
     await this.usersRepository.save(updated);
   }
 
@@ -179,7 +186,7 @@ export class UserService {
   async forgottenPassword(email: string, origin: string): Promise<void> {
     const toUpdate = await this.findOneByEmail(email);
 
-    if (!toUpdate) {
+    if (!toUpdate && process.env.ENV === 'production') {
       return await this.mailerService.sendMail({
         to: email,
         subject: mailSubjects.forgottenPassword,
@@ -193,15 +200,17 @@ export class UserService {
     const id = await this.generateForgottenPasswordRecord(toUpdate.id);
     const link = `${origin}/${resetPasswordFePath}/${id}`;
 
-    await this.mailerService.sendMail({
-      to: email,
-      subject: mailSubjects.forgottenPassword,
-      template: mailTemplates.forgottenPassword,
-      context: {
-        email,
-        link,
-      },
-    });
+    if (process.env.ENV === 'production') {
+        await this.mailerService.sendMail({
+        to: email,
+        subject: mailSubjects.forgottenPassword,
+        template: mailTemplates.forgottenPassword,
+        context: {
+          email,
+          link,
+        },
+      });
+    }
   }
 
   async resetPassword({

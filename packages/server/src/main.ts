@@ -5,10 +5,15 @@ import helmet from 'helmet';
 import { AppModule } from './app.module';
 import { DelayInterceptor } from './interceptors/delay.interceptor';
 
+
 async function bootstrap() {
   const ENV = process.env.NODE_ENV;
 
   const app = await NestFactory.create(AppModule, {
+    cors: ENV !== 'production' ? {
+      "origin": "http://localhost:3000",
+      'credentials': true,
+    } : false,
     logger:
       ENV === 'production'
         ? ['error', 'warn']

@@ -1,27 +1,12 @@
-"use client";
+import ResetPasswordForm from "./ResetPasswordForm";
 
-import { useContext } from 'react';
-import Link from 'next/link';
-import SuccessMessage from 'components/common/SuccessMessage';
-import routes from 'constants/routes';
-import { SubmitSuccessfulContext } from 'context/SubmitSuccessfulContext';
-import ResetPasswordForm from 'components/reset-password/ResetPasswordForm';
+import { Metadata } from "next";
+import documentTitle from "utils/documentTitle";
 
-function ResetPassword() {
-  const { isSuccessfullySubmitted } = useContext(SubmitSuccessfulContext);
+export const metadata: Metadata = {
+  title: documentTitle("Reset your password"),
+};
 
-  return (
-    isSuccessfullySubmitted ? (
-      <SuccessMessage>
-        Password reset successfully! You can now use your new password to log back in
-        { ' ' }
-        <Link href={routes.login}>here</Link>
-        .
-      </SuccessMessage>
-    ) : (
-      <ResetPasswordForm />
-    )
-  );
+export default function ResetPassword() {
+  return <ResetPasswordForm />;
 }
-
-export default ResetPassword;

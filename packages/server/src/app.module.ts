@@ -21,7 +21,7 @@ const ENV = process.env.NODE_ENV;
     }),
     MailerModule.forRootAsync({
       useFactory: () => ({
-        transport: `smtps://${process.env.SMTP_USER}@${process.env.SMTP_DOMAIN}:${process.env.SMTP_PASS}@${process.env.SMTP_URL}`,
+        transport: `smtp://${process.env.SMTP_USER}:${process.env.SMTP_PASS}@${process.env.SMTP_HOST}:${process.env.SMTP_PORT}`,
         defaults: {
           from: '"Alexandria" <noreply@alexandria.com>',
         },

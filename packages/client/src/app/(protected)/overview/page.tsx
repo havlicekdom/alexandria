@@ -1,28 +1,36 @@
-"use client";
-
-import { useState } from 'react';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import Container from 'components/common/Container';
-import FloatingButton from 'components/common/FloatingButton';
-import Icon from 'components/common/Icon';
-import CurrentLoans from 'components/overview/CurrentLoans';
-import LatestBooks from 'components/overview/LatestBooks';
-import LoanModal from 'components/overview/LoanModal';
+import CurrentLoans from './loans/CurrentLoans';
+import LatestBooks from './books/LatestBooks';
+import { Loan } from 'types/loan';
+import { fetchApi } from 'utils/fetch';
+import API from 'constants/api';
+import { Book } from 'types/book';
+import { LoanABook } from './loans/LoanABook';
+import LoanModal from './loans/LoanModal';
+import { User } from 'types/user';
+import { LoanModalProvider } from './loans/useLoanModal';
+import { Metadata } from 'next';
+import documentTitle from 'utils/documentTitle';
 
-function Overview() {
-  const [loanModalOpen, setLoanModalOpen] = useState(false);
+export const metadata: Metadata = {
+  title: documentTitle("Overview"),
+};
+
+async function Overview() {
+  const loans = await fetchApi(API.user.loans, 'GET') as Loan[];
+  const latestBooks = await fetchApi(API.books.latest, 'GET') as Book[];
+  const user = await fetchApi(API.user.profile, 'GET') as User;
+  const loanableBooks = await fetchApi(API.books.loanable, 'GET') as Book[];
+
 
   return (
     <Container>
-      <CurrentLoans openLoanModal={() => setLoanModalOpen(true)} />
-      <LatestBooks />
-      <FloatingButton onClick={() => setLoanModalOpen(!loanModalOpen)} large>
-        <Icon icon={faPlusCircle} />
-        Loan a book
-      </FloatingButton>
-      {loanModalOpen && (
-        <LoanModal close={() => setLoanModalOpen(false)} />
-      )}
+      <LoanModalProvider>
+        <CurrentLoans loans={loans} />
+        <LatestBooks latestBooks={latestBooks} />
+        <LoanModal user={user} loanableBooks={loanableBooks} />
+        <LoanABook />
+      </LoanModalProvider>
     </Container>
   );
 }

@@ -1,32 +1,23 @@
-"use client";
-
-import routes from 'constants/routes';
-import { useAppSelector } from 'store/hooks';
-import { selectIsLoggedIn } from 'store/auth/authSlice';
 import Navigation from 'components/shell/Navigation';
 import TopBar from 'components/shell/TopBar';
-import { ContentWrapper } from 'components/shell/ProtectedRoute/ProtectedRoute.styled';
-import { ReactNode, useEffect } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import UserDetails from 'components/shell/UserDetails';
+import { ReactNode } from 'react';
+import { fetchApi } from 'utils/fetch';
+import API from 'constants/api';
+import { User } from 'types/user';
 
-export default function ProtectedLayout({ children }: { children: ReactNode }) {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
-  const pathname = usePathname();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push(`${routes.login}?from=${pathname}`);
-    }
-  }, [isLoggedIn, pathname]);
+export default async function ProtectedLayout({ children }: { children: ReactNode }) {
+  const user = await fetchApi<User>(API.user.profile, 'GET');
 
   return (
     <>
       <Navigation />
-      <ContentWrapper>
-        <TopBar />
+      <div className='flex-[1_1_auto] p-8'>
+        <TopBar>
+          <UserDetails user={user} />
+        </TopBar>
         {children}
-      </ContentWrapper>
+      </div>
     </>
   );
 }
