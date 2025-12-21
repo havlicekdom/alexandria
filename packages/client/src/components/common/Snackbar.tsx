@@ -12,7 +12,7 @@ export interface SnackbarProps extends BaseHTMLAttributes<HTMLDivElement> {
   autoHide?: number;
 }
 
-function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
+export default function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
   const [show, setShow] = useState(true);
 
   const $animationLength = 200;
@@ -56,15 +56,9 @@ function Snackbar({ variant, autoHide = 3000, children }: SnackbarProps) {
   return (
     <div className={`${classes} ${variants[variant]}`}>
       { children }
-      <Button variant="link" onClick={handleClose} className="absolute top-8 right-8">
+      <Button variant="link" onClick={handleClose} className="absolute top-0 right-0">
         <FontAwesomeIcon icon={faTimes} />
       </Button>
     </div>
   );
 }
-
-Snackbar.defaultProps = {
-  autoHide: 3000,
-};
-
-export default Snackbar;

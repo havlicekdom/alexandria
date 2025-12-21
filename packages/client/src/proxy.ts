@@ -14,7 +14,7 @@ export default async function proxy(req: NextRequest) {
   }
 
   if (isPublicRoute && cookie) {
-    return NextResponse.redirect(new URL("/overview", req.nextUrl));
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
   return NextResponse.next();

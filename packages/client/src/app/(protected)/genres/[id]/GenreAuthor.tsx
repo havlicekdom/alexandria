@@ -9,7 +9,7 @@ type Props = {
   author: Author;
 };
 
-function GenreAuthor({ author }: Props) {
+export default function GenreAuthor({ author }: Props) {
   return (
     <ListItem>
       <div className="mr-8">
@@ -28,5 +28,3 @@ function GenreAuthor({ author }: Props) {
     </ListItem>
   );
 }
-
-export default GenreAuthor;

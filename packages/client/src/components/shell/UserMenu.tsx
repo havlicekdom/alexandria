@@ -8,8 +8,17 @@ import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
 import Link from 'next/link';
 import { logout } from 'app/actions/auth';
+import { useTransition } from 'react';
 
-function UserMenu() {
+export default function UserMenu() {
+  const [_, startTransition] = useTransition();
+
+  const handleLogout = () => {
+    startTransition(() => {
+      logout({ apiError: '' });
+    })
+  }
+
   return (
     <div className="my-22 mx-0 mt-auto py-0 px-8">
       <ul className="m-0 p-0 list-none">
@@ -22,9 +31,7 @@ function UserMenu() {
         <li className="py-4 px-0">
           <Button
             variant="link"
-            onClick={async () => {
-              await logout();
-            }}
+            onClick={handleLogout}
           >
             <Icon icon={faArrowRightFromBracket} />
             Log out
@@ -34,5 +41,3 @@ function UserMenu() {
     </div>
   );
 }
-
-export default UserMenu;

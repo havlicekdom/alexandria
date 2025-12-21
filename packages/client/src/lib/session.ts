@@ -16,7 +16,7 @@ export async function createSession(token: string) {
 
 export async function getRedirectedFrom() {
   const cookieStore = await cookies();
-  const redirectedFrom = cookieStore.get("redirectedFrom")?.value || "/overview";
+  const redirectedFrom = cookieStore.get("redirectedFrom")?.value || "/dashboard";
 
   cookieStore.delete("redirectedFrom");
 

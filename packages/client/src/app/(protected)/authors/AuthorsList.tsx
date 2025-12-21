@@ -7,7 +7,7 @@ type Props = {
   authors: AuthorType[];
 };
 
-function AuthorsList({ authors }: Props) {
+export default function AuthorsList({ authors }: Props) {
   const renderAuthors = () =>
     authors.map((author) => <Author author={author} key={author.id} />);
 
@@ -17,5 +17,3 @@ function AuthorsList({ authors }: Props) {
     </Panel>
   );
 }
-
-export default AuthorsList;

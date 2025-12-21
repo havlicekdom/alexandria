@@ -7,7 +7,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function SuccessMessage({ children }: Props) {
+export default function SuccessMessage({ children }: Props) {
   return (
     <div className="flex flex-col gap-8 items-center p-8 bg-success rounded-md">
       <div className="text-9xl">
@@ -19,5 +19,3 @@ function SuccessMessage({ children }: Props) {
     </div>
   );
 }
-
-export default SuccessMessage;

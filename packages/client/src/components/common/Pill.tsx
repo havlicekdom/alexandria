@@ -24,12 +24,10 @@ const decidePillColor = (variant: PillVariant) => {
   }
 };
 
-function Pill({ children, variant = 'default' }: Props) {
+export default function Pill({ children, variant = 'default' }: Props) {
   return (
     <div className={`pill inline-block text-sm text-primary-bg font-bold rounded-sm py-2 px-4 ${decidePillColor(variant)}`}>
       { children }
     </div>
   );
 }
-
-export default Pill;

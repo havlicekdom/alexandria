@@ -3,7 +3,7 @@ const routes = {
   register: '/register',
   forgottenPassword: '/forgotten-password',
   resetPassword: '/reset-password/:id',
-  overview: '/overview',
+  dashboard: '/dashboard',
   authors: '/authors',
   authorsDetail: (authorId: string) => `/authors/${authorId}`,
   books: '/books',

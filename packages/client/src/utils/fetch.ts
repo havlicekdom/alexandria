@@ -18,7 +18,6 @@ export async function fetchApi<T>(
   const response = await fetch(request);
 
   if (!response.ok) {
-    console.error(request);
     throw new Error(`API request failed with status ${response.status}`);
   }
 

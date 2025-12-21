@@ -4,7 +4,7 @@ type Props = {
   header?: string | React.ReactNode;
 };
 
-function Panel({ header, children, portion }: Props) {
+export default function Panel({ header, children, portion }: Props) {
   const portions = {
     1: 'w-full',
     2: 'w-1/2',
@@ -27,5 +27,3 @@ function Panel({ header, children, portion }: Props) {
     </div>
   );
 }
-
-export default Panel;

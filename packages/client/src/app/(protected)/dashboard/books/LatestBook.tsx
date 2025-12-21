@@ -11,7 +11,7 @@ type Props = {
   book: Book;
 }
 
-function LatestBook({ book }: Props) {
+export default function LatestBook({ book }: Props) {
   const renderGenres = (genres: Genre[]) => genres.map((genre) => (<Pill variant="primary" key={genre.id}><Link href={routes.genresDetail(genre.id)}>{ genre.name }</Link></Pill>));
 
   return (
@@ -42,5 +42,3 @@ function LatestBook({ book }: Props) {
     </ListItem>
   );
 }
-
-export default LatestBook;

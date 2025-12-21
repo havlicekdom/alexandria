@@ -13,7 +13,7 @@ type Props = {
   loans: ILoan[];
 };
 
-function CurrentLoans({ loans }: Props) {
+export default function CurrentLoans({ loans }: Props) {
   const { openLoanModal } = useLoanModal();
 
   const renderLoans = () => loans.map((loan) => (<Loan loan={loan} key={loan.id} />));
@@ -37,5 +37,3 @@ function CurrentLoans({ loans }: Props) {
     </Panel>
   );
 }
-
-export default CurrentLoans;

@@ -1,11 +1,15 @@
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Icon from "components/common/Icon";
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: 'link' | 'primary' | 'close';
   className?: string;
   full?: boolean;
+  isLoading?: boolean;
 }
 
-function Button({ children, variant, full = false, className = '', ...props }: ButtonProps) {
-  const defaultClass = `b-none m-0 p-4 w-auto overflow-visible bg-transparent color-inherit font-inherit line-height-normal cursor-pointer rounded-md ${full ? 'w-full' : ''}`;
+export default function Button({ children, variant, full = false, className = '', isLoading = false, ...props }: ButtonProps) {
+  const defaultClass = `b-none m-0 p-4 w-auto overflow-visible bg-transparent color-inherit font-inherit line-height-normal cursor-pointer rounded-md disabled:brightness-110 disabled:cursor-not-allowed ${full ? 'w-full' : ''}`;
 
   switch (variant) {
     case 'link':
@@ -17,8 +21,9 @@ function Button({ children, variant, full = false, className = '', ...props }: B
 
     case 'primary':
       return (
-        <button className={`${defaultClass} transition-all duration-100 ease-in-out bg-primary! color-text hover:brightness-90 active:brightness-90 ${className}`} {...props}>
-          { children }
+        <button className={`${defaultClass} transition-all duration-100 ease-in-out bg-primary! color-text hover:brightness-90 active:brightness-90 ${className}`} disabled={isLoading} {...props}>
+          {isLoading && <><Icon icon={faSpinner} className="animate-spin" /> Loading</>}
+          {!isLoading && children}
         </button>
       );
 
@@ -33,5 +38,3 @@ function Button({ children, variant, full = false, className = '', ...props }: B
       return null;
   }
 }
-
-export default Button;

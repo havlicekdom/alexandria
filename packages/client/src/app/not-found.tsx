@@ -11,7 +11,7 @@ export default function NotFoundPage() {
       </div>
       <div className="text-xl">
         <Link
-          href={routes.overview}
+          href={routes.dashboard}
           className="inline-block mt-8 p-4 w-auto rounded-md transition-all duration-100 ease-in-out bg-primary! color-text hover:brightness-90 active:brightness-90"
         >
           Take me home

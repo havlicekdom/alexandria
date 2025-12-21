@@ -5,30 +5,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Icon from "components/common/Icon";
 import FormInput from "components/common/FormInput";
-import yup from "utils/formValidation";
 import { useActionState, useTransition } from "react";
 import { forgottenPassword } from "app/actions/auth";
 import Button from "components/common/Button";
+import { FormError } from "../FormError";
+import { InferType } from "yup";
+import { forgottenPasswordSchema } from "lib/schemas";
+import { ApiCallActionStateWithValidation } from "types/api";
+import { initialState } from "constants/formDefaultState";
 
-type FormInputs = {
-  email: string;
-};
+type FormInputs = InferType<typeof forgottenPasswordSchema>;
 
-const validationSchema = yup
-  .object({
-    email: yup.string().email().required().max(255),
-  })
-  .required();
-
-function ForgottenPasswordForm() {
+export default function ForgottenPasswordForm() {
   const [_, startTransition] = useTransition();
-  const [state, formAction] = useActionState(forgottenPassword, undefined);
+  const [state, formAction, isPending] = useActionState<ApiCallActionStateWithValidation, FormData>(forgottenPassword, initialState);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(forgottenPasswordSchema),
   });
 
   const onSubmit: SubmitHandler<FormInputs> = (_, e) => {
@@ -49,19 +45,19 @@ function ForgottenPasswordForm() {
         register={register}
         type="email"
         fieldName="email"
-        error={errors.email}
+        error={errors.email || state.fieldErrors.email}
       />
+      {state.apiError && <FormError>{state.apiError}</FormError>}
       <Button
         data-testid="submit"
         name="submit"
         type="submit"
         variant="primary"
         className="mt-4!"
+        isLoading={isPending}
       >
         Generate new password
       </Button>
     </form>
   );
 }
-
-export default ForgottenPasswordForm;

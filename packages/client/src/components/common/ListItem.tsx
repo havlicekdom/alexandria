@@ -3,7 +3,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function ListItem(props: Props) {
+export default function ListItem(props: Props) {
   const { children } = props;
 
   return (
@@ -12,5 +12,3 @@ function ListItem(props: Props) {
     </div>
   );
 }
-
-export default ListItem;

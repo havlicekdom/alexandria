@@ -9,32 +9,26 @@ import {
   faArrowRightToBracket,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import yup from "utils/formValidation";
 import routes from "constants/routes";
 import Button from "components/common/Button";
 import FormInput from "components/common/FormInput";
+import { FormError } from "../FormError";
+import { ApiCallActionStateWithValidation } from "types/api";
+import { InferType } from "yup";
+import { loginSchema } from "lib/schemas";
+import { initialState } from "constants/formDefaultState";
 
-type FormInputs = {
-  username: string;
-  password: string;
-};
-
-const validationSchema = yup
-  .object({
-    username: yup.string().required(),
-    password: yup.string().required(),
-  })
-  .required();
+type FormInputs = InferType<typeof loginSchema>;
 
 export function LoginForm() {
-  const [state, formAction] = useActionState(login, undefined);
+  const [state, formAction, isPending] = useActionState<ApiCallActionStateWithValidation, FormData>(login, initialState);
   const [_, startTransition] = useTransition();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(loginSchema),
   });
 
   const onSubmit: SubmitHandler<FormInputs> = async (_, e) => {
@@ -58,7 +52,7 @@ export function LoginForm() {
         label="Username"
         fieldName="username"
         register={register}
-        error={errors?.username}
+        error={errors?.username || state.fieldErrors.username}
         type="text"
       />
       <FormInput
@@ -66,7 +60,7 @@ export function LoginForm() {
         label="Password"
         fieldName="password"
         register={register}
-        error={errors?.password}
+        error={errors?.password || state.fieldErrors.password}
         type="password"
       />
       <a
@@ -76,12 +70,14 @@ export function LoginForm() {
       >
         Forgot your password?
       </a>
+      {state.apiError && <FormError>{state.apiError}</FormError>}
       <Button
         data-testid="submit"
         name="submit"
         type="submit"
         variant="primary"
         className="mt-4!"
+        isLoading={isPending}
       >
         <Icon icon={faArrowRightToBracket} />
         Log in

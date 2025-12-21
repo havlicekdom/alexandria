@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 "use client";
 
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -6,43 +5,37 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 import Modal from "components/common/Modal";
-import yup from "utils/formValidation";
 import Icon from "components/common/Icon";
 import { Book } from "types/book";
 
 import Button from "components/common/Button";
-import { useActionState, useTransition } from "react";
+import { useActionState, useEffect, useTransition } from "react";
 import { createNewLoan } from "app/actions/loans";
 import { User } from "types/user";
 import { useLoanModal } from "./useLoanModal";
+import { initialState } from "constants/formDefaultState";
+import { ApiCallActionStateWithValidation } from "types/api";
+import { loanModalSchema } from "lib/schemas";
+import { InferType } from "yup";
 
 type Props = {
   user: User;
   loanableBooks: Book[];
 };
 
-type FormInputs = {
-  userId: string;
-  bookId: string;
-};
 
-const validationSchema = yup
-  .object({
-    userId: yup.string().required(),
-    bookId: yup.string().required(),
-  })
-  .required();
+type FormInputs = InferType<typeof loanModalSchema>;
 
-function LoanModal({ user, loanableBooks }: Props) {
+export default function LoanModal({ user, loanableBooks }: Props) {
   const { loanModalOpen, closeLoanModal } = useLoanModal();
-  const [_, startTransition] = useTransition();
-  const [state, createAction] = useActionState(createNewLoan, undefined);
+  const [isTransitioning, startTransition] = useTransition();
+  const [state, formAction, isPending] = useActionState<ApiCallActionStateWithValidation, FormData>(createNewLoan, initialState);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(validationSchema),
+    // resolver: yupResolver(loanModalSchema),
   });
 
   const filterBooks = (books: Book[], inputValue: string) =>
@@ -55,18 +48,23 @@ function LoanModal({ user, loanableBooks }: Props) {
         label: book.name,
       }));
 
-  const onSubmit: SubmitHandler<FormInputs> = async (_, e) => {
+  const onSubmit: SubmitHandler<FormInputs> = (_, e) => {
     startTransition(() => {
-      createAction(new FormData(e?.target as HTMLFormElement));
+      formAction(new FormData(e?.target as HTMLFormElement));
     });
-    closeLoanModal();
   };
+
+  useEffect(() => {
+    if (!state.fieldErrors && !state.apiError) {
+      closeLoanModal();
+    }
+  }, [state, closeLoanModal]);
 
   return (
     loanModalOpen && (
       <Modal close={closeLoanModal} title="Loan a book" size="small">
         <form
-          action={createAction}
+          action={formAction}
           className="flex flex-col flex-auto h-full"
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -84,7 +82,7 @@ function LoanModal({ user, loanableBooks }: Props) {
               </option>
             ))}
           </select>
-          {errors.bookId && (
+          {(errors.bookId || state.fieldErrors?.bookId) && (
             <span className="inline-block mt-4 text-error">
               You need to select a book first.
             </span>
@@ -96,6 +94,7 @@ function LoanModal({ user, loanableBooks }: Props) {
               type="submit"
               name="submit"
               full
+              isLoading={isPending}
             >
               <Icon icon={faPlusCircle} />
               Loan
@@ -106,5 +105,3 @@ function LoanModal({ user, loanableBooks }: Props) {
     )
   );
 }
-
-export default LoanModal;

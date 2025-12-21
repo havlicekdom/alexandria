@@ -11,7 +11,7 @@ type Props = {
   book: Book;
 };
 
-function AuthorBook({ book }: Props) {
+export default function AuthorBook({ book }: Props) {
   const renderGenres = (genres: Genre[]) =>
     genres.map((genre) => (
       <Pill variant="primary" key={genre.id}>
@@ -40,5 +40,3 @@ function AuthorBook({ book }: Props) {
     </ListItem>
   );
 }
-
-export default AuthorBook;

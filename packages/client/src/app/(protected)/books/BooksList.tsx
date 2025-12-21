@@ -7,7 +7,7 @@ type Props = {
   books: BookType[];
 }
 
-function BooksList({ books }: Props) {
+export default function BooksList({ books }: Props) {
   const renderBooks = () => books.map((book) => (<Book book={book} key={book.id} />));
 
   return (
@@ -18,5 +18,3 @@ function BooksList({ books }: Props) {
     </Panel>
   );
 }
-
-export default BooksList;

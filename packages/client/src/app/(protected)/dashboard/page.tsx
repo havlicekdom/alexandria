@@ -13,10 +13,10 @@ import { Metadata } from 'next';
 import documentTitle from 'utils/documentTitle';
 
 export const metadata: Metadata = {
-  title: documentTitle("Overview"),
+  title: documentTitle("Dashboard"),
 };
 
-async function Overview() {
+export default async function DashboardPage() {
   const loans = await fetchApi(API.user.loans, 'GET') as Loan[];
   const latestBooks = await fetchApi(API.books.latest, 'GET') as Book[];
   const user = await fetchApi(API.user.profile, 'GET') as User;
@@ -34,5 +34,3 @@ async function Overview() {
     </Container>
   );
 }
-
-export default Overview;

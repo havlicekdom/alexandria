@@ -11,7 +11,7 @@ type Props = {
   loan: ILoan;
 };
 
-function Loan({ loan }: Props) {
+export default function Loan({ loan }: Props) {
   const dateEndMoment = moment(loan.dateEnd);
   const endsIn = moment.duration(dateEndMoment.diff(moment()));
   const isOverdue = endsIn.asDays() < 0;
@@ -43,5 +43,3 @@ function Loan({ loan }: Props) {
     </ListItem>
   );
 }
-
-export default Loan;

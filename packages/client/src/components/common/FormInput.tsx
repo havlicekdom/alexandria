@@ -9,7 +9,7 @@ type FormInputProps = {
   value?: string;
 };
 
-function FormInput({
+export default function FormInput({
   label, fieldName, error, register, type, ...rest
 }: FormInputProps) {
   return (
@@ -29,9 +29,3 @@ function FormInput({
     </label>
   );
 }
-
-FormInput.defaultProps = {
-  value: undefined,
-};
-
-export default FormInput;

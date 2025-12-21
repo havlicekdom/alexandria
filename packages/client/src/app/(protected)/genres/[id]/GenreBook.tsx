@@ -9,7 +9,7 @@ type Props = {
   book: Book;
 };
 
-function GenreBook({ book }: Props) {
+export default function GenreBook({ book }: Props) {
   return (
     <ListItem>
       <div className="mr-8">
@@ -28,5 +28,3 @@ function GenreBook({ book }: Props) {
     </ListItem>
   );
 }
-
-export default GenreBook;

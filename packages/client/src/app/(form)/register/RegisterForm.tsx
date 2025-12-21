@@ -3,44 +3,29 @@
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import yup from "utils/formValidation";
 
 import Icon from "components/common/Icon";
 import FormInput from "components/common/FormInput";
-import { formValidation as translations } from "translations";
 import { useActionState, useTransition } from "react";
 import { register as registerApi } from "app/actions/auth";
 import Button from "components/common/Button";
+import { ApiCallActionStateWithValidation } from "types/api";
+import { FormError } from "../FormError";
+import { InferType } from "yup";
+import { registerSchema } from "lib/schemas";
+import { initialState } from "constants/formDefaultState";
 
-type FormInputs = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+type FormInputs = InferType<typeof registerSchema>;
 
-const validationSchema = yup
-  .object({
-    username: yup.string().required().max(255),
-    email: yup.string().email().required().max(255),
-    password: yup.string().required().max(255),
-    confirmPassword: yup
-      .string()
-      .required()
-      .oneOf([yup.ref("password"), null], translations.passwordsDontMatch)
-      .max(255),
-  })
-  .required();
-
-function RegisterForm() {
+export default function RegisterForm() {
   const [_, startTransition] = useTransition();
-  const [state, formAction] = useActionState(registerApi, undefined);
+  const [state, formAction, isPending] = useActionState<ApiCallActionStateWithValidation, FormData>(registerApi, initialState);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(registerSchema),
   });
 
   const onSubmit: SubmitHandler<FormInputs> = async (_, e) => {
@@ -60,7 +45,7 @@ function RegisterForm() {
         label="Username"
         fieldName="username"
         register={register}
-        error={errors?.username}
+        error={errors?.username || state.fieldErrors.username}
         type="text"
       />
       <FormInput
@@ -68,7 +53,7 @@ function RegisterForm() {
         label="Email"
         fieldName="email"
         register={register}
-        error={errors?.email}
+        error={errors?.email || state.fieldErrors.email}
         type="email"
       />
       <FormInput
@@ -76,7 +61,7 @@ function RegisterForm() {
         label="Password"
         fieldName="password"
         register={register}
-        error={errors?.password}
+        error={errors?.password || state.fieldErrors.password}
         type="password"
       />
       <FormInput
@@ -84,15 +69,17 @@ function RegisterForm() {
         label="Confirm password"
         fieldName="confirmPassword"
         register={register}
-        error={errors?.confirmPassword}
+        error={errors?.confirmPassword || state.fieldErrors.confirmPassword}
         type="password"
       />
+      {state.apiError && <FormError>{state.apiError}</FormError>}
       <Button
         data-testid="submit"
         type="submit"
         variant="primary"
         full
         className="mt-4!"
+        isLoading={isPending}
       >
         <Icon icon={faUserPlus} />
         Create account
@@ -100,5 +87,3 @@ function RegisterForm() {
     </form>
   );
 }
-
-export default RegisterForm;

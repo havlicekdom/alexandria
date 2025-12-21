@@ -1,27 +1,21 @@
-import { useContext } from 'react';
+'use client';
+
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import { faSun } from '@fortawesome/free-regular-svg-icons';
 import Button from 'components/common/Button';
-import { ThemeContext } from 'context/ThemeContext';
-import { ThemeVariants } from 'constants/styles/theme';
-import { isDarkTheme } from 'utils/styles';
 import Icon from 'components/common/Icon';
 
-function ThemeSwitch() {
-  const { theme, setTheme } = useContext(ThemeContext);
+export default function ThemeSwitch() {
+  const theme = 'dark';
 
   const handleToggle = () => {
-    if (isDarkTheme(theme)) {
-      setTheme(ThemeVariants.Light);
-    } else {
-      setTheme(ThemeVariants.Dark);
-    }
+
   };
 
   return (
     <Button variant="link" type="button" onClick={handleToggle}>
       {
-        isDarkTheme(theme)
+        theme === 'dark'
           ? (
             <>
               <Icon icon={faSun} />
@@ -38,5 +32,3 @@ function ThemeSwitch() {
     </Button>
   );
 }
-
-export default ThemeSwitch;

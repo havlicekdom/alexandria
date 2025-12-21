@@ -12,14 +12,14 @@ type Props = {
 function getModalClass(size: 'default' | 'small') {
   switch (size) {
     case 'small':
-      return 'flex flex-col p-8 bg-primary-bg text-text relative rounded w-[45%] max-w-[400px] h-[45%] max-h-[300px';
+      return 'flex flex-col p-8 bg-primary-bg text-text relative rounded w-[45%] max-w-[400px] h-[45%] max-h-[300px]';
     case 'default':
     default:
       return 'flex flex-col p-8 bg-primary-bg text-text relative rounded w-[60%] max-w-[500px] h-[60%] max-h-[600px]';
   }
 }
 
-function Modal({ children, close, title = '', size = 'default' }: Props) {
+export default function Modal({ children, close, title = '', size = 'default' }: Props) {
   const modalClass = getModalClass(size);
 
   return (
@@ -39,4 +39,3 @@ function Modal({ children, close, title = '', size = 'default' }: Props) {
     </div>
   );
 }
-export default Modal;

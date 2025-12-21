@@ -8,12 +8,10 @@ type Props = {
   large?: boolean;
 }
 
-function FloatingButton({ onClick, children, large = false }: Props) {
+export default function FloatingButton({ onClick, children, large = false }: Props) {
   return (
     <Button onClick={onClick} variant="primary" className={`fixed bottom-4 right-4 z-10 ${large ? 'text-xl' : ''}`}>
       { children }
     </Button>
   );
 }
-
-export default FloatingButton;
